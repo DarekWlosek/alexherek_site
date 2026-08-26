@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Page Not Found — Alex Herek"
+  description="This page could not be found."
+  noindex={true}
+>
+  <div class="wrap err-wrap">
+    <div class="err-shell">
+      <div class="err-seal"><img src="/images/seal.png" alt="" /></div>
+      <div class="err-code">ERROR 404</div>
+      <h1>This page wandered off the map.</h1>
+      <p>The page you're looking for doesn't exist, may have moved, or the link might have a typo. Let's get you back to somewhere useful.</p>
+      <div class="err-links">
+        <a href="/" class="cta-btn cta-kids">Back to homepage</a>
+        <a href="/kids" class="cta-btn cta-outline">Browse Kids books</a>
+        <a href="/seniors" class="cta-btn cta-outline">Browse Senior books</a>
+      </div>
+      <div class="err-quicklinks">
+        <a href="/blog">Blog</a>
+        <a href="/free-samples">Free samples</a>
+        <a href="/about">About Alex Herek</a>
+        <a href="mailto:hello@alexherek.com">Contact us</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .err-wrap { display: flex; align-items: center; justify-content: center; padding: 90px 28px; min-height: 60vh; }
+  .err-shell {
+    max-width: 640px; text-align: center;
+    background: var(--paper); border: 1px solid rgba(198,153,47,.3); border-radius: 22px;
+    padding: 56px 40px; box-shadow: var(--shadow-soft);
+  }
+  .err-seal { width: 74px; height: 74px; border-radius: 50%; background: var(--cream); border: 3px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+  .err-seal img { width: 42px; height: 42px; }
+  .err-code { font-family: 'IBM Plex Mono', monospace; font-size: .8rem; letter-spacing: .1em; color: var(--coral-deep); margin-bottom: 10px; }
+  .err-shell h1 { font-size: 1.9rem; color: var(--navy); margin-bottom: 14px; }
+  .err-shell p { color: var(--ink-soft); font-size: 1rem; line-height: 1.6; max-width: 44ch; margin: 0 auto 30px; }
+  .err-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; }
+  .err-quicklinks { border-top: 1px dashed rgba(198,153,47,.4); padding-top: 24px; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+  .err-quicklinks a { font-family: 'IBM Plex Mono', monospace; font-size: .78rem; color: var(--ink-soft); text-decoration: none; }
+  .err-quicklinks a:hover { color: var(--coral-deep); }
+</style>

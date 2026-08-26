@@ -1,0 +1,436 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Alex Herek — Kolorowanki i Trening Mózgu dla Dzieci i Seniorów"
+  description="Niezależne wydawnictwo kolorowanek dla dzieci i książek z dużym drukiem do treningu mózgu dla seniorów. Darmowe próbki, pełny katalog i historia obu serii."
+  lang="pl"
+  altPath="/"
+>
+  <div class="hero-shell">
+    <div class="book">
+      <div class="page page-kids">
+        <span class="eyebrow" style="color: var(--coral-deep);">DLA MAŁYCH ODKRYWCÓW · WIEK 3–10</span>
+        <h1>Kolorowanki,<br />które zabierają najmłodszych w podróż po świecie.</h1>
+        <p class="sub">Flagowa seria edukacyjna przybliża dzieciom zabytki, przyrodę i kulturę z różnych zakątków globu. Cztery polskie tomy już w sprzedaży, kolejne – w drodze! Stworzone z myślą o małych rączkach i wielkiej ciekawości.</p>
+        <a href="/pl/kids" class="cta-btn cta-kids">Zobacz książki dla dzieci →</a>
+        <img class="cover-frame" src="/images/cov-europe-pl.jpg" alt="Dzieci Świata i Ich Kultury — okładka Europa" />
+      </div>
+
+      <div class="spine">
+        <span class="vtext">ALEX HEREK · WYDAWCA</span>
+        <div class="seal"><img src="/images/seal.png" alt="Pieczęć Alex Herek" /></div>
+        <span class="vtext bottom">DZIECI · SENIORZY</span>
+      </div>
+
+      <div class="page page-seniors">
+        <span class="eyebrow" style="color: var(--gold-light);">DLA BYSTRYCH UMYSŁÓW · TRENING MÓZGU</span>
+        <h1>Łamigłówki, które<br />utrzymują umysł w formie.</h1>
+        <p class="sub">Ćwiczenia rysunkowe lewą ręką, gry pamięciowe i łagodne codzienne wyzwania, zaprojektowane z myślą o starszych dorosłych — i razem z nimi.</p>
+        <a href="/pl/seniors" class="cta-btn cta-seniors">Zobacz książki dla seniorów →</a>
+        <img class="cover-frame" src="/images/seniors-hero.jpg" alt="Dziadek i wnuk kolorujący razem" />
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow eyebrow-shelves">OPUBLIKOWANE SERIE</span>
+      <h2>Dwie półki, jeden wydawca.</h2>
+      <p>Każda seria powstaje autorsko — od pierwszego słowa po ostatnią ilustrację. Zanim trafi na Amazon, przechodzi rygorystyczne testy na prawdziwych dzieciach i prawdziwych dziadkach.</p>
+    </div>
+
+    <div class="shelves">
+      <div class="shelf shelf-kids reveal">
+        <div class="shelf-title">
+          <h3>Dzieci Świata i Ich Kultury</h3>
+          <a href="/pl/kids/dzieci-swiata-i-ich-kultury">Zobacz serię →</a>
+        </div>
+        <div class="thumb-row">
+          <figure><img src="/images/cov-europe-pl.jpg" alt="Okładka Europa" /><figcaption>EUROPA</figcaption></figure>
+          <figure><img src="/images/cov-asia.jpg" alt="Okładka Azja" /><figcaption>AZJA</figcaption></figure>
+          <figure><img src="/images/cov-africa-pl.jpg" alt="Okładka Afryka" /><figcaption>AFRYKA</figcaption></figure>
+          <figure><img src="/images/cov-americas-pl.jpg" alt="Okładka Ameryka" /><figcaption>AMERYKA</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="shelf shelf-seniors reveal">
+        <div class="shelf-title">
+          <h3>Dla Seniorów</h3>
+          <a href="/pl/seniors">Zobacz obie serie →</a>
+        </div>
+        <div class="spine-list">
+          <div class="spine-chip">
+            <span class="vol">01</span>
+            <div><div class="title">Trening Mózgu Lewą Ręką</div><div class="desc">Ćwiczenia rysunkowe niedominującą ręką</div></div>
+          </div>
+          <div class="spine-chip">
+            <span class="vol">02</span>
+            <div><div class="title">Sprawny Umysł</div><div class="desc">Ćwiczenia pamięci i koncentracji, 161 zadań</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="band reveal">
+      <div>
+        <h2>Wypróbuj kilka stron, zanim kupisz całą książkę.</h2>
+        <p>Darmowe próbki do druku, prosto na Twoją skrzynkę — wybierz zestaw dla dzieci albo dla seniorów.</p>
+      </div>
+      <div class="band-ctas">
+        <a href="/pl/free-samples#kids" class="cta-btn cta-kids">Próbka dla dzieci</a>
+        <a href="/pl/free-samples#seniors" class="cta-btn cta-outline">Próbka dla seniorów</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-shell {
+    padding: 38px 20px 0;
+  }
+  .book {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    min-height: 640px;
+  }
+  .page {
+    position: relative;
+    padding: 64px 56px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+  }
+  .page-kids {
+    background:
+      radial-gradient(ellipse at 15% 0%, rgba(217, 102, 61, 0.16), transparent 55%),
+      linear-gradient(160deg, var(--paper) 0%, var(--cream) 62%, var(--cream-deep) 100%);
+  }
+  .page-seniors {
+    background:
+      radial-gradient(ellipse at 85% 0%, rgba(142, 169, 136, 0.28), transparent 55%),
+      linear-gradient(200deg, #22303f 0%, var(--navy) 55%, var(--navy-deep) 100%);
+    color: var(--cream);
+  }
+  .page h1 {
+    font-size: 2.5rem;
+    line-height: 1.08;
+  }
+  .page-kids h1 {
+    color: var(--navy);
+  }
+  .page-seniors h1 {
+    color: var(--paper);
+  }
+  .page p.sub {
+    font-size: 1.02rem;
+    line-height: 1.55;
+    max-width: 40ch;
+  }
+  .page-kids p.sub {
+    color: var(--ink-soft);
+  }
+  .page-seniors p.sub {
+    color: #cdd6dc;
+  }
+  .cover-frame {
+    margin-top: 8px;
+    width: 190px;
+    border-radius: 8px;
+    box-shadow: 0 22px 34px -14px rgba(0, 0, 0, 0.45);
+    transform: rotate(-3deg);
+    border: 6px solid #fff;
+  }
+  .page-seniors .cover-frame {
+    transform: rotate(3deg);
+    border: 6px solid rgba(255, 255, 255, 0.08);
+  }
+  .spine {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 74px;
+    margin-left: -37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .spine::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.14) 42%,
+      rgba(0, 0, 0, 0.22) 50%,
+      rgba(0, 0, 0, 0.14) 58%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+  .spine .seal {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 3px solid var(--gold);
+    box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+  }
+  .spine .seal img {
+    width: 38px;
+    height: 38px;
+  }
+  .spine .vtext {
+    position: absolute;
+    top: 26px;
+    left: 44px;
+    writing-mode: vertical-rl;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.22em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+  .spine .vtext.bottom {
+    bottom: 24px;
+    top: auto;
+    left: 44px;
+    transform: rotate(180deg);
+    color: var(--gold);
+  }
+  @media (max-width: 900px) {
+    .book {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .spine {
+      display: none;
+    }
+    .page {
+      padding: 52px 30px;
+    }
+    .page-kids {
+      order: 1;
+    }
+    .page-seniors {
+      order: 2;
+    }
+  }
+
+  .eyebrow-shelves {
+    margin-top: 1.5em;
+  }
+
+  .shelves {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  @media (max-width: 860px) {
+    .shelves {
+      grid-template-columns: 1fr;
+    }
+  }
+  .shelf {
+    border-radius: var(--radius-l);
+    padding: 34px;
+  }
+  .shelf-kids {
+    background: var(--paper);
+    border: 1px solid rgba(198, 153, 47, 0.28);
+  }
+  .shelf-seniors {
+    background: var(--navy);
+    color: var(--cream);
+  }
+  .shelf-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+  }
+  .shelf-title h3 {
+    font-size: 1.28rem;
+  }
+  .shelf-kids h3 {
+    color: var(--navy);
+  }
+  .shelf-seniors h3 {
+    color: var(--paper);
+  }
+  .shelf-title a {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .shelf-kids a {
+    color: var(--coral-deep);
+  }
+  .shelf-seniors a {
+    color: var(--gold-light);
+  }
+  .thumb-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .thumb-row figure {
+    margin: 0;
+  }
+  .thumb-row img {
+    border-radius: 8px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(198, 153, 47, 0.22);
+  }
+  .thumb-row figcaption {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.62rem;
+    text-align: center;
+    margin-top: 7px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+  }
+  .spine-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .spine-chip {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(198, 153, 47, 0.3);
+    border-radius: 10px;
+    padding: 13px 16px;
+  }
+  .spine-chip .vol {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    color: var(--gold-light);
+    border-right: 1px solid rgba(198, 153, 47, 0.4);
+    padding-right: 12px;
+    min-width: 34px;
+  }
+  .spine-chip .title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--cream);
+  }
+  .spine-chip .desc {
+    font-size: 0.78rem;
+    color: #a9b4bc;
+    margin-top: 2px;
+  }
+
+  .proof-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 860px) {
+    .proof-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .proof-card {
+    background: var(--paper);
+    border-radius: var(--radius-l);
+    padding: 30px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    border: 1px solid rgba(198, 153, 47, 0.25);
+  }
+  .proof-card img {
+    width: 84px;
+    height: 84px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .stars {
+    color: var(--gold);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .proof-card blockquote {
+    margin: 0 0 10px;
+    font-family: "Fraunces", serif;
+    font-size: 1.06rem;
+    font-style: italic;
+    line-height: 1.45;
+    color: var(--navy);
+  }
+  .proof-card cite {
+    font-family: "IBM Plex Mono", monospace;
+    font-style: normal;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+
+  .band {
+    background: radial-gradient(ellipse at 20% 20%, rgba(198, 153, 47, 0.35), transparent 55%), var(--navy);
+    border-radius: var(--radius-l);
+    padding: 56px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    color: var(--cream);
+  }
+  .band h2 {
+    font-size: 1.9rem;
+    color: var(--paper);
+    max-width: 20ch;
+  }
+  .band p {
+    color: #c7d0d6;
+    margin-top: 10px;
+    max-width: 44ch;
+    line-height: 1.5;
+  }
+  .band-ctas {
+    display: flex;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 820px) {
+    .band {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 40px 28px;
+    }
+  }
+  @media (max-width: 480px) {
+    .band-ctas {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blogSeniorsPl")).filter((p) => !p.data.draft);
+---
+
+<BaseLayout
+  title="Blog dla seniorów — Alex Herek"
+  description="Trening mózgu, sprawna ręka i pomysły dla seniorów: ćwiczenia rysowania niedominującą ręką, wskazówki dużej czcionki i sposoby na codzienny nawyk."
+  current="blog"
+  lang="pl"
+  altPath="/blog/seniors"
+>
+  <div class="wrap">
+    <div class="crumb"><a href="/pl">Start</a><span>/</span><a href="/pl/blog">Blog</a><span>/</span>Seniorzy</div>
+  </div>
+
+  <div class="wrap" style="padding-top: 34px;">
+    <div class="section-head reveal" style="text-align: left; margin: 0 0 30px;">
+      <span class="eyebrow" style="color: var(--gold-light);">BLOG DLA SENIORÓW</span>
+      <h1 style="font-family: 'Fraunces', serif; font-size: 2.3rem; color: var(--navy); font-weight: 600;">Trening mózgu i sprawna ręka.</h1>
+      <p>Ćwiczenia rysowania niedominującą ręką, wskazówki dużej czcionki i sposoby, by zamienić kilka minut dziennie w trwały nawyk — powiązane z serią "Trening Mózgu Lewą Ręką" oraz "Sprawny Umysł".</p>
+    </div>
+  </div>
+
+  <section class="wrap" style="padding-top: 0;">
+    <div class="post-grid">
+      {posts.map((post) => (
+        <a href={`/pl/blog/seniors/${post.id}`} class="post-card reveal">
+          {post.data.heroImage ? (
+            <img class="post-thumb seniors" src={post.data.heroImage} alt={post.data.heroImageAlt ?? ""} />
+          ) : (
+            <div class="post-thumb seniors"></div>
+          )}
+          <div class="post-body">
+            <span class="post-tag seniors">{post.data.tag}</span>
+            <h3>{post.data.title}</h3>
+            <p>{post.data.excerpt}</p>
+            <span class="post-date">{post.data.pubDate?.toLocaleDateString("pl-PL")}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  @media (max-width: 900px) { .post-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .post-grid { grid-template-columns: 1fr; } }
+  .post-card { background: var(--paper); border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-m); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; }
+  .post-thumb { aspect-ratio: 16/10; background: linear-gradient(155deg,var(--cream-deep),var(--paper)); width: 100%; object-fit: cover; display: block; }
+  .post-thumb.seniors { background: linear-gradient(155deg,#22303f,var(--navy-deep)); }
+  .post-body { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .post-tag { font-family: 'IBM Plex Mono', monospace; font-size: .62rem; letter-spacing: .06em; text-transform: uppercase; color: var(--coral-deep); }
+  .post-tag.seniors { color: var(--gold); }
+  .post-body h3 { font-size: 1.02rem; color: var(--navy); line-height: 1.3; }
+  .post-body p { margin: 0; font-size: .84rem; color: var(--ink-soft); line-height: 1.5; }
+  .post-date { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; color: var(--ink-soft); margin-top: 6px; }
+</style>

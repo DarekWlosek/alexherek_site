@@ -1,0 +1,223 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const allSeries = (await getCollection("plKidsSeries")).sort((a, b) => a.data.order - b.data.order);
+const flagship = allSeries.find((s) => s.data.flagship);
+---
+
+<BaseLayout
+  title="Kolorowanki dla Dzieci — Alex Herek"
+  description="Seria kolorowanek dla dzieci w wieku 3–10 lat: Dzieci Świata i Ich Kultury — cztery tomy dostępne po polsku, piąty w przygotowaniu."
+  current="kids"
+  lang="pl"
+  altPath="/kids"
+>
+  <div class="wrap">
+    <div class="crumb"><a href="/pl">Start</a><span>/</span>Dzieci</div>
+  </div>
+
+  <div class="hero-shell">
+    <div class="kh-shell reveal">
+      <div class="kh-text">
+        <span class="kh-spine-label">ROZDZIAŁ · DZIECI</span>
+        <span class="eyebrow" style="color: var(--coral-deep);">DLA MAŁYCH ODKRYWCÓW · WIEK 3–10</span>
+        <h1>Wystarczy pudełko kredek,<br />by ruszyć w podróż po świecie.</h1>
+        <p>Cztery tomy naszej serii są już dostępne po polsku, a piąty właśnie szykuje się do drogi!</p>
+        <div class="kh-tags">
+          <span class="kh-tag">84+ KRAJE PO POLSKU</span>
+          <span class="kh-tag">BEZ EKRANU</span>
+          <span class="kh-tag">WYDRUKUJ I KOLORUJ</span>
+        </div>
+      </div>
+      <div class="kh-photo">
+        <img src="/images/kids-catalog-hero.jpg" alt="Pięcioro dzieci koloruje razem stronę o tematyce USA przy szkolnym stole" />
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">KATALOG</span>
+      <h2>Zacznij od jedynej dostępnej serii.</h2>
+      <p>„Dzieci Świata i Ich Kultury” to nasza flagowa seria — cztery tomy już wydane po polsku, piąty (Oceania i Arktyka) w przygotowaniu.</p>
+    </div>
+
+    {flagship && (
+      <a href={`/pl/kids/${flagship.id}`} class="featured-card reveal">
+        <div class="fc-body">
+          <span class="fc-badge">SERIA FLAGOWA</span>
+          <h3>{flagship.data.title}</h3>
+          <p>{flagship.data.description}</p>
+          <div class="fc-volumes">
+            {flagship.data.volumes.map((v) => (
+              <div class={`vol-row ${v.status !== "available" ? "soon" : ""}`}>
+                <span class="vn">{v.number}</span>
+                <span class="vt">{v.title}</span>
+                <span class="vl">{v.status === "available" ? v.meta : "WKRÓTCE"}</span>
+              </div>
+            ))}
+          </div>
+          <span class="cta-btn cta-kids fc-cta">Zobacz serię →</span>
+        </div>
+        <div class="fc-covers">
+          {flagship.data.volumes
+            .filter((v) => v.cover)
+            .map((v, i) => <img class={`c${(i % 4) + 1}`} src={v.cover} alt={`${flagship.data.title} — okładka ${v.title}`} />)}
+        </div>
+      </a>
+    )}
+  </section>
+
+  <section class="wrap">
+    <div class="band reveal">
+      <div>
+        <h2>Wypróbuj kilka stron, zanim kupisz książkę.</h2>
+        <p>Darmowa próbka z serii „Dzieci Świata i Ich Kultury” — prosto na Twoją skrzynkę.</p>
+      </div>
+      <div class="band-ctas">
+        <a href="/pl/free-samples#kids" class="cta-btn cta-kids">Pobierz darmową próbkę</a>
+        <a href="/pl/seniors" class="cta-btn cta-outline">Szukasz książek dla seniorów?</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-shell { padding: 34px 0 10px; }
+  .kh-shell {
+    position: relative;
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 420px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .kh-shell::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0; width: 26px;
+    background: linear-gradient(90deg, rgba(0,0,0,.28), rgba(0,0,0,0));
+    z-index: 3;
+  }
+  .kh-text {
+    position: relative; z-index: 2;
+    padding: 56px 20px 56px 58px;
+    display: flex; flex-direction: column; justify-content: center; gap: 16px;
+    background: radial-gradient(ellipse at 10% 0%, rgba(217,102,61,.16), transparent 55%), linear-gradient(160deg, var(--paper) 0%, var(--cream) 60%, var(--cream-deep) 100%);
+  }
+  .kh-spine-label {
+    position: absolute; left: 8px; top: 0; bottom: 0; display: flex; align-items: center; z-index: 4;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    font-family: 'IBM Plex Mono', monospace; font-size: .62rem; letter-spacing: .2em;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .kh-text h1 { font-size: 2.4rem; line-height: 1.1; color: var(--navy); }
+  .kh-text p { color: var(--ink-soft); font-size: 1.02rem; line-height: 1.55; max-width: 42ch; }
+  .kh-photo { position: relative; }
+  .kh-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
+  .kh-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2px; }
+  .kh-tag {
+    font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .05em;
+    background: rgba(198,153,47,.16); color: var(--coral-deep);
+    padding: 5px 12px; border-radius: 100px; border: 1px solid rgba(198,153,47,.35);
+  }
+  @media (max-width: 840px) {
+    .kh-shell { grid-template-columns: 1fr; }
+    .kh-photo { order: -1; aspect-ratio: 16/9; }
+    .kh-text { padding: 40px 26px; }
+  }
+
+  .series-grid { display: flex; flex-direction: column; gap: 34px; }
+  .featured-card {
+    background: var(--paper); border: 1px solid rgba(198,153,47,.3);
+    border-radius: var(--radius-l); overflow: hidden;
+    display: grid; grid-template-columns: 1.05fr 1fr;
+    box-shadow: 0 20px 40px -26px rgba(27,38,53,.3);
+    text-decoration: none;
+  }
+  @media (max-width: 900px) { .featured-card { grid-template-columns: 1fr; } }
+  .fc-body { padding: 46px 46px 40px; display: flex; flex-direction: column; gap: 16px; justify-content: center; }
+  .fc-badge {
+    font-family: 'IBM Plex Mono', monospace; font-size: .64rem; letter-spacing: .08em; text-transform: uppercase;
+    background: var(--coral); color: #fff; padding: 4px 10px; border-radius: 100px; width: fit-content;
+  }
+  .fc-body h3 { font-size: 1.7rem; color: var(--navy); }
+  .fc-body p { color: var(--ink-soft); font-size: .98rem; line-height: 1.55; max-width: 48ch; }
+  .fc-volumes { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+  .vol-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 0; border-bottom: 1px dashed rgba(198,153,47,.35);
+    font-size: .88rem;
+  }
+  .vol-row:last-child { border-bottom: none; }
+  .vol-row .vn { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; color: var(--coral-deep); min-width: 44px; }
+  .vol-row .vt { color: var(--navy); font-weight: 600; flex: 1; }
+  .vol-row .vl { font-family: 'IBM Plex Mono', monospace; font-size: .62rem; color: var(--ink-soft); }
+  .vol-row.soon .vt { color: var(--ink-soft); font-weight: 600; }
+  .vol-row.soon .vl { color: var(--gold); }
+  .fc-cta { margin-top: 10px; }
+  .fc-covers {
+    position: relative; padding: 36px;
+    background: linear-gradient(160deg, var(--cream-deep), var(--cream));
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-content: center;
+  }
+  .fc-covers img { border-radius: 8px; box-shadow: 0 16px 26px -14px rgba(0,0,0,.4); border: 5px solid #fff; }
+  .fc-covers .c1 { transform: rotate(-4deg) translateY(6px); }
+  .fc-covers .c2 { transform: rotate(3deg) translateY(-10px); }
+  .fc-covers .c3 { transform: rotate(-2deg) translateY(-2px); }
+  .fc-covers .c4 { transform: rotate(4deg) translateY(4px); }
+
+  .soon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  @media (max-width: 900px) { .soon-grid { grid-template-columns: 1fr; } }
+  .soon-card {
+    position: relative; border-radius: var(--radius-l); padding: 32px; min-height: 230px;
+    display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;
+    overflow: hidden; color: var(--paper); text-decoration: none;
+  }
+  .soon-card::before { content: ""; position: absolute; inset: 0; opacity: .9; background: var(--grad); }
+  .soon-tag {
+    position: relative; z-index: 1;
+    font-family: 'IBM Plex Mono', monospace; font-size: .64rem; letter-spacing: .1em; text-transform: uppercase;
+    background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.35);
+    padding: 5px 11px; border-radius: 100px; width: fit-content;
+  }
+  .soon-card h3 { position: relative; z-index: 1; font-size: 1.3rem; }
+  .soon-card p { position: relative; z-index: 1; margin: 0; font-size: .86rem; line-height: 1.5; color: rgba(255,255,255,.85); }
+  .soon-vols { position: relative; z-index: 1; font-family: 'IBM Plex Mono', monospace; font-size: .66rem; letter-spacing: .04em; color: rgba(255,255,255,.7); margin-top: 4px; }
+
+  .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 900px) { .research-grid { grid-template-columns: 1fr; } }
+  .research-card { background: var(--paper); border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-m); padding: 26px; }
+  .research-card h3 { font-size: 1.02rem; color: var(--navy); margin-bottom: 10px; }
+  .research-card p { margin: 0 0 14px; font-size: .88rem; color: var(--ink-soft); line-height: 1.55; }
+  .research-cite { font-family: 'IBM Plex Mono', monospace; font-size: .64rem; letter-spacing: .03em; color: var(--coral-deep); }
+  .research-disclaimer {
+    font-family: 'IBM Plex Mono', monospace; font-size: .7rem; color: var(--ink-soft);
+    text-align: center; margin-top: 24px; max-width: 640px; margin-left: auto; margin-right: auto;
+    border-top: 1px dashed rgba(198,153,47,.35); padding-top: 18px;
+  }
+
+  .age-strip {
+    background: var(--paper); border: 1px solid rgba(198,153,47,.28);
+    border-radius: var(--radius-l); padding: 34px 40px;
+    display: flex; align-items: center; justify-content: space-between; gap: 30px; flex-wrap: wrap;
+  }
+  .age-strip .al { font-family: 'Fraunces', serif; font-size: 1.2rem; color: var(--navy); }
+  .age-strip .al span { display: block; font-family: 'IBM Plex Mono', monospace; font-size: .66rem; letter-spacing: .1em; color: var(--coral-deep); text-transform: uppercase; margin-bottom: 6px; }
+  .age-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+  .age-chip { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; border: 1px solid var(--navy); border-radius: 100px; padding: 7px 14px; color: var(--navy); }
+
+  .band {
+    background: radial-gradient(ellipse at 15% 15%, rgba(217,102,61,.25), transparent 55%), var(--navy);
+    border-radius: var(--radius-l); padding: 52px 46px; color: var(--cream);
+    display: flex; align-items: center; justify-content: space-between; gap: 36px; flex-wrap: wrap;
+  }
+  .band h2 { font-size: 1.75rem; color: var(--paper); max-width: 24ch; }
+  .band p { color: #c7d0d6; margin-top: 10px; max-width: 42ch; line-height: 1.5; }
+  .band-ctas { display: flex; gap: 14px; flex-shrink: 0; }
+  @media (max-width: 480px) { .band-ctas { flex-direction: column; width: 100%; } }
+</style>

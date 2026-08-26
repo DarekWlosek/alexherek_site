@@ -1,0 +1,202 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const allSeries = (await getCollection("plSeniorSeries")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Książki do Treningu Mózgu dla Seniorów — Alex Herek"
+  description="Dwie serie dla seniorów po polsku: Trening Mózgu Lewą Ręką i Sprawny Umysł. Duży druk, bez twierdzeń medycznych — czysta rozrywka umysłowa."
+  current="seniors"
+  lang="pl"
+  altPath="/seniors"
+>
+  <div class="wrap">
+    <div class="crumb"><a href="/pl">Start</a><span>/</span>Seniorzy</div>
+  </div>
+
+  <div class="wrap sr-hero">
+    <div class="sh-shell reveal">
+      <div class="sh-text">
+        <span class="sh-spine-label">ROZDZIAŁ · SENIORZY</span>
+        <span class="eyebrow" style="color: var(--gold-light);">DLA BYSTRYCH UMYSŁÓW · TRENING MÓZGU</span>
+        <h1>Dwie serie.<br />Jeden spokojny rytuał.</h1>
+        <p>Łamigłówki i ćwiczenia rysunkowe dużą czcionką — na spokojne dziesięć minut z kawą, bez pośpiechu i z wyraźnym poczuciem postępu, strona po stronie.</p>
+        <div class="sh-tags">
+          <span class="sh-tag">DUŻY DRUK</span>
+          <span class="sh-tag">BEZ EKRANU</span>
+          <span class="sh-tag">BEZ WSTĘPNYCH UMIEJĘTNOŚCI</span>
+        </div>
+      </div>
+      <div class="sh-photo">
+        <img src="/images/sm-hero.jpg" alt="Starsza para czyta razem książkę z łamigłówkami Sprawny Umysł" />
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">KATALOG</span>
+      <h2>Obie serie gotowe już dziś.</h2>
+      <p>Żadnych „wkrótce” — poniższe tytuły są napisane, wydrukowane i dostępne od zaraz.</p>
+    </div>
+
+    <div class="series-grid">
+      {allSeries.map((s) => (
+        <a href={`/pl/seniors/${s.id}`} class="featured-card reveal">
+          <div class="fc-covers">
+            <div class="single"><img src={s.data.heroImage} alt={`Okładka ${s.data.title}`} /></div>
+          </div>
+          <div class="fc-body">
+            <span class="fc-badge">{s.data.eyebrow}</span>
+            <h3>{s.data.title}</h3>
+            <p class="desc">{s.data.description}</p>
+            <div class="fc-volumes">
+              {s.data.volumes.map((v) => (
+                <div class={`vol-row ${v.status === "available" ? "available" : "soon"}`}>
+                  <span class="vn">{v.number}</span>
+                  <span class="vt">{v.title}</span>
+                  <span class="vl">{v.status === "available" ? "Dostępne" : "W przygotowaniu"}</span>
+                </div>
+              ))}
+            </div>
+            <span class="cta-btn cta-primary fc-cta">Zobacz serię →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">DLACZEGO CZYTELNICY WRACAJĄ</span>
+      <h2>Zaprojektowane do biurka, nie do sklepu z aplikacjami.</h2>
+    </div>
+    <div class="feat-strip">
+      <div class="feat-card reveal">
+        <div class="icon">Aa</div>
+        <h3>Naprawdę duży druk</h3>
+        <p>Każda strona zaprojektowana do komfortowego czytania bez lupy.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="icon">✓</div>
+        <h3>Rozwiązania dołączone</h3>
+        <p>Żadnych niedokończonych zagadek — każda odpowiedź jest wydrukowana na końcu.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="icon">✎</div>
+        <h3>Bez wymaganych umiejętności</h3>
+        <p>Każde ćwiczenie zaczyna się prosto — czy to pierwsza kreska niedominującą ręką, czy pierwsza rozwiązana łamigłówka.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="band reveal">
+      <div>
+        <h2>Wypróbuj kilka stron, zanim kupisz.</h2>
+        <p>Darmowe próbki do druku z obu serii, prosto na Twoją skrzynkę.</p>
+      </div>
+      <div class="band-ctas">
+        <a href="/pl/free-samples#seniors" class="cta-btn cta-primary">Pobierz darmową próbkę</a>
+        <a href="/pl/kids" class="cta-btn cta-outline-cream">Szukasz książek dla dzieci?</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .sr-hero { padding: 34px 0 10px; }
+  .sh-shell {
+    position: relative; border-radius: var(--radius-l); overflow: hidden; box-shadow: var(--shadow-soft);
+    display: grid; grid-template-columns: 1fr 1fr; min-height: 420px;
+  }
+  .sh-shell::after {
+    content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 26px;
+    background: linear-gradient(270deg, rgba(0,0,0,.28), rgba(0,0,0,0)); z-index: 3;
+  }
+  .sh-text {
+    position: relative; z-index: 2; order: 2;
+    padding: 56px 58px 56px 20px;
+    display: flex; flex-direction: column; justify-content: center; gap: 16px;
+    background: radial-gradient(ellipse at 90% 0%, rgba(142,169,136,.28), transparent 55%), linear-gradient(200deg, #22303f 0%, var(--navy) 55%, var(--navy-deep) 100%);
+    color: var(--cream);
+  }
+  .sh-spine-label {
+    position: absolute; right: 8px; top: 0; bottom: 0; display: flex; align-items: center; z-index: 4;
+    writing-mode: vertical-rl;
+    font-family: 'IBM Plex Mono', monospace; font-size: .62rem; letter-spacing: .2em;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .sh-text h1 { font-size: 2.4rem; line-height: 1.1; color: var(--paper); }
+  .sh-text p { color: #cdd6dc; font-size: 1.02rem; line-height: 1.55; max-width: 42ch; }
+  .sh-photo { position: relative; order: 1; }
+  .sh-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .sh-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2px; }
+  .sh-tag {
+    font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .05em;
+    background: rgba(198,153,47,.16); color: var(--gold-light);
+    padding: 5px 12px; border-radius: 100px; border: 1px solid rgba(198,153,47,.35);
+  }
+  @media (max-width: 840px) {
+    .sh-shell { grid-template-columns: 1fr; }
+    .sh-photo { order: -1; aspect-ratio: 16/9; }
+    .sh-text { padding: 40px 26px; order: 2; }
+  }
+
+  .series-grid { display: flex; flex-direction: column; gap: 34px; }
+  .featured-card {
+    background: var(--navy); color: var(--cream); border-radius: var(--radius-l); overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1.05fr;
+    box-shadow: 0 20px 40px -26px rgba(27,38,53,.3); text-decoration: none;
+  }
+  @media (max-width: 900px) { .featured-card { grid-template-columns: 1fr; } }
+  .fc-covers { position: relative; padding: 36px; background: linear-gradient(160deg, #22303f, var(--navy-deep)); display: flex; align-items: center; justify-content: center; gap: 16px; }
+  .fc-covers img { border-radius: 8px; box-shadow: 0 16px 30px -14px rgba(0,0,0,.55); border: 5px solid rgba(255,255,255,.08); }
+  .fc-covers .single { max-width: 230px; }
+  .fc-covers .pair img { max-width: 150px; }
+  .fc-covers .pair .c1 { transform: rotate(-4deg) translateY(6px); }
+  .fc-covers .pair .c2 { transform: rotate(3deg) translateY(-6px); }
+  .fc-covers .pair { display: flex; gap: 14px; }
+  .fc-body { padding: 46px 46px 40px; display: flex; flex-direction: column; gap: 14px; justify-content: center; }
+  .fc-badge {
+    font-family: 'IBM Plex Mono', monospace; font-size: .64rem; letter-spacing: .08em; text-transform: uppercase;
+    background: var(--gold); color: var(--navy-deep); padding: 4px 10px; border-radius: 100px; width: fit-content;
+  }
+  .fc-body h3 { font-size: 1.6rem; color: var(--paper); }
+  .fc-body p.desc { color: #c7d0d6; font-size: .96rem; line-height: 1.55; max-width: 48ch; }
+  .fc-volumes { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+  .vol-row { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px dashed rgba(198,153,47,.3); font-size: .88rem; }
+  .vol-row:last-child { border-bottom: none; }
+  .vol-row .vn { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; color: var(--gold-light); min-width: 44px; }
+  .vol-row .vt { color: var(--paper); font-weight: 600; flex: 1; }
+  .vol-row .vl { font-family: 'IBM Plex Mono', monospace; font-size: .6rem; letter-spacing: .04em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; }
+  .vol-row.available .vl { background: var(--gold); color: var(--navy-deep); }
+  .vol-row.soon .vl { background: rgba(255,255,255,.08); color: #9aa5ac; }
+  .fc-cta { margin-top: 10px; }
+
+  .feat-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 820px) { .feat-strip { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .feat-strip { grid-template-columns: 1fr; } }
+  .feat-card { background: var(--paper); border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-m); padding: 26px; }
+  .feat-card .icon { width: 42px; height: 42px; border-radius: 10px; background: var(--sage-tint); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; font-family: 'Fraunces', serif; font-weight: 600; color: var(--sage); font-size: 1.1rem; }
+  .feat-card h3 { font-size: 1.02rem; color: var(--navy); margin-bottom: 8px; }
+  .feat-card p { margin: 0 0 10px; font-size: .86rem; color: var(--ink-soft); line-height: 1.5; }
+  .research-cite { font-family: 'IBM Plex Mono', monospace; font-size: .64rem; letter-spacing: .03em; color: #8a6a1a; }
+  .research-disclaimer {
+    font-family: 'IBM Plex Mono', monospace; font-size: .7rem; color: var(--ink-soft);
+    text-align: center; margin-top: 24px; max-width: 640px; margin-left: auto; margin-right: auto;
+    border-top: 1px dashed rgba(198,153,47,.35); padding-top: 18px;
+  }
+
+  .band {
+    background: radial-gradient(ellipse at 80% 10%, rgba(142,169,136,.25), transparent 55%), var(--navy);
+    border-radius: var(--radius-l); padding: 52px 46px; color: var(--cream);
+    display: flex; align-items: center; justify-content: space-between; gap: 36px; flex-wrap: wrap;
+  }
+  .band h2 { font-size: 1.75rem; color: var(--paper); max-width: 24ch; }
+  .band p { color: #c7d0d6; margin-top: 10px; max-width: 42ch; line-height: 1.5; }
+  .band-ctas { display: flex; gap: 14px; flex-shrink: 0; }
+  @media (max-width: 480px) { .band-ctas { flex-direction: column; width: 100%; } }
+</style>

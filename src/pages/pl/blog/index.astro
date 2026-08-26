@@ -1,0 +1,104 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const kidsPosts = (await getCollection("blogKidsPl")).filter((p) => !p.data.draft);
+const seniorPosts = (await getCollection("blogSeniorsPl")).filter((p) => !p.data.draft);
+const latest = [
+  ...kidsPosts.slice(0, 2).map((p) => ({ ...p, silo: "kids" as const })),
+  ...seniorPosts.slice(0, 1).map((p) => ({ ...p, silo: "seniors" as const })),
+];
+---
+
+<BaseLayout
+  title="Blog — Alex Herek"
+  description="Notatki zza stołu kreślarskiego: sztuczki geograficzne i pomysły na kolorowanie dla dzieci, wkrótce także trening mózgu i poradniki dla seniorów."
+  current="blog"
+  lang="pl"
+  altPath="/blog"
+>
+  <div class="wrap">
+    <div class="crumb"><a href="/pl">Start</a><span>/</span>Blog</div>
+  </div>
+
+  <div class="wrap" style="padding-top: 34px;">
+    <div class="section-head reveal" style="text-align: left; margin: 0 0 30px;">
+      <span class="eyebrow">Z NOTATNIKA</span>
+      <h1 style="font-family: 'Fraunces', serif; font-size: 2.3rem; color: var(--navy); font-weight: 600;">Notatki zza stołu kreślarskiego.</h1>
+      <p>Dwie półki, dwa silosy — wybierz ten, który pasuje do tego, po co tu trafiłeś.</p>
+    </div>
+  </div>
+
+  <section class="wrap" style="padding-top: 0;">
+    <div class="silo-grid">
+      <a href="/pl/blog/kids" class="silo-card kids reveal">
+        <span class="silo-tag">Dzieci</span>
+        <h3>Kolorowanki, kultury świata i wspólna nauka</h3>
+        <p>Proste sposoby na naukę geografii i pomysły, jak zamienić czas przy kolorowance w rozmowę o świecie.</p>
+      </a>
+      <a href="/pl/blog/seniors" class="silo-card seniors reveal">
+        <span class="silo-tag">Seniorzy</span>
+        <h3>Trening mózgu i sprawna ręka</h3>
+        <p>Ćwiczenia rysowania niedominującą ręką, wskazówki dużej czcionki i sposoby na trwały, codzienny nawyk.</p>
+      </a>
+    </div>
+  </section>
+
+  {latest.length > 0 && (
+    <section class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">NAJNOWSZE WPISY</span>
+        <h2>Ostatnie artykuły.</h2>
+      </div>
+      <div class="post-grid">
+        {latest.map((post) => (
+          <a href={`/pl/blog/${post.silo}/${post.id}`} class="post-card reveal">
+            {post.data.heroImage ? (
+              <img class={`post-thumb ${post.silo === "seniors" ? "seniors" : ""}`} src={post.data.heroImage} alt={post.data.heroImageAlt ?? ""} />
+            ) : (
+              <div class={`post-thumb ${post.silo === "seniors" ? "seniors" : ""}`}></div>
+            )}
+            <div class="post-body">
+              <span class={`post-tag ${post.silo === "seniors" ? "seniors" : ""}`}>{post.data.tag}</span>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.excerpt}</p>
+              <span class="post-date">{post.data.pubDate?.toLocaleDateString("pl-PL")}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .silo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  @media (max-width: 760px) { .silo-grid { grid-template-columns: 1fr; } }
+  .silo-card { border-radius: var(--radius-l); padding: 38px; min-height: 220px; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px; position: relative; overflow: hidden; box-shadow: var(--shadow-soft); text-decoration: none; }
+  .silo-card.kids { background: linear-gradient(155deg,#f3d7bf,var(--cream)); }
+  .silo-card.seniors { background: linear-gradient(155deg,#22303f,var(--navy-deep)); color: var(--cream); }
+  .silo-card.soon { opacity: .82; }
+  .silo-tag { font-family: 'IBM Plex Mono', monospace; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; width: fit-content; }
+  .silo-card.kids .silo-tag { background: var(--coral); color: #fff; }
+  .silo-card.seniors .silo-tag { background: var(--gold); color: var(--navy-deep); }
+  .silo-card h3 { font-size: 1.5rem; }
+  .silo-card.kids h3 { color: var(--navy); }
+  .silo-card.seniors h3 { color: var(--paper); }
+  .silo-card p { margin: 0; font-size: .92rem; line-height: 1.5; }
+  .silo-card.kids p { color: var(--ink-soft); }
+  .silo-card.seniors p { color: #b7c1c8; }
+  .silo-card.seniors p a { color: var(--gold-light); }
+
+  .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  @media (max-width: 900px) { .post-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .post-grid { grid-template-columns: 1fr; } }
+  .post-card { background: var(--paper); border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-m); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; }
+  .post-thumb { aspect-ratio: 16/10; background: linear-gradient(155deg,var(--cream-deep),var(--paper)); width: 100%; object-fit: cover; display: block; }
+  .post-thumb.seniors { background: linear-gradient(155deg,#22303f,var(--navy-deep)); }
+  .post-body { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .post-tag { font-family: 'IBM Plex Mono', monospace; font-size: .62rem; letter-spacing: .06em; text-transform: uppercase; color: var(--coral-deep); }
+  .post-tag.seniors { color: var(--gold); }
+  .post-body h3 { font-size: 1.02rem; color: var(--navy); line-height: 1.3; }
+  .post-body p { margin: 0; font-size: .84rem; color: var(--ink-soft); line-height: 1.5; }
+  .post-date { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; color: var(--ink-soft); margin-top: 6px; }
+</style>

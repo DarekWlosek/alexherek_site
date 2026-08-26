@@ -1,0 +1,188 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const allSeries = await getCollection("plKidsSeries");
+  return allSeries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+
+const bookSeriesJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BookSeries",
+  name: data.title,
+  author: { "@type": "Person", name: "Alex Herek" },
+  publisher: { "@type": "Organization", name: "Alex Herek" },
+  audience: { "@type": "Audience", audienceType: "Children", suggestedMinAge: 3, suggestedMaxAge: 10 },
+  inLanguage: "pl",
+  hasPart: data.volumes
+    .filter((v) => v.status === "available" && v.asin)
+    .map((v) => ({
+      "@type": "Book",
+      name: `${data.title}: ${v.title}`,
+      bookFormat: "https://schema.org/Paperback",
+      inLanguage: "pl",
+      ...(v.price && v.asin
+        ? { offers: { "@type": "Offer", price: v.price, priceCurrency: "EUR", url: `https://www.amazon.com/dp/${v.asin}` } }
+        : {}),
+    })),
+};
+---
+
+<BaseLayout
+  title={`${data.title} — Alex Herek`}
+  description={data.description}
+  current="kids"
+  lang="pl"
+  altPath="/kids/children-of-the-world"
+>
+  <div class="wrap">
+    <div class="crumb"><a href="/pl">Start</a><span>/</span><a href="/pl/kids">Dzieci</a><span>/</span>{data.title}</div>
+  </div>
+
+  <div class="wrap p-hero">
+    <div class="p-shell reveal">
+      <div class="p-body">
+        <span class="eyebrow">{data.eyebrow}</span>
+        <h1>{data.title}</h1>
+        <p class="desc"><Content /></p>
+        <div class="p-facts">
+          <span class="p-fact">{data.volumes.length} TOMÓW</span>
+          <span class="p-fact">{data.ageRange}</span>
+        </div>
+        <div class="p-ctas">
+          {data.flagship && data.volumes[0].asin && (
+            <a href={`https://www.amazon.com/dp/${data.volumes[0].asin}`} class="cta-btn cta-kids">Kup serię →</a>
+          )}
+          <a href="/pl/free-samples#kids" class="cta-btn cta-outline">Wypróbuj darmową próbkę</a>
+        </div>
+      </div>
+      {data.heroImage && (
+        <div class="p-covers">
+          {data.volumes.filter((v) => v.cover).map((v, i) => (
+            <img class={`c${(i % 4) + 1}`} src={v.cover} alt={`${data.title} — okładka ${v.title}`} />
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+
+  <section class="wrap" id="volumes">
+    <div class="section-head reveal">
+      <span class="eyebrow">PEŁNA SERIA</span>
+      <h2>Każdy tom, jeden kontynent na raz.</h2>
+    </div>
+
+    <div class="vol-grid reveal">
+      {data.volumes.map((v) => (
+        <a href={v.asin ? `https://www.amazon.com/dp/${v.asin}` : "#"} class="vol-card">
+          <div class="vol-cover">
+            <span class="vol-badge">{v.number}</span>
+            {v.cover ? <img src={v.cover} alt={`Okładka ${v.title}`} /> : <div class="placeholder">WKRÓTCE<br />PO POLSKU</div>}
+          </div>
+          <div class="vol-info">
+            <h3>{v.title}</h3>
+            {v.meta && <span class="vmeta">{v.meta}</span>}
+            {v.price && <span class="vprice">{v.price.toFixed(2)} €</span>}
+            {v.asin && <span class="vbuy">Kup na Amazon</span>}
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {data.languageNote && <p class="pl-note">{data.languageNote}</p>}
+  </section>
+
+  <section class="wrap">
+    <div class="band reveal">
+      <div>
+        <h2>Wypróbuj, zanim kupisz.</h2>
+        <p>Weź darmową próbkę z naszej flagowej serii.</p>
+      </div>
+      <div class="band-ctas">
+        <a href="/pl/free-samples#kids" class="cta-btn cta-kids">Pobierz darmową próbkę</a>
+        <a href="/pl/kids" class="cta-btn cta-outline">Wróć do katalogu Dzieci</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+{data.flagship && (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(bookSeriesJsonLd)} />
+)}
+
+<style>
+  .p-hero { padding: 34px 0 10px; }
+  .p-shell {
+    border-radius: var(--radius-l); overflow: hidden; box-shadow: var(--shadow-soft);
+    background: radial-gradient(ellipse at 10% 0%, rgba(217,102,61,.16), transparent 55%), linear-gradient(160deg, var(--paper) 0%, var(--cream) 60%, var(--cream-deep) 100%);
+    display: grid; grid-template-columns: 1.05fr 1fr;
+  }
+  @media (max-width: 900px) { .p-shell { grid-template-columns: 1fr; } }
+  .p-body { padding: 52px 48px; display: flex; flex-direction: column; gap: 16px; justify-content: center; }
+  .p-body .eyebrow { color: var(--coral-deep); }
+  .p-body h1 { font-size: 2.4rem; line-height: 1.1; color: var(--navy); }
+  .p-body .desc { color: var(--ink-soft); font-size: 1.02rem; line-height: 1.6; max-width: 50ch; }
+  .p-facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2px; }
+  .p-fact {
+    font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .04em;
+    background: rgba(198,153,47,.14); color: var(--coral-deep);
+    padding: 6px 12px; border-radius: 100px; border: 1px solid rgba(198,153,47,.35);
+  }
+  .p-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+  .p-covers { position: relative; padding: 36px; display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .p-covers img { border-radius: 8px; box-shadow: 0 16px 30px -14px rgba(0,0,0,.4); border: 5px solid #fff; width: 150px; }
+  .p-covers .c1 { transform: rotate(-6deg) translateY(10px); }
+  .p-covers .c2 { transform: rotate(3deg) translateY(-14px); }
+  .p-covers .c3 { transform: rotate(-2deg) translateY(4px); }
+  .p-covers .c4 { transform: rotate(6deg) translateY(-4px); }
+
+  .vol-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+  @media (max-width: 1000px) { .vol-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 640px) { .vol-grid { grid-template-columns: repeat(2, 1fr); } }
+  .vol-card {
+    background: var(--paper); border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-m);
+    overflow: hidden; display: flex; flex-direction: column; text-decoration: none;
+  }
+  .vol-cover { aspect-ratio: 4/5; background: linear-gradient(155deg,#22303f,var(--navy-deep)); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .vol-cover img { width: 100%; height: 100%; object-fit: cover; }
+  .vol-cover .placeholder { color: var(--gold-light); text-align: center; padding: 16px; font-family: 'IBM Plex Mono', monospace; font-size: .62rem; letter-spacing: .05em; }
+  .vol-badge { position: absolute; top: 8px; left: 8px; background: var(--gold); color: var(--navy-deep); font-family: 'IBM Plex Mono', monospace; font-size: .6rem; font-weight: 700; padding: 3px 8px; border-radius: 100px; }
+  .vol-info { padding: 14px 14px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .vol-info h3 { font-size: .9rem; color: var(--navy); line-height: 1.25; }
+  .vol-info .vmeta { font-family: 'IBM Plex Mono', monospace; font-size: .62rem; color: var(--ink-soft); }
+  .vol-info .vprice { font-family: 'IBM Plex Mono', monospace; font-size: .78rem; color: var(--coral-deep); font-weight: 700; margin-top: auto; }
+  .vol-info .vbuy {
+    display: block; text-align: center; margin-top: 6px;
+    font-family: 'IBM Plex Mono', monospace; font-size: .66rem; letter-spacing: .03em; text-transform: uppercase;
+    background: var(--coral); color: #fff; padding: 8px; border-radius: 100px;
+  }
+  .pl-note {
+    font-family: 'IBM Plex Mono', monospace; font-size: .72rem; color: var(--ink-soft);
+    text-align: center; margin-top: 20px; border-top: 1px dashed rgba(198,153,47,.35); padding-top: 18px;
+  }
+
+  .vol-shelf { background: var(--navy); border-radius: var(--radius-l); padding: 36px 40px; color: var(--cream); }
+  .spine-list { display: flex; flex-direction: column; gap: 10px; }
+  .spine-chip { display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(198,153,47,.3); border-radius: 10px; padding: 13px 16px; }
+  .spine-chip .vol { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; color: var(--gold-light); border-right: 1px solid rgba(198,153,47,.4); padding-right: 12px; min-width: 44px; }
+  .spine-chip .title { font-size: .92rem; font-weight: 600; color: var(--cream); }
+  .spine-chip .status { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: .62rem; letter-spacing: .05em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; background: rgba(255,255,255,.08); color: #9aa5ac; }
+
+  .band {
+    background: radial-gradient(ellipse at 15% 15%, rgba(217,102,61,.25), transparent 55%), var(--navy);
+    border-radius: var(--radius-l); padding: 52px 46px; color: var(--cream);
+    display: flex; align-items: center; justify-content: space-between; gap: 36px; flex-wrap: wrap;
+  }
+  .band h2 { font-size: 1.75rem; color: var(--paper); max-width: 24ch; }
+  .band p { color: #c7d0d6; margin-top: 10px; max-width: 42ch; line-height: 1.5; }
+  .band-ctas { display: flex; gap: 14px; flex-shrink: 0; }
+  @media (max-width: 480px) { .band-ctas { flex-direction: column; width: 100%; } }
+</style>

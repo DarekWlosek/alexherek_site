@@ -1,0 +1,75 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Privacy Policy — Alex Herek"
+  description="How Alex Herek collects, uses, and protects information collected through alexherek.com."
+  altPath="/pl/privacy"
+>
+  <main class="narrow">
+    <div class="crumb"><a href="/">Home</a><span>/</span>Privacy Policy</div>
+
+    <div class="page-header">
+      <span class="eyebrow" style="color: var(--gold);">LEGAL</span>
+      <h1>Privacy Policy</h1>
+      <p class="meta">Last updated: [DATE] &middot; Effective for alexherek.com</p>
+    </div>
+
+    <div class="draft-note">
+      DRAFT TEMPLATE — this is a structural starting point, not legal advice. Have this reviewed by a qualified attorney before publishing, especially the sections on children's data, email marketing (CAN-SPAM / GDPR if serving EU visitors), and any state-specific privacy laws (e.g. CCPA) that may apply to your traffic.
+    </div>
+
+    <div class="prose">
+      <p>This Privacy Policy explains how Alex Herek ("we," "us," "our") collects, uses, and protects information when you visit alexherek.com (the "Site").</p>
+
+      <h2>Information we collect</h2>
+      <p>We collect information you provide directly, such as your name and email address when you request a free sample or subscribe to updates. We also collect limited technical information automatically, such as pages visited and general location, through standard analytics tools.</p>
+
+      <h2>How we use your information</h2>
+      <ul>
+        <li>To send the free printable samples you request.</li>
+        <li>To occasionally email you about new volumes, updates, or printable extras.</li>
+        <li>To understand which pages and books are most useful to visitors, so we can improve the Site.</li>
+      </ul>
+
+      <h2>Children's privacy</h2>
+      <p>This Site is intended for parents, caregivers, and adult readers — not for direct use by children. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us so we can remove it.</p>
+
+      <h2>Cookies and analytics</h2>
+      <p>We may use cookies or similar technologies to understand how visitors use the Site. You can disable cookies in your browser settings; some features may not work as intended if you do.</p>
+
+      <h2>Third-party links</h2>
+      <p>Our book pages link to Amazon and other retailers. Once you leave our Site, their own privacy policies apply — we don't control how those sites handle your information.</p>
+
+      <h2>Email communications</h2>
+      <p>If you sign up for a free sample or our mailing list, we'll send you the content you requested and occasional updates. Every email includes an unsubscribe link, and you can opt out at any time.</p>
+
+      <h2>Data sharing</h2>
+      <p>We do not sell your personal information. We may share limited data with service providers who help us run the Site (such as email delivery or hosting), solely to provide those services.</p>
+
+      <h2>Your choices</h2>
+      <p>You can unsubscribe from emails at any time, and you can request that we delete personal information we hold about you by contacting us below.</p>
+
+      <h2>Contact us</h2>
+      <p>Questions about this policy? Email <a href="mailto:hello@alexherek.com">hello@alexherek.com</a>.</p>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  main.narrow { padding-bottom: 60px; }
+  a { color: var(--coral-deep); }
+  .page-header { padding: 36px 0 10px; }
+  .page-header h1 { font-size: 2rem; color: var(--navy); margin-top: 10px; }
+  .page-header .meta { font-family: 'IBM Plex Mono', monospace; font-size: .78rem; color: var(--ink-soft); margin-top: 12px; }
+  .draft-note {
+    background: rgba(198,153,47,.1); border-left: 3px solid var(--gold); padding: 16px 18px;
+    font-family: 'IBM Plex Mono', monospace; font-size: .78rem; color: var(--ink-soft); margin: 26px 0 36px; border-radius: 0 8px 8px 0;
+  }
+  .prose { font-size: 1rem; line-height: 1.75; color: var(--ink); }
+  .prose h2 { font-size: 1.25rem; color: var(--navy); margin: 34px 0 12px; }
+  .prose p { margin: 0 0 18px; color: var(--ink-soft); }
+  .prose ul { margin: 0 0 18px; padding-left: 22px; color: var(--ink-soft); }
+  .prose li { margin-bottom: 8px; }
+</style>

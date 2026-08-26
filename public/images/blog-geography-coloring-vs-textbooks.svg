@@ -1,0 +1,95 @@
+<svg viewBox="0 0 1600 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="leftBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffcf5"/>
+      <stop offset="60%" stop-color="#F6EFE1"/>
+      <stop offset="100%" stop-color="#f3d7bf"/>
+    </linearGradient>
+    <linearGradient id="rightBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22303f"/>
+      <stop offset="55%" stop-color="#1B2635"/>
+      <stop offset="100%" stop-color="#10151d"/>
+    </linearGradient>
+    <linearGradient id="seam" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#000000" stop-opacity="0.18"/>
+      <stop offset="50%" stop-color="#000000" stop-opacity="0.28"/>
+      <stop offset="55%" stop-color="#000000" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- backgrounds -->
+  <rect x="0" y="0" width="800" height="800" fill="url(#leftBg)"/>
+  <rect x="800" y="0" width="800" height="800" fill="url(#rightBg)"/>
+  <rect x="740" y="0" width="120" height="800" fill="url(#seam)"/>
+
+  <!-- ================= LEFT: coloring page ================= -->
+  <g transform="translate(60,90) rotate(-3)">
+    <rect x="0" y="0" width="430" height="560" rx="14" fill="#ffffff" stroke="#C6992F" stroke-width="3" opacity="0.97"/>
+    <!-- flag being colored -->
+    <text x="215" y="60" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="20" letter-spacing="3" fill="#4b5563">COLOR ME</text>
+    <rect x="60" y="90" width="310" height="200" fill="none" stroke="#1B2635" stroke-width="3" rx="4"/>
+    <!-- colored left half of flag -->
+    <rect x="60" y="90" width="155" height="66.6" fill="#d9663d"/>
+    <rect x="60" y="156.6" width="155" height="66.6" fill="#fffcf5"/>
+    <rect x="60" y="223.3" width="155" height="66.6" fill="#3f8fb0"/>
+    <!-- uncolored right half of flag (outline only, dashed guide lines) -->
+    <line x1="215" y1="90" x2="370" y2="90" stroke="#c7c7c7" stroke-width="2"/>
+    <line x1="215" y1="156.6" x2="370" y2="156.6" stroke="#c7c7c7" stroke-width="2" stroke-dasharray="6 6"/>
+    <line x1="215" y1="223.3" x2="370" y2="223.3" stroke="#c7c7c7" stroke-width="2" stroke-dasharray="6 6"/>
+    <circle cx="292" cy="190" r="34" fill="none" stroke="#c7c7c7" stroke-width="2" stroke-dasharray="5 5"/>
+
+    <!-- little child figure -->
+    <circle cx="130" cy="380" r="34" fill="#f6dcce" stroke="#1B2635" stroke-width="3"/>
+    <path d="M96 460 q34 -50 68 0 v50 h-68 z" fill="#d9663d" stroke="#1B2635" stroke-width="3"/>
+    <circle cx="118" cy="375" r="4" fill="#1B2635"/>
+    <circle cx="142" cy="375" r="4" fill="#1B2635"/>
+    <path d="M114 392 q16 12 32 0" stroke="#1B2635" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- crayon -->
+    <g transform="translate(230,430) rotate(28)">
+      <rect x="0" y="0" width="110" height="22" rx="6" fill="#e6c778" stroke="#1B2635" stroke-width="2.5"/>
+      <path d="M110 0 L134 11 L110 22 Z" fill="#c6992f" stroke="#1B2635" stroke-width="2.5" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- caption chip left -->
+  <g transform="translate(60,700)">
+    <rect x="0" y="0" width="230" height="46" rx="100" fill="#d9663d"/>
+    <text x="115" y="30" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="18" font-weight="700" fill="#ffffff" letter-spacing="1">COLORING PAGE</text>
+  </g>
+
+  <!-- ================= RIGHT: textbook ================= -->
+  <g transform="translate(1000,110) rotate(3)">
+    <rect x="0" y="0" width="410" height="540" rx="10" fill="#2c3c4d" stroke="#4b5563" stroke-width="3"/>
+    <rect x="24" y="24" width="362" height="492" rx="4" fill="#1B2635" opacity="0.5"/>
+    <!-- dense text lines -->
+    <g stroke="#7c8890" stroke-width="6" stroke-linecap="round" opacity="0.8">
+      <line x1="56" y1="80" x2="330" y2="80"/>
+      <line x1="56" y1="108" x2="352" y2="108"/>
+      <line x1="56" y1="136" x2="300" y2="136"/>
+      <line x1="56" y1="180" x2="352" y2="180"/>
+      <line x1="56" y1="208" x2="320" y2="208"/>
+      <line x1="56" y1="236" x2="352" y2="236"/>
+      <line x1="56" y1="264" x2="280" y2="264"/>
+      <line x1="56" y1="308" x2="352" y2="308"/>
+      <line x1="56" y1="336" x2="300" y2="336"/>
+      <line x1="56" y1="364" x2="352" y2="364"/>
+      <line x1="56" y1="392" x2="330" y2="392"/>
+      <line x1="56" y1="436" x2="352" y2="436"/>
+      <line x1="56" y1="464" x2="290" y2="464"/>
+    </g>
+  </g>
+
+  <!-- caption chip right -->
+  <g transform="translate(1310,700)">
+    <rect x="0" y="0" width="200" height="46" rx="100" fill="#C6992F"/>
+    <text x="100" y="30" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="18" font-weight="700" fill="#10151d" letter-spacing="1">TEXTBOOK</text>
+  </g>
+
+  <!-- ================= center VS seal ================= -->
+  <circle cx="800" cy="400" r="76" fill="#F6EFE1" stroke="#C6992F" stroke-width="4"/>
+  <circle cx="800" cy="400" r="62" fill="none" stroke="#C6992F" stroke-width="1.5"/>
+  <text x="800" y="418" text-anchor="middle" font-family="Georgia, 'Fraunces', serif" font-size="46" font-weight="700" fill="#1B2635">VS</text>
+</svg>

@@ -1,0 +1,107 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/tokens.css";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Nav item to highlight in the header. */
+  current?: "kids" | "seniors" | "blog" | "about";
+  /** Absolute or root-relative path to a 1200x630 share image. */
+  ogImage?: string;
+  /** Set true on error/utility pages that shouldn't be indexed. */
+  noindex?: boolean;
+  /** Page language. Defaults to English. */
+  lang?: "en" | "pl";
+  /** Root-relative path to the equivalent page in the other language, if one exists. */
+  altPath?: string;
+}
+
+const {
+  title,
+  description,
+  current,
+  ogImage = "/images/og-default.png",
+  noindex = false,
+  lang = "en",
+  altPath,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+
+// hreflang: only emitted when we actually know the equivalent page in the
+// other language, so we never point to a page that doesn't exist yet.
+const enURL = lang === "en" ? canonicalURL : altPath ? new URL(altPath, Astro.site) : null;
+const plURL = lang === "pl" ? canonicalURL : altPath ? new URL(altPath, Astro.site) : null;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {enURL && <link rel="alternate" hreflang="en" href={enURL} />}
+    {plURL && <link rel="alternate" hreflang="pl" href={plURL} />}
+    {enURL && <link rel="alternate" hreflang="x-default" href={enURL} />}
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:site_name" content="Alex Herek" />
+    <meta property="og:locale" content={lang === "pl" ? "pl_PL" : "en_US"} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16x16.png" />
+    <link rel="apple-touch-icon" href="/images/appletouchicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <Header current={current} lang={lang} altPath={altPath} />
+    <main>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+
+    <script>
+      const els = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12 },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add("in"));
+      }
+    </script>
+  </body>
+</html>

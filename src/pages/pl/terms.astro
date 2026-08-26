@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Regulamin — Alex Herek"
+  description="Zasady korzystania z alexherek.com."
+  lang="pl"
+  altPath="/terms"
+>
+  <main class="narrow">
+    <div class="crumb"><a href="/pl">Start</a><span>/</span>Regulamin</div>
+
+    <div class="page-header">
+      <span class="eyebrow" style="color: var(--gold);">PRAWNE</span>
+      <h1>Regulamin</h1>
+      <p class="meta">Ostatnia aktualizacja: [DATA] &middot; Dotyczy alexherek.com</p>
+    </div>
+
+    <div class="draft-note">
+      SZKIC — to jest punkt wyjścia strukturalny, nie porada prawna. Skonsultuj to z wykwalifikowanym prawnikiem przed publikacją — szczególnie kwestie własności intelektualnej, ograniczenia odpowiedzialności i przepisy konsumenckie właściwe dla rynków, na których sprzedajesz.
+    </div>
+
+    <div class="prose">
+      <p>Niniejszy Regulamin („Regulamin”) określa zasady dostępu do i korzystania z alexherek.com („Strona”), prowadzonej przez Alex Herek. Korzystając ze Strony, akceptujesz niniejszy Regulamin.</p>
+
+      <h2>Korzystanie ze Strony</h2>
+      <p>Strona i jej zawartość — w tym ilustracje, opisy książek i wpisy blogowe — są udostępniane wyłącznie do osobistego, niekomercyjnego użytku. Nie wolno powielać, rozpowszechniać ani tworzyć utworów pochodnych na podstawie naszych treści bez zgody.</p>
+
+      <h2>Zakupy</h2>
+      <p>Książki wymienione na tej Stronie są sprzedawane przez Amazon i innych sprzedawców zewnętrznych. Zakupy, zwroty i kwestie związane z zamówieniami podlegają regulaminowi danego sprzedawcy — nie przetwarzamy płatności ani nie realizujemy zamówień bezpośrednio przez tę Stronę.</p>
+
+      <h2>Darmowe próbki i zapis na e-mail</h2>
+      <p>Darmowe strony do druku są udostępniane wyłącznie do użytku osobistego i nie mogą być odsprzedawane, rozpowszechniane ani wykorzystywane komercyjnie. Zamawiając próbkę, zgadzasz się na otrzymanie e-maila z zamówioną treścią oraz, opcjonalnie, dalszych aktualizacji, z których możesz zrezygnować w każdej chwili.</p>
+
+      <h2>Własność intelektualna</h2>
+      <p>Wszystkie ilustracje, logotypy, okładki książek i treści pisane na tej Stronie są własnością Alex Herek, o ile nie zaznaczono inaczej, i są chronione prawem autorskim oraz prawem znaków towarowych.</p>
+
+      <h2>Brak porady profesjonalnej</h2>
+      <p>Treści na tej Stronie — w tym wpisy blogowe dotyczące rozwoju dziecka, pamięci czy funkcji poznawczych — są udostępniane wyłącznie w celach informacyjnych i rozrywkowych. Nie stanowią porady medycznej, psychologicznej ani edukacyjnej. Skonsultuj się z wykwalifikowanym specjalistą w sprawach dotyczących Twojej sytuacji.</p>
+
+      <h2>Ograniczenie odpowiedzialności</h2>
+      <p>Strona jest udostępniana „tak jak jest”, bez jakichkolwiek gwarancji. Alex Herek nie ponosi odpowiedzialności za żadne szkody wynikające z korzystania ze Strony, w najszerszym zakresie dozwolonym przez prawo.</p>
+
+      <h2>Zmiany w Regulaminie</h2>
+      <p>Możemy okresowo aktualizować niniejszy Regulamin. Dalsze korzystanie ze Strony po opublikowaniu zmian oznacza akceptację zaktualizowanego Regulaminu.</p>
+
+      <h2>Kontakt</h2>
+      <p>Pytania dotyczące niniejszego Regulaminu? Napisz na <a href="mailto:hello@alexherek.com">hello@alexherek.com</a>.</p>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  main.narrow { padding-bottom: 60px; }
+  a { color: var(--coral-deep); }
+  .page-header { padding: 36px 0 10px; }
+  .page-header h1 { font-size: 2rem; color: var(--navy); margin-top: 10px; }
+  .page-header .meta { font-family: 'IBM Plex Mono', monospace; font-size: .78rem; color: var(--ink-soft); margin-top: 12px; }
+  .draft-note {
+    background: rgba(198,153,47,.1); border-left: 3px solid var(--gold); padding: 16px 18px;
+    font-family: 'IBM Plex Mono', monospace; font-size: .78rem; color: var(--ink-soft); margin: 26px 0 36px; border-radius: 0 8px 8px 0;
+  }
+  .prose { font-size: 1rem; line-height: 1.75; color: var(--ink); }
+  .prose h2 { font-size: 1.25rem; color: var(--navy); margin: 34px 0 12px; }
+  .prose p { margin: 0 0 18px; color: var(--ink-soft); }
+  .prose ul { margin: 0 0 18px; padding-left: 22px; color: var(--ink-soft); }
+  .prose li { margin-bottom: 8px; }
+</style>

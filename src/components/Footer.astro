@@ -1,0 +1,147 @@
+---
+interface Props {
+  lang?: "en" | "pl";
+}
+const { lang = "en" } = Astro.props;
+const p = lang === "pl" ? "/pl" : "";
+
+const isPl = lang === "pl";
+---
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href={p || "/"} class="brand">
+          <img src="/images/seal.png" alt="" width="34" height="34" />
+          <span class="name">Alex Herek</span>
+        </a>
+        <p>
+          {isPl
+            ? "Niezależne wydawnictwo kolorowanek i książek do treningu mózgu — jedna półka dla dzieci, jedna dla tych, którzy im czytają."
+            : "Independent publisher of coloring and brain-training books — one shelf for kids, one for the people who read to them."}
+        </p>
+      </div>
+      <div class="foot-col">
+        <h4>{isPl ? "Dzieci" : "Kids"}</h4>
+        {isPl ? (
+          <a href={`${p}/kids/dzieci-swiata-i-ich-kultury`}>Dzieci Świata i Ich Kultury</a>
+        ) : (
+          <>
+            <a href="/kids/children-of-the-world">Children of the World</a>
+            <a href="/kids/dreams-what-ill-become">Dreams — What I'll Become</a>
+            <a href="/kids/legends-and-tales">Legends &amp; Tales</a>
+            <a href="/kids/emotion-superpowers">Emotion Superpowers</a>
+          </>
+        )}
+      </div>
+      <div class="foot-col">
+        <h4>{isPl ? "Seniorzy" : "Seniors"}</h4>
+        {isPl ? (
+          <>
+            <a href={`${p}/seniors/trening-mozgu-lewa-reka`}>Trening Mózgu Lewą Ręką</a>
+            <a href={`${p}/seniors/sprawny-umysl`}>Sprawny Umysł</a>
+            <a href={`${p}/free-samples`}>Darmowe próbki</a>
+          </>
+        ) : (
+          <>
+            <a href="/seniors/left-hand-brain-training">Left Hand Brain Training</a>
+            <a href="/seniors/sprawny-umysl">Sharp Mind</a>
+            <a href="/free-samples">Free samples</a>
+          </>
+        )}
+      </div>
+      <div class="foot-col">
+        <h4>{isPl ? "Wydawca" : "Publisher"}</h4>
+        {isPl ? (
+          <>
+            <a href={`${p}/about`}>O Alexie Hereku</a>
+            <a href={`${p}/blog`}>Blog</a>
+            <a href={`${p}/privacy`}>Polityka Prywatności</a>
+            <a href={`${p}/terms`}>Regulamin</a>
+            <a href="mailto:hello@alexherek.com">Kontakt</a>
+          </>
+        ) : (
+          <>
+            <a href="/about">About Alex Herek</a>
+            <a href="/blog">Blog</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Use</a>
+            <a href="mailto:hello@alexherek.com">Contact</a>
+          </>
+        )}
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; {new Date().getFullYear()} Alex Herek. {isPl ? "Wszelkie prawa zastrzeżone." : "All rights reserved."}</span>
+      <span>{isPl ? "Niezależny wydawca" : "Independent publisher"} &middot; Amazon KDP</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background: var(--navy-deep);
+    color: #c7d0d6;
+    padding: 70px 0 30px;
+    margin-top: 20px;
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 36px;
+  }
+  @media (max-width: 760px) {
+    .foot-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .foot-brand .brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    text-decoration: none;
+  }
+  .foot-brand .name {
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    font-size: 1.08rem;
+    color: var(--paper);
+  }
+  .foot-brand p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-top: 14px;
+    max-width: 32ch;
+    color: #98a3ab;
+  }
+  .foot-col h4 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 16px;
+  }
+  .foot-col a {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 11px;
+    color: #c7d0d6;
+    text-decoration: none;
+  }
+  .foot-col a:hover {
+    color: var(--paper);
+  }
+  .foot-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 54px;
+    padding-top: 22px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.78rem;
+    color: #7c8890;
+  }
+</style>

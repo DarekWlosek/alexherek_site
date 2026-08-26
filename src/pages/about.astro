@@ -1,0 +1,234 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Alex Herek",
+  jobTitle: "Founder & Author",
+  worksFor: { "@type": "Organization", name: "Alex Herek" },
+  url: "https://alexherek.com/about",
+};
+---
+
+<BaseLayout
+  title="About Alex Herek — Independent Publisher"
+  description="Alex Herek is an independent publisher making coloring books for kids and large-print brain-training books for seniors — one drawing table, two very different readers."
+  current="about"
+  altPath="/pl/about"
+>
+  <div class="wrap about-hero">
+    <div class="hero-grid">
+      <div class="reveal">
+        <span class="eyebrow" style="color: var(--coral-deep);">ABOUT THE PUBLISHER</span>
+        <h1>One drawing table.<br />Two very different readers.</h1>
+        <p class="lede">Alex Herek is an independent publisher making activity books that ask very little and give back a lot — a set of crayons, a quiet half hour, and something worth finishing. Some readers are five. Some are eighty-five. The table looks the same either way.</p>
+      </div>
+      <div class="reveal">
+        <div class="portrait-frame">
+          <span class="portrait-corner">EST. PUBLISHER</span>
+          <img class="author-photo" src="/images/author.jpg" alt="Alex Herek, founder of Alex Herek publishing, in his home library" />
+          <div class="portrait-caption">
+            <div class="pname">Alex Herek</div>
+            <div class="prole">Founder &amp; Author</div>
+          </div>
+          <div class="portrait-seal"><img src="/images/seal.png" alt="" /></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="mission">
+    <div class="wrap mission-grid">
+      <div class="reveal">
+        <blockquote>"I wanted to make something my kids and my parents could both sit down with — no batteries, no login, just a page worth coloring in."</blockquote>
+        <cite>— ALEX HEREK, FOUNDER</cite>
+        <p class="mission-note">Draft pull-quote — replace with Alex's own words on why the two shelves exist.</p>
+      </div>
+      <div class="photo-pair reveal">
+        <figure>
+          <img src="/images/thumb-living.jpg" alt="A child coloring a country page at a desk" />
+          <figcaption>Kids shelf</figcaption>
+        </figure>
+        <figure>
+          <img src="/images/seniors-hero.jpg" alt="A grandfather and grandson coloring together" />
+          <figcaption>Seniors shelf</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">HOW IT STARTED</span>
+      <h2>A shelf that grew in both directions.</h2>
+      <p>Placeholder milestones below — swap in the real dates, volume counts and turning points of the catalog.</p>
+    </div>
+    <div class="timeline">
+      <div class="t-item reveal">
+        <div class="t-year">Y1</div>
+        <div class="t-body">
+          <h3>The first volume</h3>
+          <p>[Describe the very first book you published — what problem it solved, and for whom.]</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">Y2</div>
+        <div class="t-body">
+          <h3>Children of the World takes shape</h3>
+          <p>[Note when the flagship kids series expanded into its five continent volumes.]</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">Y3</div>
+        <div class="t-body">
+          <h3>The senior shelf opens</h3>
+          <p>[Explain what prompted Left Hand Brain Training and the Sharp Mind series.]</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">Now</div>
+        <div class="t-body">
+          <h3>Two shelves, one table</h3>
+          <p>[Where the catalog stands today, and what's coming next.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">HOW THE BOOKS GET MADE</span>
+      <h2>Three things every volume shares.</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <span class="num">01</span>
+        <h3>Researched, not guessed</h3>
+        <p>Flags, landmarks and traditions are checked against real sources before a single line is drawn.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="num">02</span>
+        <h3>Tested at the table</h3>
+        <p>Every page goes through a real kid or a real senior with a pack of crayons before it ships.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="num">03</span>
+        <h3>Independently made</h3>
+        <p>Written, illustrated and published in-house — no ghostwriters, no stock templates.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="stats-band reveal">
+      <div class="stats-grid">
+        <div class="stat"><div class="n">13</div><div class="l">Titles published</div></div>
+        <div class="stat"><div class="n">116</div><div class="l">Countries explored</div></div>
+        <div class="stat"><div class="n">2</div><div class="l">Generations of readers</div></div>
+        <div class="stat"><div class="n">100%</div><div class="l">Screen-free</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="band reveal">
+      <div>
+        <h2>Pick a shelf and pull up a chair.</h2>
+        <p>Browse the full catalog for kids or for seniors — or grab a free sample first.</p>
+      </div>
+      <div class="band-ctas">
+        <a href="/kids" class="cta-btn cta-kids">Browse Kids Books</a>
+        <a href="/seniors" class="cta-btn cta-outline">Browse Senior Books</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(personJsonLd)} />
+
+<style>
+  .about-hero { padding: 70px 0 30px; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 60px; align-items: center; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+  .about-hero h1 { font-size: 2.7rem; line-height: 1.1; color: var(--navy); margin: 14px 0 20px; }
+  .about-hero .lede { font-size: 1.08rem; line-height: 1.6; color: var(--ink-soft); max-width: 46ch; }
+
+  .portrait-frame {
+    position: relative; aspect-ratio: 4/5; border-radius: var(--radius-l); overflow: hidden;
+    border: 1px solid rgba(198,153,47,.35); box-shadow: var(--shadow-soft);
+  }
+  .portrait-frame img.author-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .portrait-frame::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(16,21,29,.55) 0%, rgba(16,21,29,0) 32%);
+    pointer-events: none;
+  }
+  .portrait-caption { position: absolute; left: 22px; bottom: 20px; z-index: 2; color: var(--paper); }
+  .portrait-caption .pname { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; }
+  .portrait-caption .prole { font-family: 'IBM Plex Mono', monospace; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-light); margin-top: 3px; }
+  .portrait-seal {
+    position: absolute; bottom: 18px; right: 18px; z-index: 2; width: 56px; height: 56px; border-radius: 50%;
+    background: var(--cream); border: 3px solid var(--gold); box-shadow: 0 8px 18px -6px rgba(0,0,0,.5);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .portrait-seal img { width: 32px; height: 32px; }
+  .portrait-corner {
+    position: absolute; top: 16px; right: 16px; z-index: 2;
+    font-family: 'IBM Plex Mono', monospace; font-size: .6rem; color: var(--paper); letter-spacing: .1em;
+    border: 1px solid rgba(246,239,225,.5); background: rgba(16,21,29,.35); border-radius: 100px; padding: 4px 10px;
+  }
+
+  .mission { background: var(--paper); border-top: 1px solid rgba(198,153,47,.25); border-bottom: 1px solid rgba(198,153,47,.25); }
+  .mission-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: center; }
+  @media (max-width: 900px) { .mission-grid { grid-template-columns: 1fr; } }
+  .mission blockquote { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.6rem; line-height: 1.4; color: var(--navy); margin: 0 0 18px; }
+  .mission cite { font-family: 'IBM Plex Mono', monospace; font-style: normal; font-size: .74rem; letter-spacing: .06em; color: var(--ink-soft); }
+  .mission-note { font-size: .8rem; color: var(--ink-soft); margin-top: 10px; border-left: 2px solid var(--gold); padding-left: 12px; }
+  .photo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .photo-pair figure { margin: 0; position: relative; }
+  .photo-pair img { border-radius: var(--radius-m); aspect-ratio: 4/5; object-fit: cover; box-shadow: 0 14px 26px -14px rgba(0,0,0,.35); }
+  .photo-pair figcaption {
+    position: absolute; left: 10px; bottom: 10px;
+    font-family: 'IBM Plex Mono', monospace; font-size: .62rem; letter-spacing: .06em; text-transform: uppercase;
+    background: rgba(16,21,29,.72); color: var(--paper); padding: 5px 10px; border-radius: 100px;
+  }
+
+  .timeline { max-width: 760px; margin: 0 auto; }
+  .t-item { display: grid; grid-template-columns: 64px 1fr; gap: 22px; padding-bottom: 38px; position: relative; }
+  .t-item:last-child { padding-bottom: 0; }
+  .t-item::before { content: ""; position: absolute; left: 31px; top: 44px; bottom: 0; width: 1px; background: linear-gradient(to bottom, rgba(198,153,47,.5), rgba(198,153,47,.08)); }
+  .t-item:last-child::before { display: none; }
+  .t-year {
+    width: 64px; height: 64px; border-radius: 50%; background: var(--navy); color: var(--gold-light);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace; font-size: .72rem; font-weight: 600; text-align: center;
+    border: 2px solid var(--gold); flex-shrink: 0; z-index: 1;
+  }
+  .t-body h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 6px; }
+  .t-body p { margin: 0; color: var(--ink-soft); font-size: .94rem; line-height: 1.55; max-width: 52ch; }
+
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  @media (max-width: 860px) { .values-grid { grid-template-columns: 1fr; } }
+  .value-card { background: var(--paper); border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-l); padding: 30px; }
+  .value-card .num { font-family: 'IBM Plex Mono', monospace; font-size: .7rem; color: var(--gold); letter-spacing: .1em; margin-bottom: 14px; display: block; }
+  .value-card h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 10px; }
+  .value-card p { margin: 0; color: var(--ink-soft); font-size: .92rem; line-height: 1.55; }
+
+  .stats-band { background: radial-gradient(ellipse at 80% 10%, rgba(198,153,47,.25), transparent 55%), var(--navy); border-radius: var(--radius-l); padding: 52px 40px; color: var(--cream); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+  @media (max-width: 760px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+  .stat { padding: 10px; }
+  .stat .n { font-family: 'Fraunces', serif; font-size: 2.4rem; color: var(--paper); font-weight: 600; }
+  .stat .l { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-light); margin-top: 6px; }
+
+  .band {
+    background: linear-gradient(155deg, var(--cream-deep), var(--paper)); border: 1px solid rgba(198,153,47,.35);
+    border-radius: var(--radius-l); padding: 54px 48px;
+    display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;
+  }
+  .band h2 { font-size: 1.8rem; color: var(--navy); max-width: 24ch; }
+  .band p { color: var(--ink-soft); margin-top: 10px; max-width: 44ch; line-height: 1.5; }
+  .band-ctas { display: flex; gap: 14px; flex-shrink: 0; }
+  @media (max-width: 480px) { .band-ctas { flex-direction: column; width: 100%; } }
+</style>

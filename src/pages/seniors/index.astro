@@ -1,0 +1,230 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const allSeries = (await getCollection("seniorSeries")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Senior Brain-Training Books — Alex Herek"
+  description="Two large-print series for seniors: Left Hand Brain Training and Sharp Mind. Every title is live today, with solutions included."
+  current="seniors"
+  altPath="/pl/seniors"
+>
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a><span>/</span>Seniors</div>
+  </div>
+
+  <div class="wrap sr-hero">
+    <div class="sh-shell reveal">
+      <div class="sh-text">
+        <span class="sh-spine-label">CHAPTER · SENIORS</span>
+        <span class="eyebrow" style="color: var(--gold-light);">FOR SHARP MINDS · BRAIN TRAINING</span>
+        <h1>Two series.<br />One quiet ritual.</h1>
+        <p>Large-print puzzles and drawing drills built for a calm ten minutes with coffee — no screens, no rush, and a clear sense of progress page by page.</p>
+        <div class="sh-tags">
+          <span class="sh-tag">LARGE PRINT</span>
+          <span class="sh-tag">SCREEN-FREE</span>
+          <span class="sh-tag">NO SKILL NEEDED</span>
+        </div>
+      </div>
+      <div class="sh-photo">
+        <img src="/images/sm-hero.jpg" alt="An elderly couple reading a Sharp Mind puzzle book together on their sofa" />
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">THE CATALOG</span>
+      <h2>Both series, ready today.</h2>
+      <p>No "coming soon" here — every title below is written, printed and available now.</p>
+    </div>
+
+    <div class="series-grid">
+      {allSeries.map((s) => (
+        <a href={`/seniors/${s.id}`} class="featured-card reveal">
+          <div class="fc-covers">
+            {s.data.volumes.filter((v) => v.cover).length > 0 ? (
+              <div class="pair">
+                {s.data.volumes.filter((v) => v.cover).map((v, i) => (
+                  <img class={`c${(i % 2) + 1}`} src={v.cover} alt={`${s.data.title}: ${v.title} — book cover`} />
+                ))}
+              </div>
+            ) : (
+              <div class="single"><img src={s.data.heroImage} alt={`${s.data.title} cover`} /></div>
+            )}
+          </div>
+          <div class="fc-body">
+            <span class="fc-badge">{s.data.eyebrow}</span>
+            <h3>{s.data.title}</h3>
+            <p class="desc">{s.data.description}</p>
+            <div class="fc-volumes">
+              {s.data.volumes.map((v) => (
+                <div class={`vol-row ${v.status === "available" ? "available" : "soon"}`}>
+                  <span class="vn">{v.number}</span>
+                  <span class="vt">{v.title}</span>
+                  <span class="vl">{v.status === "available" ? "Available" : "In production"}</span>
+                </div>
+              ))}
+            </div>
+            <span class="cta-btn cta-primary fc-cta">View the series →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">WHY READERS COME BACK</span>
+      <h2>Built for the desk, not the app store.</h2>
+    </div>
+    <div class="feat-strip">
+      <div class="feat-card reveal">
+        <div class="icon">Aa</div>
+        <h3>Genuinely large print</h3>
+        <p>Every page is laid out for comfortable reading without a magnifying glass.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="icon">✓</div>
+        <h3>Solutions included</h3>
+        <p>No guessing left hanging — every puzzle's answer is printed at the back.</p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="icon">✎</div>
+        <h3>No experience required</h3>
+        <p>Every exercise starts simple, whether it's a first pencil stroke or a first word search.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">BACKED BY RESEARCH</span>
+      <h2>Why it works, not just why we like it.</h2>
+      <p>A few findings from published research on coloring and puzzle activities — described in general terms below, in our own words.</p>
+    </div>
+    <div class="feat-strip">
+      <div class="feat-card reveal">
+        <h3>Calmer mind, sharper focus</h3>
+        <p>In two controlled studies with adults, twenty minutes of coloring was linked to lower anxiety and better performance on attention and creative-thinking tasks compared with a non-coloring control.</p>
+        <span class="research-cite">Holt, Furbert &amp; Sweetingham (2019), Art Therapy Journal</span>
+      </div>
+      <div class="feat-card reveal">
+        <h3>More than a pastime</h3>
+        <p>A 2023 survey of 156 older adults found that regularly working on puzzles was linked to both stronger cognitive engagement and better emotional and social wellbeing.</p>
+        <span class="research-cite">Lin et al. (2023), Activities, Adaptation &amp; Aging</span>
+      </div>
+    </div>
+    <p class="research-disclaimer">These findings describe coloring and puzzle activities in general in published research — they were not conducted using Alex Herek books specifically, and our books are not marketed as therapeutic or medical products.</p>
+  </section>
+
+  <section class="wrap">
+    <div class="band reveal">
+      <div>
+        <h2>Try a few pages before you buy.</h2>
+        <p>Free printable samples from both series, delivered straight to your inbox.</p>
+      </div>
+      <div class="band-ctas">
+        <a href="/free-samples#seniors" class="cta-btn cta-primary">Get the free sample</a>
+        <a href="/kids" class="cta-btn cta-outline-cream">Looking for Kids books?</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .sr-hero { padding: 34px 0 10px; }
+  .sh-shell {
+    position: relative; border-radius: var(--radius-l); overflow: hidden; box-shadow: var(--shadow-soft);
+    display: grid; grid-template-columns: 1fr 1fr; min-height: 420px;
+  }
+  .sh-shell::after {
+    content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 26px;
+    background: linear-gradient(270deg, rgba(0,0,0,.28), rgba(0,0,0,0)); z-index: 3;
+  }
+  .sh-text {
+    position: relative; z-index: 2; order: 2;
+    padding: 56px 58px 56px 20px;
+    display: flex; flex-direction: column; justify-content: center; gap: 16px;
+    background: radial-gradient(ellipse at 90% 0%, rgba(142,169,136,.28), transparent 55%), linear-gradient(200deg, #22303f 0%, var(--navy) 55%, var(--navy-deep) 100%);
+    color: var(--cream);
+  }
+  .sh-spine-label {
+    position: absolute; right: 8px; top: 0; bottom: 0; display: flex; align-items: center; z-index: 4;
+    writing-mode: vertical-rl;
+    font-family: 'IBM Plex Mono', monospace; font-size: .62rem; letter-spacing: .2em;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .sh-text h1 { font-size: 2.4rem; line-height: 1.1; color: var(--paper); }
+  .sh-text p { color: #cdd6dc; font-size: 1.02rem; line-height: 1.55; max-width: 42ch; }
+  .sh-photo { position: relative; order: 1; }
+  .sh-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .sh-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2px; }
+  .sh-tag {
+    font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .05em;
+    background: rgba(198,153,47,.16); color: var(--gold-light);
+    padding: 5px 12px; border-radius: 100px; border: 1px solid rgba(198,153,47,.35);
+  }
+  @media (max-width: 840px) {
+    .sh-shell { grid-template-columns: 1fr; }
+    .sh-photo { order: -1; aspect-ratio: 16/9; }
+    .sh-text { padding: 40px 26px; order: 2; }
+  }
+
+  .series-grid { display: flex; flex-direction: column; gap: 34px; }
+  .featured-card {
+    background: var(--navy); color: var(--cream); border-radius: var(--radius-l); overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1.05fr;
+    box-shadow: 0 20px 40px -26px rgba(27,38,53,.3); text-decoration: none;
+  }
+  @media (max-width: 900px) { .featured-card { grid-template-columns: 1fr; } }
+  .fc-covers { position: relative; padding: 36px; background: linear-gradient(160deg, #22303f, var(--navy-deep)); display: flex; align-items: center; justify-content: center; gap: 16px; }
+  .fc-covers img { border-radius: 8px; box-shadow: 0 16px 30px -14px rgba(0,0,0,.55); border: 5px solid rgba(255,255,255,.08); }
+  .fc-covers .single { max-width: 230px; }
+  .fc-covers .pair img { max-width: 150px; }
+  .fc-covers .pair .c1 { transform: rotate(-4deg) translateY(6px); }
+  .fc-covers .pair .c2 { transform: rotate(3deg) translateY(-6px); }
+  .fc-covers .pair { display: flex; gap: 14px; }
+  .fc-body { padding: 46px 46px 40px; display: flex; flex-direction: column; gap: 14px; justify-content: center; }
+  .fc-badge {
+    font-family: 'IBM Plex Mono', monospace; font-size: .64rem; letter-spacing: .08em; text-transform: uppercase;
+    background: var(--gold); color: var(--navy-deep); padding: 4px 10px; border-radius: 100px; width: fit-content;
+  }
+  .fc-body h3 { font-size: 1.6rem; color: var(--paper); }
+  .fc-body p.desc { color: #c7d0d6; font-size: .96rem; line-height: 1.55; max-width: 48ch; }
+  .fc-volumes { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+  .vol-row { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px dashed rgba(198,153,47,.3); font-size: .88rem; }
+  .vol-row:last-child { border-bottom: none; }
+  .vol-row .vn { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; color: var(--gold-light); min-width: 44px; }
+  .vol-row .vt { color: var(--paper); font-weight: 600; flex: 1; }
+  .vol-row .vl { font-family: 'IBM Plex Mono', monospace; font-size: .6rem; letter-spacing: .04em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; }
+  .vol-row.available .vl { background: var(--gold); color: var(--navy-deep); }
+  .vol-row.soon .vl { background: rgba(255,255,255,.08); color: #9aa5ac; }
+  .fc-cta { margin-top: 10px; }
+
+  .feat-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 820px) { .feat-strip { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .feat-strip { grid-template-columns: 1fr; } }
+  .feat-card { background: var(--paper); border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-m); padding: 26px; }
+  .feat-card .icon { width: 42px; height: 42px; border-radius: 10px; background: var(--sage-tint); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; font-family: 'Fraunces', serif; font-weight: 600; color: var(--sage); font-size: 1.1rem; }
+  .feat-card h3 { font-size: 1.02rem; color: var(--navy); margin-bottom: 8px; }
+  .feat-card p { margin: 0 0 10px; font-size: .86rem; color: var(--ink-soft); line-height: 1.5; }
+  .research-cite { font-family: 'IBM Plex Mono', monospace; font-size: .64rem; letter-spacing: .03em; color: #8a6a1a; }
+  .research-disclaimer {
+    font-family: 'IBM Plex Mono', monospace; font-size: .7rem; color: var(--ink-soft);
+    text-align: center; margin-top: 24px; max-width: 640px; margin-left: auto; margin-right: auto;
+    border-top: 1px dashed rgba(198,153,47,.35); padding-top: 18px;
+  }
+
+  .band {
+    background: radial-gradient(ellipse at 80% 10%, rgba(142,169,136,.25), transparent 55%), var(--navy);
+    border-radius: var(--radius-l); padding: 52px 46px; color: var(--cream);
+    display: flex; align-items: center; justify-content: space-between; gap: 36px; flex-wrap: wrap;
+  }
+  .band h2 { font-size: 1.75rem; color: var(--paper); max-width: 24ch; }
+  .band p { color: #c7d0d6; margin-top: 10px; max-width: 42ch; line-height: 1.5; }
+  .band-ctas { display: flex; gap: 14px; flex-shrink: 0; }
+  @media (max-width: 480px) { .band-ctas { flex-direction: column; width: 100%; } }
+</style>

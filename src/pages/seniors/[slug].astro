@@ -1,0 +1,160 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const allSeries = await getCollection("seniorSeries");
+  return allSeries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+
+const seriesJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BookSeries",
+  name: data.title,
+  author: { "@type": "Person", name: "Alex Herek" },
+  publisher: { "@type": "Organization", name: "Alex Herek" },
+  audience: { "@type": "Audience", audienceType: "Seniors" },
+  hasPart: data.volumes
+    .filter((v) => v.status === "available")
+    .map((v) => ({
+      "@type": "Book",
+      name: `${data.title}: ${v.title}`,
+      bookFormat: "https://schema.org/Paperback",
+      inLanguage: "en",
+      ...(v.price && v.asin
+        ? { offers: { "@type": "Offer", price: v.price, priceCurrency: "USD", url: `https://www.amazon.com/dp/${v.asin}` } }
+        : {}),
+    })),
+};
+
+const firstAvailable = data.volumes.find((v) => v.asin);
+---
+
+<BaseLayout
+  title={`${data.title} — Alex Herek`}
+  description={data.description}
+  current="seniors"
+  altPath={entry.id === "left-hand-brain-training" ? "/pl/seniors/trening-mozgu-lewa-reka" : entry.id === "sprawny-umysl" ? "/pl/seniors/sprawny-umysl" : undefined}
+>
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a><span>/</span><a href="/seniors">Seniors</a><span>/</span>{data.title}</div>
+  </div>
+
+  <div class="wrap p-hero">
+    <div class="p-shell reveal">
+      <div class="p-photo">
+        {data.heroImage && <img src={data.heroImage} alt={`${data.title} — lifestyle photo`} />}
+      </div>
+      <div class="p-body">
+        <span class="eyebrow">{data.eyebrow}</span>
+        <h1>{data.title}</h1>
+        <span class="subtitle">{data.subtitle}</span>
+        <p class="desc"><Content /></p>
+        <div class="p-facts">
+          <span class="p-fact">{data.volumes.length} TITLE{data.volumes.length > 1 ? "S" : ""}</span>
+          <span class="p-fact">LARGE PRINT</span>
+        </div>
+        <div class="p-ctas">
+          {firstAvailable && (
+            <a href={`https://www.amazon.com/dp/${firstAvailable.asin}`} class="cta-btn cta-primary">Buy on Amazon →</a>
+          )}
+          <a href="/free-samples#seniors" class="cta-btn cta-outline-cream">Try a free sample</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap" id="volumes">
+    <div class="section-head reveal">
+      <span class="eyebrow">THE FULL SERIES</span>
+      <h2>Every title, all in one place.</h2>
+    </div>
+    <div class="vol-shelf reveal">
+      <h3>{data.title}</h3>
+      <div class="spine-list">
+        {data.volumes.map((v, i) => (
+          <a class={`spine-chip ${i === 0 ? "active" : ""}`} href={v.asin ? `https://www.amazon.com/dp/${v.asin}` : "#"}>
+            <span class="vol">{v.number}</span>
+            <div>
+              <div class="title">{v.title}</div>
+              {v.meta && <div class="desc">{v.meta}</div>}
+            </div>
+            <span class="status">{v.price ? `$${v.price.toFixed(2)} · Live` : v.status === "available" ? "Live" : "In production"}</span>
+          </a>
+        ))}
+      </div>
+      {data.languageNote && <p class="lang-note">{data.languageNote}</p>}
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="band reveal">
+      <div>
+        <h2>Start with fifteen minutes a day.</h2>
+        <p>All titles in this series are available now — or try a free sample page first.</p>
+      </div>
+      <div class="band-ctas">
+        {firstAvailable && (
+          <a href={`https://www.amazon.com/dp/${firstAvailable.asin}`} class="cta-btn cta-primary">Buy on Amazon →</a>
+        )}
+        <a href="/free-samples#seniors" class="cta-btn cta-outline-cream">Get free sample</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(seriesJsonLd)} />
+
+<style>
+  .p-hero { padding: 34px 0 10px; }
+  .p-shell {
+    border-radius: var(--radius-l); overflow: hidden; box-shadow: var(--shadow-soft);
+    background: linear-gradient(200deg,#22303f 0%, var(--navy) 55%, var(--navy-deep) 100%);
+    display: grid; grid-template-columns: 1fr 1.1fr; color: var(--cream);
+  }
+  @media (max-width: 900px) { .p-shell { grid-template-columns: 1fr; } }
+  .p-photo { position: relative; min-height: 420px; }
+  .p-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .p-body { padding: 52px 48px; display: flex; flex-direction: column; gap: 16px; justify-content: center; }
+  .p-body .eyebrow { color: var(--gold-light); }
+  .p-body h1 { font-size: 2.3rem; line-height: 1.12; color: var(--paper); }
+  .subtitle { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.1rem; color: var(--gold-light); }
+  .desc { color: #cdd6dc; font-size: 1rem; line-height: 1.6; max-width: 48ch; }
+  .p-facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2px; }
+  .p-fact {
+    font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .04em;
+    background: rgba(198,153,47,.14); border: 1px solid rgba(198,153,47,.4); color: var(--gold-light);
+    padding: 6px 12px; border-radius: 100px;
+  }
+  .p-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+
+  .vol-shelf { background: var(--navy); border-radius: var(--radius-l); padding: 36px 40px; color: var(--cream); }
+  .vol-shelf h3 { font-size: 1.2rem; color: var(--paper); margin-bottom: 20px; }
+  .spine-list { display: flex; flex-direction: column; gap: 10px; }
+  .spine-chip { display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(198,153,47,.3); border-radius: 10px; padding: 13px 16px; text-decoration: none; }
+  .spine-chip.active { background: rgba(198,153,47,.16); border-color: var(--gold); }
+  .spine-chip .vol { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; color: var(--gold-light); border-right: 1px solid rgba(198,153,47,.4); padding-right: 12px; min-width: 44px; }
+  .spine-chip .title { font-size: .92rem; font-weight: 600; color: var(--cream); }
+  .spine-chip .desc { font-size: .78rem; color: #a9b4bc; margin-top: 2px; }
+  .spine-chip .status { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: .62rem; letter-spacing: .05em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; }
+  .spine-chip.active .status { background: var(--gold); color: var(--navy-deep); }
+  .spine-chip:not(.active) .status { background: rgba(255,255,255,.08); color: #9aa5ac; }
+  .lang-note { font-family: 'IBM Plex Mono', monospace; font-size: .7rem; color: #9aa5ac; margin-top: 16px; }
+
+  .band {
+    background: radial-gradient(ellipse at 80% 10%, rgba(198,153,47,.25), transparent 55%), var(--navy);
+    border-radius: var(--radius-l); padding: 52px 46px; color: var(--cream);
+    display: flex; align-items: center; justify-content: space-between; gap: 36px; flex-wrap: wrap;
+  }
+  .band h2 { font-size: 1.75rem; color: var(--paper); max-width: 24ch; }
+  .band p { color: #c7d0d6; margin-top: 10px; max-width: 42ch; line-height: 1.5; }
+  .band-ctas { display: flex; gap: 14px; flex-shrink: 0; }
+  @media (max-width: 480px) { .band-ctas { flex-direction: column; width: 100%; } }
+</style>

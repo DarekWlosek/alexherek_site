@@ -1,0 +1,234 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Alex Herek",
+  jobTitle: "Założyciel i Autor",
+  worksFor: { "@type": "Organization", name: "Alex Herek" },
+  url: "https://alexherek.com/pl/about",
+};
+---
+
+<BaseLayout
+  title="O Alexie Hereku — Niezależnym Wydawcy"
+  description="Alex Herek to niezależny wydawca kolorowanek edukacyjnych dla dzieci i książek z dużym drukiem wspierających sprawność umysłu seniorów — jeden stół, dwoje bardzo różnych czytelników."
+  current="about"
+  lang="pl"
+  altPath="/about"
+>
+  <div class="wrap about-hero">
+    <div class="hero-grid">
+      <div class="reveal">
+        <span class="eyebrow" style="color: var(--coral-deep);">O WYDAWCY</span>
+        <h1>Jeden stół. Różne pokolenia,<br />wspólna edukacja i zabawa.</h1>
+        <p class="lede">Alex Herek to niezależny wydawca tworzący mądre książki aktywizacyjne, które łączą relaks z bezdyskusyjną wartością edukacyjną. Pudełko kredek i chwila skupienia wystarczą, by zwykłą zabawę zmienić w trening umysłu, rozwijający sprawność manualną i wiedzę o świecie — niezależnie od tego, czy masz pięć, czy osiemdziesiąt pięć lat.</p>
+      </div>
+      <div class="reveal">
+        <div class="portrait-frame">
+          <span class="portrait-corner">WYDAWCA</span>
+          <img class="author-photo" src="/images/author.jpg" alt="Alex Herek, założyciel wydawnictwa Alex Herek, w swojej domowej bibliotece" />
+          <div class="portrait-caption">
+            <div class="pname">Alex Herek</div>
+            <div class="prole">Założyciel i Autor</div>
+          </div>
+          <div class="portrait-seal"><img src="/images/seal.png" alt="" /></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="mission">
+    <div class="wrap mission-grid">
+      <div class="reveal">
+        <blockquote>„Moje publikacje powstały z bardzo prostej potrzeby. Chciałem stworzyć coś, co łączy pokolenia, zbliży dzieci i rodziców, dziadków — bez ekranów i bez skomplikowanych zasad. Dziś tworzę publikacje, które udowadniają, że nauka, trening umysłu i dobra zabawa mogą się „spotkać” przy tym samym stole.”</blockquote>
+        <cite>— ALEX HEREK, AUTOR</cite>
+      </div>
+      <div class="photo-pair reveal">
+        <figure>
+          <img src="/images/thumb-living.jpg" alt="Dziecko koloruje stronę o kraju przy biurku" />
+          <figcaption>Półka dla dzieci</figcaption>
+        </figure>
+        <figure>
+          <img src="/images/seniors-hero.jpg" alt="Dziadek i wnuk kolorujący razem" />
+          <figcaption>Półka dla seniorów</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">JAK TO SIĘ ZACZĘŁO</span>
+      <h2>Półka, która rosła w obu kierunkach.</h2>
+      <p>Poniższe kamienie milowe to szkic — do uzupełnienia prawdziwymi datami i faktami z historii katalogu.</p>
+    </div>
+    <div class="timeline">
+      <div class="t-item reveal">
+        <div class="t-year">R1</div>
+        <div class="t-body">
+          <h3>Pierwszy tom</h3>
+          <p>[Opisz swoją pierwszą wydaną książkę — jaki problem rozwiązywała i dla kogo.]</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">R2</div>
+        <div class="t-body">
+          <h3>Dzieci Świata nabierają kształtu</h3>
+          <p>[Zaznacz, kiedy flagowa seria dla dzieci rozrosła się do osobnych tomów kontynentalnych.]</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">R3</div>
+        <div class="t-body">
+          <h3>Otwiera się półka dla seniorów</h3>
+          <p>[Wyjaśnij, co skłoniło Cię do stworzenia Treningu Mózgu Lewą Ręką i serii Sprawny Umysł.]</p>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">Dziś</div>
+        <div class="t-body">
+          <h3>Dwie półki, jeden stół</h3>
+          <p>[Gdzie katalog jest dzisiaj i co planujesz dalej.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">JAK POWSTAJĄ KSIĄŻKI</span>
+      <h2>Trzy rzeczy wspólne dla każdego tomu.</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <span class="num">01</span>
+        <h3>Zbadane, nie zgadywane</h3>
+        <p>Flagi, zabytki i tradycje są sprawdzane w realnych źródłach, zanim powstanie choćby jedna linia rysunku.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="num">02</span>
+        <h3>Przetestowane przy stole</h3>
+        <p>Każda strona trafia do prawdziwego dziecka lub prawdziwego seniora z pudełkiem kredek, zanim trafi do druku.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="num">03</span>
+        <h3>Wydane niezależnie</h3>
+        <p>Napisane, zilustrowane i wydane samodzielnie — bez ghostwriterów, bez gotowych szablonów.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="stats-band reveal">
+      <div class="stats-grid">
+        <div class="stat"><div class="n">10</div><div class="l">Tytułów po polsku</div></div>
+        <div class="stat"><div class="n">92</div><div class="l">Krajów po polsku</div></div>
+        <div class="stat"><div class="n">2</div><div class="l">Pokolenia czytelników</div></div>
+        <div class="stat"><div class="n">100%</div><div class="l">Bez ekranu</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="band reveal">
+      <div>
+        <h2>Wybierz półkę i usiądź wygodnie.</h2>
+        <p>Przeglądaj pełny katalog dla dzieci lub dla seniorów — albo najpierw weź darmową próbkę.</p>
+      </div>
+      <div class="band-ctas">
+        <a href="/pl/kids" class="cta-btn cta-kids">Zobacz książki dla dzieci</a>
+        <a href="/pl/seniors" class="cta-btn cta-outline">Zobacz książki dla seniorów</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(personJsonLd)} />
+
+<style>
+  .about-hero { padding: 70px 0 30px; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 60px; align-items: center; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+  .about-hero h1 { font-size: 2.7rem; line-height: 1.1; color: var(--navy); margin: 14px 0 20px; }
+  .about-hero .lede { font-size: 1.08rem; line-height: 1.6; color: var(--ink-soft); max-width: 46ch; }
+
+  .portrait-frame {
+    position: relative; aspect-ratio: 4/5; border-radius: var(--radius-l); overflow: hidden;
+    border: 1px solid rgba(198,153,47,.35); box-shadow: var(--shadow-soft);
+  }
+  .portrait-frame img.author-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .portrait-frame::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(16,21,29,.55) 0%, rgba(16,21,29,0) 32%);
+    pointer-events: none;
+  }
+  .portrait-caption { position: absolute; left: 22px; bottom: 20px; z-index: 2; color: var(--paper); }
+  .portrait-caption .pname { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; }
+  .portrait-caption .prole { font-family: 'IBM Plex Mono', monospace; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-light); margin-top: 3px; }
+  .portrait-seal {
+    position: absolute; bottom: 18px; right: 18px; z-index: 2; width: 56px; height: 56px; border-radius: 50%;
+    background: var(--cream); border: 3px solid var(--gold); box-shadow: 0 8px 18px -6px rgba(0,0,0,.5);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .portrait-seal img { width: 32px; height: 32px; }
+  .portrait-corner {
+    position: absolute; top: 16px; right: 16px; z-index: 2;
+    font-family: 'IBM Plex Mono', monospace; font-size: .6rem; color: var(--paper); letter-spacing: .1em;
+    border: 1px solid rgba(246,239,225,.5); background: rgba(16,21,29,.35); border-radius: 100px; padding: 4px 10px;
+  }
+
+  .mission { background: var(--paper); border-top: 1px solid rgba(198,153,47,.25); border-bottom: 1px solid rgba(198,153,47,.25); }
+  .mission-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: center; }
+  @media (max-width: 900px) { .mission-grid { grid-template-columns: 1fr; } }
+  .mission blockquote { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.6rem; line-height: 1.4; color: var(--navy); margin: 0 0 18px; }
+  .mission cite { font-family: 'IBM Plex Mono', monospace; font-style: normal; font-size: .74rem; letter-spacing: .06em; color: var(--ink-soft); }
+  .mission-note { font-size: .8rem; color: var(--ink-soft); margin-top: 10px; border-left: 2px solid var(--gold); padding-left: 12px; }
+  .photo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .photo-pair figure { margin: 0; position: relative; }
+  .photo-pair img { border-radius: var(--radius-m); aspect-ratio: 4/5; object-fit: cover; box-shadow: 0 14px 26px -14px rgba(0,0,0,.35); }
+  .photo-pair figcaption {
+    position: absolute; left: 10px; bottom: 10px;
+    font-family: 'IBM Plex Mono', monospace; font-size: .62rem; letter-spacing: .06em; text-transform: uppercase;
+    background: rgba(16,21,29,.72); color: var(--paper); padding: 5px 10px; border-radius: 100px;
+  }
+
+  .timeline { max-width: 760px; margin: 0 auto; }
+  .t-item { display: grid; grid-template-columns: 64px 1fr; gap: 22px; padding-bottom: 38px; position: relative; }
+  .t-item:last-child { padding-bottom: 0; }
+  .t-item::before { content: ""; position: absolute; left: 31px; top: 44px; bottom: 0; width: 1px; background: linear-gradient(to bottom, rgba(198,153,47,.5), rgba(198,153,47,.08)); }
+  .t-item:last-child::before { display: none; }
+  .t-year {
+    width: 64px; height: 64px; border-radius: 50%; background: var(--navy); color: var(--gold-light);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace; font-size: .72rem; font-weight: 600; text-align: center;
+    border: 2px solid var(--gold); flex-shrink: 0; z-index: 1;
+  }
+  .t-body h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 6px; }
+  .t-body p { margin: 0; color: var(--ink-soft); font-size: .94rem; line-height: 1.55; max-width: 52ch; }
+
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  @media (max-width: 860px) { .values-grid { grid-template-columns: 1fr; } }
+  .value-card { background: var(--paper); border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-l); padding: 30px; }
+  .value-card .num { font-family: 'IBM Plex Mono', monospace; font-size: .7rem; color: var(--gold); letter-spacing: .1em; margin-bottom: 14px; display: block; }
+  .value-card h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 10px; }
+  .value-card p { margin: 0; color: var(--ink-soft); font-size: .92rem; line-height: 1.55; }
+
+  .stats-band { background: radial-gradient(ellipse at 80% 10%, rgba(198,153,47,.25), transparent 55%), var(--navy); border-radius: var(--radius-l); padding: 52px 40px; color: var(--cream); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+  @media (max-width: 760px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+  .stat { padding: 10px; }
+  .stat .n { font-family: 'Fraunces', serif; font-size: 2.4rem; color: var(--paper); font-weight: 600; }
+  .stat .l { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-light); margin-top: 6px; }
+
+  .band {
+    background: linear-gradient(155deg, var(--cream-deep), var(--paper)); border: 1px solid rgba(198,153,47,.35);
+    border-radius: var(--radius-l); padding: 54px 48px;
+    display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;
+  }
+  .band h2 { font-size: 1.8rem; color: var(--navy); max-width: 24ch; }
+  .band p { color: var(--ink-soft); margin-top: 10px; max-width: 44ch; line-height: 1.5; }
+  .band-ctas { display: flex; gap: 14px; flex-shrink: 0; }
+  @media (max-width: 480px) { .band-ctas { flex-direction: column; width: 100%; } }
+</style>

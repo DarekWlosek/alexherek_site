@@ -1,0 +1,157 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blogSeniorsPl");
+  return posts.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content, headings } = await render(entry);
+const tocHeadings = headings.filter((h) => h.depth === 2);
+
+const canonicalPath = `/pl/blog/seniors/${entry.id}`;
+
+const blogPostingJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: data.title,
+  description: data.excerpt,
+  inLanguage: "pl",
+  author: { "@type": "Person", name: "Alex Herek" },
+  publisher: { "@type": "Organization", name: "Alex Herek" },
+  ...(data.pubDate ? { datePublished: data.pubDate.toISOString() } : {}),
+  ...(data.heroImage ? { image: new URL(data.heroImage, "https://alexherek.com").toString() } : {}),
+  mainEntityOfPage: { "@type": "WebPage", "@id": new URL(canonicalPath, "https://alexherek.com").toString() },
+};
+
+const faqJsonLd = data.faq && data.faq.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: data.faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+} : null;
+---
+
+<BaseLayout
+  title={`${data.title} — Alex Herek`}
+  description={data.excerpt}
+  current="seniors"
+  lang="pl"
+  altPath={data.enSlug ? `/blog/seniors/${data.enSlug}` : undefined}
+>
+  <div class="narrow">
+    <div class="crumb"><a href="/pl">Start</a><span>/</span><a href="/pl/blog">Blog</a><span>/</span><a href="/pl/blog/seniors">Seniorzy</a><span>/</span>{data.title}</div>
+  </div>
+
+  <div class="narrow post-header">
+    <span class="post-tag">{data.tag}</span>
+    <h1>{data.title}</h1>
+    <p class="post-meta">Autor: Alex Herek &middot; {data.draft ? "Wersja robocza — data publikacji zostanie ustalona" : data.pubDate?.toLocaleDateString("pl-PL")} &middot; 4 min czytania</p>
+  </div>
+
+  <div class="narrow">
+    {data.heroImage ? (
+      <img class="post-hero-img" src={data.heroImage} alt={data.heroImageAlt ?? ""} />
+    ) : (
+      <div class="post-hero"></div>
+    )}
+
+    {data.draft && (
+      <div class="draft-note">
+        WERSJA ROBOCZA — ten wpis jest tymczasowym szablonem rezerwującym adres URL. Przed publikacją zastąp ten tekst i sekcje poniżej docelową treścią.
+      </div>
+    )}
+
+    {tocHeadings.length >= 3 && (
+      <nav class="toc" aria-label="Spis treści">
+        <span class="toc-label">W tym poradniku</span>
+        <ul>
+          {tocHeadings.map((h) => (
+            <li><a href={`#${h.slug}`}>{h.text}</a></li>
+          ))}
+        </ul>
+      </nav>
+    )}
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {data.faq && data.faq.length > 0 && (
+      <section class="faq" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">Najczęściej zadawane pytania</h2>
+        {data.faq.map((item) => (
+          <div class="faq-item">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </div>
+        ))}
+      </section>
+    )}
+
+    <div class="cta-inline">
+      <div>
+        <h3>Nie próbowałeś jeszcze tej serii?</h3>
+        <p>Pobierz darmową próbkę z Trening Mózgu Lewą Ręką lub Sprawny Umysł.</p>
+      </div>
+      <a href="/pl/free-samples#seniors" class="cta-btn cta-primary">Pobierz darmową próbkę →</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(blogPostingJsonLd)} />
+{faqJsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />}
+
+<style>
+  .post-header { padding: 40px 0 20px; }
+  .post-tag {
+    font-family: 'IBM Plex Mono', monospace; font-size: .66rem; letter-spacing: .08em; text-transform: uppercase;
+    background: var(--gold); color: var(--navy-deep); padding: 5px 12px; border-radius: 100px; width: fit-content; display: inline-block; margin-bottom: 16px;
+  }
+  .post-header h1 { font-size: 2.1rem; line-height: 1.2; color: var(--navy); }
+  .post-meta { font-family: 'IBM Plex Mono', monospace; font-size: .76rem; color: var(--ink-soft); margin-top: 14px; }
+  .post-hero { border-radius: var(--radius-l); aspect-ratio: 16/8; background: linear-gradient(155deg,#22303f,var(--navy-deep)); margin: 26px 0 40px; }
+  .post-hero-img { border-radius: var(--radius-l); width: 100%; aspect-ratio: 16/8; object-fit: cover; margin: 26px 0 40px; box-shadow: var(--shadow-soft); }
+  .prose { font-size: 1.06rem; line-height: 1.75; color: var(--ink); }
+  .prose :global(p) { margin: 0 0 22px; }
+  .prose :global(h2) { font-size: 1.4rem; color: var(--navy); margin: 36px 0 14px; }
+  .prose :global(ul), .prose :global(ol) { margin: 0 0 22px; padding-left: 22px; }
+  .prose :global(li) { margin-bottom: 8px; }
+  .prose :global(img) { border-radius: var(--radius-m); box-shadow: var(--shadow-soft); margin: 10px 0 26px; }
+  .prose :global(table) { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: .94rem; }
+  .prose :global(th), .prose :global(td) { text-align: left; padding: 10px 12px; border-bottom: 1px solid rgba(198,153,47,.28); }
+  .prose :global(th) { color: var(--navy); font-family: 'IBM Plex Mono', monospace; font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; }
+  .toc {
+    font-family: 'IBM Plex Mono', monospace; font-size: .8rem; background: var(--paper);
+    border-left: 3px solid var(--gold); border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 28px 0;
+  }
+  .toc-label { display: block; margin-bottom: 8px; letter-spacing: .04em; text-transform: uppercase; font-size: .72rem; color: var(--ink-soft); }
+  .toc ul { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin: 4px 0; }
+  .toc a { color: var(--navy); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .faq { margin: 40px 0; padding-top: 8px; border-top: 1px solid rgba(198,153,47,.28); }
+  .faq h2 { font-size: 1.4rem; color: var(--navy); margin: 28px 0 18px; }
+  .faq-item { margin-bottom: 20px; }
+  .faq-item h3 { font-size: 1rem; color: var(--navy); margin-bottom: 6px; }
+  .faq-item p { font-size: .96rem; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+  .cta-inline {
+    background: var(--paper); border: 1px solid rgba(198,153,47,.3); border-radius: var(--radius-m);
+    padding: 26px; margin: 36px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  }
+  .cta-inline h3 { font-size: 1.05rem; color: var(--navy); margin-bottom: 4px; }
+  .cta-inline p { margin: 0; font-size: .86rem; color: var(--ink-soft); }
+  .draft-note {
+    background: rgba(198,153,47,.1); border-left: 3px solid var(--gold); padding: 14px 18px;
+    font-family: 'IBM Plex Mono', monospace; font-size: .76rem; color: var(--ink-soft); margin: 30px 0; border-radius: 0 8px 8px 0;
+  }
+</style>
