@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
-
 <BaseLayout
   title="Darmowe Próbki do Druku — Alex Herek"
   description="Wypróbuj darmowe strony do druku z serii Dzieci Świata i Ich Kultury, Treningu Mózgu Lewą Ręką lub Sprawnego Umysłu, zanim kupisz całą książkę."
@@ -11,7 +10,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   <div class="wrap">
     <div class="crumb"><a href="/pl">Start</a><span>/</span>Darmowe Próbki</div>
   </div>
-
   <div class="wrap intro">
     <div class="section-head reveal" style="text-align:left; margin: 0 0 30px;">
       <span class="eyebrow" style="color: var(--gold);">WYPRÓBUJ, ZANIM KUPISZ</span>
@@ -23,7 +21,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </div>
     </div>
   </div>
-
   <section id="kids" class="panel panel-kids">
     <div class="wrap">
       <div class="panel-shell reveal">
@@ -41,16 +38,19 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             <div class="item"><span class="dot"></span>Flaga z własnym wzornikiem kolorów dla każdego kraju</div>
             <div class="item"><span class="dot"></span>Format dostosowany do druku A4</div>
           </div>
-          <form class="lead-form" data-note="visual only — wire up to an email service before launch">
-            <input type="email" placeholder="Twój adres e-mail" required />
+          <form class="lead-form" data-list="kids" novalidate>
+            <input type="text" name="name" placeholder="Twoje imię" autocomplete="given-name" required />
+            <input type="email" name="email" placeholder="Twój adres e-mail" autocomplete="email" required />
+            <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-theme="light" data-language="pl"></div>
             <button class="cta-btn cta-kids" type="submit">Wyślij mi darmowe strony →</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
             <span class="fine">Zero spamu. Rezygnacja w każdej chwili. Zobacz naszą <a href="/pl/privacy">politykę prywatności</a>.</span>
           </form>
         </div>
       </div>
     </div>
   </section>
-
   <section id="seniors" class="panel panel-seniors">
     <div class="wrap">
       <div class="panel-shell reveal">
@@ -68,16 +68,19 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             <div class="item"><span class="dot"></span>Krótki przewodnik „jak korzystać z tej książki”</div>
             <div class="item"><span class="dot"></span>Format dostosowany do druku A4</div>
           </div>
-          <form class="lead-form" data-note="visual only — wire up to an email service before launch">
-            <input type="email" placeholder="Twój adres e-mail" required />
+          <form class="lead-form" data-list="seniors" novalidate>
+            <input type="text" name="name" placeholder="Twoje imię" autocomplete="given-name" required />
+            <input type="email" name="email" placeholder="Twój adres e-mail" autocomplete="email" required />
+            <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-theme="dark" data-language="pl"></div>
             <button class="cta-btn cta-seniors" type="submit">Wyślij mi darmowe strony →</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
             <span class="fine">Zero spamu. Rezygnacja w każdej chwili. Zobacz naszą <a href="/pl/privacy">politykę prywatności</a>.</span>
           </form>
         </div>
       </div>
     </div>
   </section>
-
   <section class="wrap" style="padding: 20px 28px 80px;">
     <div class="section-head reveal">
       <span class="eyebrow" style="color: var(--gold);">JAK TO DZIAŁA</span>
@@ -98,7 +101,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </div>
     </div>
   </section>
-
   <section class="wrap" style="padding-bottom: 90px;">
     <div class="section-head reveal">
       <span class="eyebrow" style="color: var(--gold);">NAJCZĘŚCIEJ ZADAWANE PYTANIA</span>
@@ -120,20 +122,71 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     </div>
   </section>
 </BaseLayout>
-
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
-  document.querySelectorAll(".lead-form").forEach((form) => {
-    form.addEventListener("submit", (e) => e.preventDefault());
+  // Wysyła każdy formularz do naszej własnej funkcji Cloudflare Pages
+  // (/api/subscribe), która weryfikuje token Turnstile po stronie serwera,
+  // a dopiero potem przekazuje zgłoszenie do Kit. To Kit odpowiada od tego
+  // momentu za mail z potwierdzeniem (double opt-in) — ta strona nigdy sama
+  // nie oznacza nikogo jako "zapisanego".
+  document.querySelectorAll<HTMLFormElement>(".lead-form").forEach((form) => {
+    const statusEl = form.querySelector<HTMLElement>(".form-status");
+    const button = form.querySelector<HTMLButtonElement>("button[type='submit']");
+
+    function setStatus(msg: string, isError: boolean) {
+      if (!statusEl) return;
+      statusEl.textContent = msg;
+      statusEl.classList.toggle("is-error", isError);
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = new FormData(form);
+      const turnstileToken = data.get("cf-turnstile-response");
+
+      if (!turnstileToken) {
+        setStatus("Uzupełnij proszę weryfikację powyżej.", true);
+        return;
+      }
+
+      if (button) button.disabled = true;
+      setStatus("Wysyłanie…", false);
+
+      try {
+        const res = await fetch("/api/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: data.get("name"),
+            email: data.get("email"),
+            list: form.dataset.list,
+            token: turnstileToken,
+            company: data.get("company"), // honeypot — powinno zawsze być puste
+          }),
+        });
+        const result = await res.json();
+
+        if (result.ok) {
+          form.innerHTML =
+            '<p class="form-success">✓ Prawie gotowe — sprawdź skrzynkę i potwierdź adres e-mail, aby otrzymać PDF.</p>';
+        } else {
+          setStatus("Coś poszło nie tak. Spróbuj ponownie za chwilę.", true);
+          if (button) button.disabled = false;
+        }
+      } catch {
+        setStatus("Błąd połączenia — spróbuj ponownie.", true);
+        if (button) button.disabled = false;
+      }
+    });
   });
 </script>
-
 <style>
   .intro { padding: 56px 0 20px; }
   .jump-links { display: flex; justify-content: center; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
   .jump-chip { font-family: 'IBM Plex Mono', monospace; font-size: .76rem; letter-spacing: .04em; border: 1px solid var(--navy); border-radius: 100px; padding: 9px 18px; color: var(--navy); text-decoration: none; }
   .jump-chip.kids { border-color: var(--coral); color: var(--coral-deep); }
   .jump-chip.seniors { border-color: var(--gold); color: #8a6a1a; }
-
   .panel { padding: 70px 0; scroll-margin-top: 90px; }
   .panel-shell { border-radius: var(--radius-l); overflow: hidden; box-shadow: var(--shadow-soft); display: grid; grid-template-columns: 1fr 1fr; }
   @media (max-width: 900px) { .panel-shell { grid-template-columns: 1fr; } }
@@ -180,7 +233,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   .panel-seniors .includes .dot { background: var(--gold); }
   .panel-kids .includes .item { color: var(--ink-soft); }
   .panel-seniors .includes .item { color: #c7d0d6; }
-
   .lead-form { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; max-width: 380px; }
   .lead-form input { font-family: 'Source Sans 3', sans-serif; font-size: .94rem; padding: 12px 16px; border-radius: 10px; border: 1.5px solid rgba(27,38,53,.2); background: #fff; color: var(--ink); }
   .panel-seniors .lead-form input { border: 1.5px solid rgba(246,239,225,.25); background: rgba(255,255,255,.06); color: var(--paper); }
@@ -189,13 +241,24 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   .panel-seniors .lead-form .fine { color: #8fa0a9; }
   .lead-form .fine a { text-decoration: underline; color: inherit; }
 
+  /* Honeypot: pole trzymane w DOM, ale odsunięte poza ekran i poza kolejność
+     tabulacji, więc czytniki ekranu je pomijają. Zwykłe boty, które
+     wypełniają każde pole formularza, wpadają w tę pułapkę. */
+  .hp-field { position: absolute; left: -5000px; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
+
+  .form-status { font-size: .82rem; min-height: 1.2em; margin: 0; }
+  .form-status.is-error { color: #c0392b; font-weight: 600; }
+  .panel-seniors .form-status.is-error { color: #ff8a7a; }
+  .form-success { font-size: .96rem; font-weight: 600; margin: 8px 0 0; }
+  .panel-kids .form-success { color: var(--navy); }
+  .panel-seniors .form-success { color: var(--gold-light); }
+
   .how-strip { background: var(--paper); border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-l); padding: 36px 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
   @media (max-width: 760px) { .how-strip { grid-template-columns: 1fr; } }
   .how-item { display: flex; gap: 14px; align-items: flex-start; }
   .how-num { width: 34px; height: 34px; border-radius: 50%; background: var(--navy); color: var(--gold-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'IBM Plex Mono', monospace; font-size: .78rem; font-weight: 700; }
   .how-item h3 { font-size: .96rem; color: var(--navy); margin-bottom: 4px; }
   .how-item p { margin: 0; font-size: .84rem; color: var(--ink-soft); line-height: 1.5; }
-
   .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
   .faq-item { background: var(--paper); border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-m); padding: 22px 26px; }
   .faq-item h3 { font-size: 1rem; color: var(--navy); margin-bottom: 8px; }
