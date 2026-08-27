@@ -4,7 +4,7 @@ subtitle: "Book 1 — First Strokes"
 eyebrow: "SENIORS · BRAIN TRAINING SERIES"
 description: "98 large-print left-hand drawing exercises that gently wake up the right side of the brain — tracing, mirror-drawing and pattern drills, printed large enough to enjoy without squinting."
 order: 1
-heroImage: "/images/lhbt-hero.jpg"
+heroImage: "/images/lhbt-cover-en.jpg"
 languageNote: 'Also available in Polish as "Trening Mózgu Lewą Ręką dla Seniorów" (Books 1–5).'
 volumes:
   - number: "Bk. 1"
