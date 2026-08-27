@@ -25,6 +25,17 @@
 //   KIT_API_KEY           — from Kit → Settings → Developer → API Keys
 //   KIT_FORM_ID_KIDS       — the numeric ID of the "Kids" Kit form
 //   KIT_FORM_ID_SENIORS    — the numeric ID of the "Seniors" Kit form
+//
+// Kit integration note (2026-08-27): the single-step "add subscriber to
+// form by email address" endpoint (POST /v4/forms/{id}/subscribers with
+// {email_address}) returns 404 for this Kit account for reasons Kit
+// support could not immediately explain — confirmed not a plan
+// restriction, confirmed the form IDs are correct and exist, confirmed
+// reproducible across every form on the account. The two-step flow below
+// (create/upsert the subscriber, then attach them to the form by numeric
+// subscriber ID) was verified working end-to-end, including the double
+// opt-in confirmation email. If Kit later fixes the single-step endpoint,
+// this can be simplified back to one call.
 
 interface Env {
   TURNSTILE_SECRET_KEY: string;
@@ -105,59 +116,63 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return json({ ok: false, error: "captcha_failed" }, 400);
   }
 
-  // 2. Add the subscriber to the correct Kit form. Kit owns the double
-  // opt-in confirmation email from here on — nothing below marks anyone
-  // as subscribed on our side.
+  // 2. Create (or upsert) the subscriber in Kit, then attach them to the
+  // correct form. Kit owns the double opt-in confirmation email from here
+  // on — nothing below marks anyone as subscribed on our side.
   const formId = env[FORM_ID_BY_LIST[list]];
 
-  // TEMPORARY DIAGNOSTIC LOGGING — remove once signups work reliably.
-  console.error(
-    "DEBUG subscribe: list=", list,
-    "formId=", formId,
-    "apiKeyPrefix=", (env.KIT_API_KEY || "").slice(0, 8),
-    "apiKeyLength=", (env.KIT_API_KEY || "").length
-  );
-
-  let kitRes: Response;
+  // 2a. Create/find the subscriber by email. This upserts: if the email
+  // already exists in Kit, it just updates the first name.
+  let createRes: Response;
   try {
-    kitRes = await fetch(`https://api.kit.com/v4/forms/${formId}/subscribers`, {
+    createRes = await fetch("https://api.kit.com/v4/subscribers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "X-Kit-Api-Key": env.KIT_API_KEY,
       },
-      body: JSON.stringify({ email_address: email }),
+      body: JSON.stringify(
+        name ? { email_address: email, first_name: name } : { email_address: email }
+      ),
     });
-  } catch (err) {
-    console.error("DEBUG subscribe: fetch to Kit threw", String(err));
+  } catch {
     return json({ ok: false, error: "subscribe_unreachable" }, 502);
   }
 
-  if (!kitRes.ok) {
-    const errBody = await kitRes.text().catch(() => "<unreadable body>");
-    console.error("DEBUG subscribe: Kit responded", kitRes.status, errBody);
+  if (!createRes.ok) {
     return json({ ok: false, error: "subscribe_failed" }, 502);
   }
 
-  // Best-effort: attach the first name, if given. Never blocks the signup
-  // itself — the subscription above has already succeeded either way.
-  if (name) {
-    try {
-      const kitBody = (await kitRes.json()) as { subscriber?: { id?: number } };
-      const subscriberId = kitBody.subscriber?.id;
-      if (subscriberId) {
-        await fetch(`https://api.kit.com/v4/subscribers/${subscriberId}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Kit-Api-Key": env.KIT_API_KEY,
-          },
-          body: JSON.stringify({ first_name: name }),
-        });
+  const createBody = (await createRes.json()) as { subscriber?: { id?: number } };
+  const subscriberId = createBody.subscriber?.id;
+
+  if (!subscriberId) {
+    return json({ ok: false, error: "subscribe_failed" }, 502);
+  }
+
+  // 2b. Attach the subscriber to the correct form. This is what actually
+  // triggers Kit's double opt-in confirmation email for this form/sequence.
+  let attachRes: Response;
+  try {
+    attachRes = await fetch(
+      `https://api.kit.com/v4/forms/${formId}/subscribers/${subscriberId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Kit-Api-Key": env.KIT_API_KEY,
+        },
+        body: JSON.stringify({
+          referrer: request.headers.get("Referer") ?? undefined,
+        }),
       }
-    } catch {
-      // Non-fatal — swallow silently.
-    }
+    );
+  } catch {
+    return json({ ok: false, error: "subscribe_unreachable" }, 502);
+  }
+
+  if (!attachRes.ok) {
+    return json({ ok: false, error: "subscribe_failed" }, 502);
   }
 
   return json({ ok: true });
