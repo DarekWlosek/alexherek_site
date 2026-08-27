@@ -4,27 +4,27 @@
 // lead-magnet forms on /free-samples and /pl/free-samples.
 //
 // Security model:
-//   - Only POST is handled; every other method is rejected explicitly.
-//   - The Turnstile CAPTCHA token is verified server-side against
-//     Cloudflare's own siteverify endpoint before anything else happens —
-//     a token existing in the request proves nothing on its own.
-//   - A hidden honeypot field ("company") catches simple bots that fill in
-//     every input on a form.
-//   - The email address is validated with a basic regex + a length cap.
-//   - TURNSTILE_SECRET_KEY and KIT_API_KEY live ONLY as Cloudflare Pages
-//     environment variables of type "Secret" — set in the Cloudflare
-//     dashboard, never committed to Git, never sent to the browser.
-//   - This function never stores the visitor's name or email itself. It
-//     forwards the signup to Kit, which owns the double opt-in confirmation
-//     email and the mailing list — exactly as described in the Privacy
-//     Policy (section 5, "Data Sharing & Third-Party Processors").
+// - Only POST is handled; every other method is rejected explicitly.
+// - The Turnstile CAPTCHA token is verified server-side against
+//   Cloudflare's own siteverify endpoint before anything else happens —
+//   a token existing in the request proves nothing on its own.
+// - A hidden honeypot field ("company") catches simple bots that fill in
+//   every input on a form.
+// - The email address is validated with a basic regex + a length cap.
+// - TURNSTILE_SECRET_KEY and KIT_API_KEY live ONLY as Cloudflare Pages
+//   environment variables of type "Secret" — set in the Cloudflare
+//   dashboard, never committed to Git, never sent to the browser.
+// - This function never stores the visitor's name or email itself. It
+//   forwards the signup to Kit, which owns the double opt-in confirmation
+//   email and the mailing list — exactly as described in the Privacy
+//   Policy (section 5, "Data Sharing & Third-Party Processors").
 //
 // Required Cloudflare Pages environment variables (Settings → Environment
 // variables, "Secret" type, set for both Production and Preview):
-//   TURNSTILE_SECRET_KEY   — from the Cloudflare Turnstile widget
-//   KIT_API_KEY             — from Kit → Settings → Developer → API Keys
-//   KIT_FORM_ID_KIDS         — the numeric ID of the "Kids" Kit form
-//   KIT_FORM_ID_SENIORS      — the numeric ID of the "Seniors" Kit form
+//   TURNSTILE_SECRET_KEY — from the Cloudflare Turnstile widget
+//   KIT_API_KEY           — from Kit → Settings → Developer → API Keys
+//   KIT_FORM_ID_KIDS       — the numeric ID of the "Kids" Kit form
+//   KIT_FORM_ID_SENIORS    — the numeric ID of the "Seniors" Kit form
 
 interface Env {
   TURNSTILE_SECRET_KEY: string;
@@ -81,8 +81,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   }
 
   // 1. Verify the Turnstile token server-side. This is the step that
-  //    actually matters — never trust a token just because it was present
-  //    in the request body.
+  // actually matters — never trust a token just because it was present
+  // in the request body.
   let verifyData: { success: boolean };
   try {
     const verifyRes = await fetch(
@@ -106,9 +106,18 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   }
 
   // 2. Add the subscriber to the correct Kit form. Kit owns the double
-  //    opt-in confirmation email from here on — nothing below marks anyone
-  //    as subscribed on our side.
+  // opt-in confirmation email from here on — nothing below marks anyone
+  // as subscribed on our side.
   const formId = env[FORM_ID_BY_LIST[list]];
+
+  // TEMPORARY DIAGNOSTIC LOGGING — remove once signups work reliably.
+  console.error(
+    "DEBUG subscribe: list=", list,
+    "formId=", formId,
+    "apiKeyPrefix=", (env.KIT_API_KEY || "").slice(0, 8),
+    "apiKeyLength=", (env.KIT_API_KEY || "").length
+  );
+
   let kitRes: Response;
   try {
     kitRes = await fetch(`https://api.kit.com/v4/forms/${formId}/subscribers`, {
@@ -119,11 +128,14 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       },
       body: JSON.stringify({ email_address: email }),
     });
-  } catch {
+  } catch (err) {
+    console.error("DEBUG subscribe: fetch to Kit threw", String(err));
     return json({ ok: false, error: "subscribe_unreachable" }, 502);
   }
 
   if (!kitRes.ok) {
+    const errBody = await kitRes.text().catch(() => "<unreadable body>");
+    console.error("DEBUG subscribe: Kit responded", kitRes.status, errBody);
     return json({ ok: false, error: "subscribe_failed" }, 502);
   }
 
