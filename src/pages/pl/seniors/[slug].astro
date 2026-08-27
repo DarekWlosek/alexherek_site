@@ -1,4 +1,4 @@
----
+﻿---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 
@@ -36,6 +36,7 @@ const seriesJsonLd = {
 };
 
 const firstAvailable = data.volumes.find((v) => v.asin);
+const hasFreeSample = entry.id === "trening-mozgu-lewa-reka";
 const altPathMap: Record<string, string> = {
   "trening-mozgu-lewa-reka": "/seniors/left-hand-brain-training",
   "sprawny-umysl": "/seniors/sprawny-umysl",
@@ -71,7 +72,9 @@ const altPathMap: Record<string, string> = {
           {firstAvailable && (
             <a href={`https://www.amazon.com/dp/${firstAvailable.asin}`} class="cta-btn cta-primary">Kup na Amazon →</a>
           )}
-          <a href="/pl/free-samples#seniors" class="cta-btn cta-outline-cream">Wypróbuj darmową próbkę</a>
+          {hasFreeSample && (
+  <a href="/pl/free-samples#seniors" class="cta-btn cta-outline-cream">Wypróbuj darmową próbkę</a>
+)}
         </div>
       </div>
     </div>
@@ -104,13 +107,17 @@ const altPathMap: Record<string, string> = {
     <div class="band reveal">
       <div>
         <h2>Zacznij od piętnastu minut dziennie.</h2>
-        <p>Wypróbuj darmową próbkę, zanim zdecydujesz się na pełną książkę.</p>
+        {hasFreeSample && (
+  <p>Wypróbuj darmową próbkę, zanim zdecydujesz się na pełną książkę.</p>
+)}
       </div>
       <div class="band-ctas">
         {firstAvailable && (
           <a href={`https://www.amazon.com/dp/${firstAvailable.asin}`} class="cta-btn cta-primary">Kup na Amazon →</a>
         )}
-        <a href="/pl/free-samples#seniors" class="cta-btn cta-outline-cream">Pobierz darmową próbkę</a>
+        {hasFreeSample && (
+  <a href="/pl/free-samples#seniors" class="cta-btn cta-outline-cream">Pobierz darmową próbkę</a>
+)}
       </div>
     </div>
   </section>
