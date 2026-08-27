@@ -2,19 +2,18 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 <BaseLayout
-  title="Darmowe Próbki do Druku — Alex Herek"
-  description="Wypróbuj darmowe strony do druku z serii Dzieci Świata i Ich Kultury, Treningu Mózgu Lewą Ręką lub Sprawnego Umysłu, zanim kupisz całą książkę."
-  lang="pl"
+  title="Darmowe Przykładowe Strony — Alex Herek"
+  description="Wypróbuj darmowe strony do druku z serii Dzieci Świata, Left Hand Brain Training czy Sprawny Umysł, zanim kupisz pełną książkę."
   altPath="/free-samples"
 >
   <div class="wrap">
-    <div class="crumb"><a href="/pl">Start</a><span>/</span>Darmowe Próbki</div>
+    <div class="crumb"><a href="/pl">Strona główna</a><span>/</span>Darmowe próbki</div>
   </div>
   <div class="wrap intro">
     <div class="section-head reveal" style="text-align:left; margin: 0 0 30px;">
-      <span class="eyebrow" style="color: var(--gold);">WYPRÓBUJ, ZANIM KUPISZ</span>
-      <h1>Darmowe strony, bez zobowiązań.</h1>
-      <p>Wybierz półkę — wyślemy krótką próbkę do druku prosto na Twoją skrzynkę. Bez konta, bez karty kredytowej, po prostu PDF, który warto wydrukować.</p>
+      <span class="eyebrow" style="color: var(--gold);">WYPRÓBUJ PRZED ZAKUPEM</span>
+      <h1>Darmowe strony, bez żadnych zobowiązań.</h1>
+      <p>Wybierz półkę — wyślemy krótką próbkę do druku prosto na Twoją skrzynkę. Bez zakładania konta, bez karty kredytowej — po prostu PDF wart wydrukowania.</p>
       <div class="jump-links">
         <a href="#kids" class="jump-chip kids">↓ Próbka dla dzieci</a>
         <a href="#seniors" class="jump-chip seniors">↓ Próbka dla seniorów</a>
@@ -24,28 +23,50 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   <section id="kids" class="panel panel-kids">
     <div class="wrap">
       <div class="panel-shell reveal">
-        <div class="panel-media">
-          <img class="stack-1" src="/images/pl-sample-usa-flag.jpg" alt="Przykładowa strona do kolorowania: Stany Zjednoczone, flaga i mapa" />
-          <img class="stack-2" src="/images/pl-sample-usa-city.jpg" alt="Przykładowa strona do kolorowania: Stany Zjednoczone, scena miejska" />
-          <img class="stack-3" src="/images/pl-sample-canada.jpg" alt="Przykładowa strona do kolorowania: Kanada" />
+        <div class="panel-media panel-media-grid">
+          <figure>
+            <img src="/images/sample-argentina-flag.jpg" alt="Karta do kolorowania — flaga i mapa Argentyny" />
+            <figcaption>ARGENTYNA · FLAGA</figcaption>
+          </figure>
+          <figure>
+            <img src="/images/sample-argentina-nature.jpg" alt="Karta do kolorowania — scena przyrodnicza w Argentynie, lodowce Patagonii i pingwiny" />
+            <figcaption>ARGENTYNA · PRZYRODA</figcaption>
+          </figure>
+          <figure>
+            <img src="/images/sample-argentina-city.jpg" alt="Karta do kolorowania — scena miejska w Argentynie, Buenos Aires i tancerze tanga" />
+            <figcaption>ARGENTYNA · MIASTO</figcaption>
+          </figure>
+          <figure>
+            <img src="/images/sample-australia-flag.jpg" alt="Karta do kolorowania — flaga i mapa Australii" />
+            <figcaption>AUSTRALIA · FLAGA</figcaption>
+          </figure>
+          <figure>
+            <img src="/images/sample-australia-nature.jpg" alt="Karta do kolorowania — scena przyrodnicza w Australii, Uluru, wombat i dziobak" />
+            <figcaption>AUSTRALIA · PRZYRODA</figcaption>
+          </figure>
+          <figure>
+            <img src="/images/sample-australia-city.jpg" alt="Karta do kolorowania — scena miejska w Australii, Opera w Sydney z koalą i kangurem" />
+            <figcaption>AUSTRALIA · MIASTO</figcaption>
+          </figure>
         </div>
         <div class="panel-body">
           <span class="eyebrow">DLA DZIECI · WIEK 3–10</span>
-          <h2>Strony z serii „Dzieci Świata i Ich Kultury”</h2>
-          <p class="desc">Darmowa próbka z naszej flagowej serii — kraje, flagi i nowi przyjaciele do pokolorowania, wprost z pełnych tomów.</p>
+          <h2>6 stron z serii „Dzieci Świata i ich kultury”</h2>
+          <p class="desc">Darmowa próbka z naszej flagowej serii — dwa kraje, sześć kart: strona z flagą i mapą, scena z dziećmi na łonie natury oraz scena miejska dla każdego kraju, wprost z pełnych tomów.</p>
           <div class="includes">
-            <div class="item"><span class="dot"></span>Strony do druku w formacie PDF</div>
-            <div class="item"><span class="dot"></span>Flaga z własnym wzornikiem kolorów dla każdego kraju</div>
-            <div class="item"><span class="dot"></span>Format dostosowany do druku A4</div>
+            <div class="item"><span class="dot"></span>6 stron do wydruku i kolorowania (PDF)</div>
+            <div class="item"><span class="dot"></span>Strona z flagą i mapą dla każdego z dwóch krajów, wraz z własnym wzornikiem kolorów</div>
+            <div class="item"><span class="dot"></span>Scena przyrodnicza i scena miejska dla każdego kraju</div>
+            <div class="item"><span class="dot"></span>Format dopasowany do standardowego druku 8,5×11" / A4</div>
           </div>
-          <form class="lead-form" data-list="kids" novalidate>
+          <form class="lead-form" data-list="kids-pl" novalidate>
             <input type="text" name="name" placeholder="Twoje imię" autocomplete="given-name" required />
             <input type="email" name="email" placeholder="Twój adres e-mail" autocomplete="email" required />
             <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAAEcxM-7TnesT20ZP" data-theme="light" data-language="pl"></div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAEcxM-7TnesT20ZP" data-theme="light"></div>
             <button class="cta-btn cta-kids" type="submit">Wyślij mi darmowe strony →</button>
             <p class="form-status" role="status" aria-live="polite"></p>
-            <span class="fine">Zero spamu. Rezygnacja w każdej chwili. Zobacz naszą <a href="/pl/privacy">politykę prywatności</a>.</span>
+            <span class="fine">Zero spamu. Wypisz się w każdej chwili. Zobacz naszą <a href="/pl/privacy">politykę prywatności</a>.</span>
           </form>
         </div>
       </div>
@@ -55,27 +76,27 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <div class="wrap">
       <div class="panel-shell reveal">
         <div class="panel-media">
-          <img class="stack-1" src="/images/pl-sample-kropki.jpg" alt="Przykładowa strona: Połącz kropki, ćwiczenie rysunkowe" />
-          <img class="stack-2" src="/images/pl-sample-linie.jpg" alt="Przykładowa strona: Linie proste, ćwiczenie rysunkowe" />
-          <img class="stack-3" src="/images/pl-sample-labirynt.jpg" alt="Przykładowa strona: labirynt, łamigłówka" />
+          <img class="stack-1" src="/images/sm-sample-wordsearch.jpg" alt="Przykładowa strona Sprawny Umysł: wyszukiwanka słów" />
+          <img class="stack-2" src="/images/sm-sample-logic.jpg" alt="Przykładowa strona Sprawny Umysł: łamigłówka logiczna" />
+          <img class="stack-3" src="/images/sm-sample-memory.jpg" alt="Przykładowa strona Sprawny Umysł: ćwiczenie pamięci" />
         </div>
         <div class="panel-body">
           <span class="eyebrow">DLA SENIORÓW · DUŻY DRUK</span>
-          <h2>Strony z Treningu Mózgu Lewą Ręką i Sprawnego Umysłu</h2>
-          <p class="desc">Mieszany zestaw próbek — kilka ćwiczeń rysunkowych i kilka łamigłówek — żebyś mógł ocenić obie serie, zanim zdecydujesz się na jedną.</p>
+          <h2>5 stron z serii Left Hand Brain Training i Sprawny Umysł</h2>
+          <p class="desc">Mieszany zestaw próbek — kilka ćwiczeń z odrysowywania i kilka łamigłówek — żebyś mógł/mogła poczuć obie serie, zanim zdecydujesz, od czego zacząć.</p>
           <div class="includes">
-            <div class="item"><span class="dot"></span>Strony do druku dużą czcionką, w formacie PDF</div>
+            <div class="item"><span class="dot"></span>5 stron do wydruku dużą czcionką (PDF)</div>
             <div class="item"><span class="dot"></span>Krótki przewodnik „jak korzystać z tej książki”</div>
-            <div class="item"><span class="dot"></span>Format dostosowany do druku A4</div>
+            <div class="item"><span class="dot"></span>Format dopasowany do standardowego druku 8,5×11" / A4</div>
           </div>
-          <form class="lead-form" data-list="seniors" novalidate>
+          <form class="lead-form" data-list="seniors-pl" novalidate>
             <input type="text" name="name" placeholder="Twoje imię" autocomplete="given-name" required />
             <input type="email" name="email" placeholder="Twój adres e-mail" autocomplete="email" required />
             <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAAEcxM-7TnesT20ZP" data-theme="dark" data-language="pl"></div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAEcxM-7TnesT20ZP" data-theme="dark"></div>
             <button class="cta-btn cta-seniors" type="submit">Wyślij mi darmowe strony →</button>
             <p class="form-status" role="status" aria-live="polite"></p>
-            <span class="fine">Zero spamu. Rezygnacja w każdej chwili. Zobacz naszą <a href="/pl/privacy">politykę prywatności</a>.</span>
+            <span class="fine">Zero spamu. Wypisz się w każdej chwili. Zobacz naszą <a href="/pl/privacy">politykę prywatności</a>.</span>
           </form>
         </div>
       </div>
@@ -89,7 +110,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <div class="how-strip reveal">
       <div class="how-item">
         <div class="how-num">1</div>
-        <div><h3>Wybierz półkę</h3><p>Zaznacz próbkę dla dzieci lub dla seniorów powyżej.</p></div>
+        <div><h3>Wybierz półkę</h3><p>Wybierz powyżej próbkę dla dzieci lub dla seniorów.</p></div>
       </div>
       <div class="how-item">
         <div class="how-num">2</div>
@@ -97,90 +118,31 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       </div>
       <div class="how-item">
         <div class="how-num">3</div>
-        <div><h3>Wydrukuj i wypróbuj</h3><p>Zobacz, jak to działa, zanim kupisz całą książkę.</p></div>
+        <div><h3>Wydrukuj i wypróbuj</h3><p>Sprawdź, jak to działa, zanim kupisz pełną książkę.</p></div>
       </div>
     </div>
   </section>
   <section class="wrap" style="padding-bottom: 90px;">
     <div class="section-head reveal">
       <span class="eyebrow" style="color: var(--gold);">NAJCZĘŚCIEJ ZADAWANE PYTANIA</span>
-      <h2 style="font-size: 1.9rem;">Krótkie odpowiedzi.</h2>
+      <h2 style="font-size: 1.9rem;">Krótkie pytania.</h2>
     </div>
     <div class="faq-list">
       <div class="faq-item reveal">
-        <h3>Czy próbka jest naprawdę darmowa?</h3>
-        <p>Tak — bez płatności, bez okresu próbnego, bez karty. Wystarczy adres e-mail, na który wyślemy plik PDF.</p>
+        <h3>Czy próbka naprawdę jest darmowa?</h3>
+        <p>Tak — bez opłat, bez okresu próbnego, bez karty. Wystarczy adres e-mail, na który wyślemy PDF.</p>
       </div>
       <div class="faq-item reveal">
-        <h3>Czy mogę pobrać próbkę zarówno dla dzieci, jak i dla seniorów?</h3>
+        <h3>Czy mogę otrzymać próbkę zarówno dla dzieci, jak i dla seniorów?</h3>
         <p>Oczywiście — po prostu wypełnij oba formularze powyżej, tym samym lub różnymi adresami e-mail.</p>
       </div>
       <div class="faq-item reveal">
-        <h3>Czy będę dostawać inne wiadomości?</h3>
-        <p>Sporadycznie — informacje o nowych tomach i dodatkowe materiały do druku. Możesz zrezygnować jednym kliknięciem w każdej chwili.</p>
+        <h3>Czy będziecie wysyłać mi inne wiadomości?</h3>
+        <p>Od czasu do czasu — informacje o nowych tomach i dodatkowych materiałach do druku. Możesz wypisać się jednym kliknięciem w każdej chwili.</p>
       </div>
     </div>
   </section>
 </BaseLayout>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-<script>
-  // Wysyła każdy formularz do naszej własnej funkcji Cloudflare Pages
-  // (/api/subscribe), która weryfikuje token Turnstile po stronie serwera,
-  // a dopiero potem przekazuje zgłoszenie do Kit. To Kit odpowiada od tego
-  // momentu za mail z potwierdzeniem (double opt-in) — ta strona nigdy sama
-  // nie oznacza nikogo jako "zapisanego".
-  document.querySelectorAll<HTMLFormElement>(".lead-form").forEach((form) => {
-    const statusEl = form.querySelector<HTMLElement>(".form-status");
-    const button = form.querySelector<HTMLButtonElement>("button[type='submit']");
-
-    function setStatus(msg: string, isError: boolean) {
-      if (!statusEl) return;
-      statusEl.textContent = msg;
-      statusEl.classList.toggle("is-error", isError);
-    }
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const data = new FormData(form);
-      const turnstileToken = data.get("cf-turnstile-response");
-
-      if (!turnstileToken) {
-        setStatus("Uzupełnij proszę weryfikację powyżej.", true);
-        return;
-      }
-
-      if (button) button.disabled = true;
-      setStatus("Wysyłanie…", false);
-
-      try {
-        const res = await fetch("/api/subscribe", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: data.get("name"),
-            email: data.get("email"),
-            list: form.dataset.list,
-            token: turnstileToken,
-            company: data.get("company"), // honeypot — powinno zawsze być puste
-          }),
-        });
-        const result = await res.json();
-
-        if (result.ok) {
-          form.innerHTML =
-            '<p class="form-success">✓ Prawie gotowe — sprawdź skrzynkę i potwierdź adres e-mail, aby otrzymać PDF.</p>';
-        } else {
-          setStatus("Coś poszło nie tak. Spróbuj ponownie za chwilę.", true);
-          if (button) button.disabled = false;
-        }
-      } catch {
-        setStatus("Błąd połączenia — spróbuj ponownie.", true);
-        if (button) button.disabled = false;
-      }
-    });
-  });
-</script>
 <style>
   .intro { padding: 56px 0 20px; }
   .jump-links { display: flex; justify-content: center; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
@@ -240,19 +202,17 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   .panel-kids .lead-form .fine { color: var(--ink-soft); }
   .panel-seniors .lead-form .fine { color: #8fa0a9; }
   .lead-form .fine a { text-decoration: underline; color: inherit; }
-
-  /* Honeypot: pole trzymane w DOM, ale odsunięte poza ekran i poza kolejność
-     tabulacji, więc czytniki ekranu je pomijają. Zwykłe boty, które
-     wypełniają każde pole formularza, wpadają w tę pułapkę. */
+  /* Pole-pułapka (honeypot): zostaje w DOM, ale poza kolejnością tabulacji,
+     żeby czytniki ekranu je pomijały, i jest wizualnie ukryte poza ekranem,
+     więc prawdziwi odwiedzający nigdy go nie widzą ani nie wypełniają.
+     Proste boty wypełniające każde pole formularza "wpadają" w nie. */
   .hp-field { position: absolute; left: -5000px; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
-
   .form-status { font-size: .82rem; min-height: 1.2em; margin: 0; }
   .form-status.is-error { color: #c0392b; font-weight: 600; }
   .panel-seniors .form-status.is-error { color: #ff8a7a; }
   .form-success { font-size: .96rem; font-weight: 600; margin: 8px 0 0; }
   .panel-kids .form-success { color: var(--navy); }
   .panel-seniors .form-success { color: var(--gold-light); }
-
   .how-strip { background: var(--paper); border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-l); padding: 36px 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
   @media (max-width: 760px) { .how-strip { grid-template-columns: 1fr; } }
   .how-item { display: flex; gap: 14px; align-items: flex-start; }
@@ -264,3 +224,54 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   .faq-item h3 { font-size: 1rem; color: var(--navy); margin-bottom: 8px; }
   .faq-item p { margin: 0; color: var(--ink-soft); font-size: .92rem; line-height: 1.55; }
 </style>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+  // Submits each lead-magnet form to our own Cloudflare Pages Function
+  // (/api/subscribe), which verifies the Turnstile token server-side and
+  // then hands the signup to Kit. Kit owns the double opt-in confirmation
+  // email from there — this page never marks anyone as "subscribed".
+  document.querySelectorAll<HTMLFormElement>(".lead-form").forEach((form) => {
+    const statusEl = form.querySelector<HTMLElement>(".form-status");
+    const button = form.querySelector<HTMLButtonElement>("button[type='submit']");
+    function setStatus(msg: string, isError: boolean) {
+      if (!statusEl) return;
+      statusEl.textContent = msg;
+      statusEl.classList.toggle("is-error", isError);
+    }
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const turnstileToken = data.get("cf-turnstile-response");
+      if (!turnstileToken) {
+        setStatus("Proszę ukończyć weryfikację powyżej.", true);
+        return;
+      }
+      if (button) button.disabled = true;
+      setStatus("Wysyłanie…", false);
+      try {
+        const res = await fetch("/api/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: data.get("name"),
+            email: data.get("email"),
+            list: form.dataset.list,
+            token: turnstileToken,
+            company: data.get("company"), // honeypot — powinno zawsze być puste
+          }),
+        });
+        const result = await res.json();
+        if (result.ok) {
+          form.innerHTML =
+            '<p class="form-success">✓ Już prawie gotowe — sprawdź skrzynkę i potwierdź adres e-mail, aby otrzymać PDF.</p>';
+        } else {
+          setStatus("Coś poszło nie tak. Spróbuj ponownie za chwilę.", true);
+          if (button) button.disabled = false;
+        }
+      } catch {
+        setStatus("Błąd sieci — spróbuj ponownie.", true);
+        if (button) button.disabled = false;
+      }
+    });
+  });
+</script>

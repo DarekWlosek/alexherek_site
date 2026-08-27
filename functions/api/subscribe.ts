@@ -21,10 +21,19 @@
 //
 // Required Cloudflare Pages environment variables (Settings → Environment
 // variables, "Secret" type, set for both Production and Preview):
-//   TURNSTILE_SECRET_KEY — from the Cloudflare Turnstile widget
-//   KIT_API_KEY           — from Kit → Settings → Developer → API Keys
-//   KIT_FORM_ID_KIDS       — the numeric ID of the "Kids" Kit form
-//   KIT_FORM_ID_SENIORS    — the numeric ID of the "Seniors" Kit form
+//   TURNSTILE_SECRET_KEY   — from the Cloudflare Turnstile widget
+//   KIT_API_KEY             — from Kit → Settings → Developer → API Keys
+//   KIT_FORM_ID_KIDS        — the numeric ID of the "Kids Free Sample" (EN) Kit form
+//   KIT_FORM_ID_SENIORS     — the numeric ID of the "Seniors Free Sample" (EN) Kit form
+//   KIT_FORM_ID_KIDS_PL     — the numeric ID of the "Kids Free Sample PL" Kit form
+//   KIT_FORM_ID_SENIORS_PL  — the numeric ID of the "Seniors Free Sample PL" Kit form
+//
+// EN/PL split (2026-08-27): Kit's confirmation email copy and post-confirm
+// PDF delivery are both per-form settings, not dynamic per submission — so
+// each language needs its own Kit form. The /free-samples (EN) page sends
+// list "kids" / "seniors"; the /pl/free-samples page sends "kids-pl" /
+// "seniors-pl". Each maps to its own form below, with its own (translated)
+// confirmation email already configured in Kit.
 //
 // Kit integration note (2026-08-27): the single-step "add subscriber to
 // form by email address" endpoint (POST /v4/forms/{id}/subscribers with
@@ -42,11 +51,15 @@ interface Env {
   KIT_API_KEY: string;
   KIT_FORM_ID_KIDS: string;
   KIT_FORM_ID_SENIORS: string;
+  KIT_FORM_ID_KIDS_PL: string;
+  KIT_FORM_ID_SENIORS_PL: string;
 }
 
 const FORM_ID_BY_LIST: Record<string, keyof Env> = {
   kids: "KIT_FORM_ID_KIDS",
   seniors: "KIT_FORM_ID_SENIORS",
+  "kids-pl": "KIT_FORM_ID_KIDS_PL",
+  "seniors-pl": "KIT_FORM_ID_SENIORS_PL",
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
