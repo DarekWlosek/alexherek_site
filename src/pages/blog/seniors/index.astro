@@ -2,7 +2,13 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 
-const posts = await getCollection("blogSeniors");
+const posts = (await getCollection("blogSeniors")).sort((a, b) => {
+  // Chronological by publish date (oldest published first), with undated
+  // drafts ("Coming soon" placeholder cards) pushed to the end, in place.
+  const aTime = a.data.pubDate ? new Date(a.data.pubDate).getTime() : Infinity;
+  const bTime = b.data.pubDate ? new Date(b.data.pubDate).getTime() : Infinity;
+  return aTime - bTime;
+});
 ---
 
 <BaseLayout
