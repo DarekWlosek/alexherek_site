@@ -1,5 +1,20 @@
 // functions/api/subscribe.ts
 //
+// DEPRECATED (2026-09-11): /free-samples and /pl/free-samples no longer
+// call this endpoint. Both pages now embed Kit's own native forms
+// directly (<script data-uid="..." src="https://alex-herek.kit.com/...">),
+// because this custom two-step API flow (POST /v4/subscribers, then
+// attach to the form) was confirmed to bypass Kit's double opt-in —
+// subscribers were marked "Confirmed" immediately, before ever clicking
+// the confirmation email, regardless of whether step 2b attached by
+// numeric ID or by email address. Kit's own form-submission endpoint
+// (used by the native embed) does not have this problem.
+//
+// This file is kept only as a reference/fallback. It is safe to delete
+// along with its Cloudflare Pages env vars (TURNSTILE_SECRET_KEY,
+// KIT_API_KEY, KIT_FORM_ID_*) once you're confident the native Kit
+// embeds are working well. Nothing on the site calls it anymore.
+//
 // Cloudflare Pages Function — handles POST /api/subscribe from the
 // lead-magnet forms on /free-samples and /pl/free-samples.
 //

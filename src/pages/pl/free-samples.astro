@@ -59,15 +59,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             <div class="item"><span class="dot"></span>Scena przyrodnicza i scena miejska dla każdego kraju</div>
             <div class="item"><span class="dot"></span>Format dopasowany do standardowego druku 8,5×11" / A4</div>
           </div>
-          <form class="lead-form" data-list="kids-pl" novalidate>
-            <input type="text" name="name" placeholder="Twoje imię" autocomplete="given-name" required />
-            <input type="email" name="email" placeholder="Twój adres e-mail" autocomplete="email" required />
-            <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAAEcxM-7TnesT20ZP" data-theme="light"></div>
-            <button class="cta-btn cta-kids" type="submit">Wyślij mi darmowe strony →</button>
-            <p class="form-status" role="status" aria-live="polite"></p>
+          <div class="kit-embed-wrap">
+            <script async data-uid="72cbc92a6c" src="https://alex-herek.kit.com/72cbc92a6c/index.js"></script>
             <span class="fine">Zero spamu. Wypisz się w każdej chwili. Zobacz naszą <a href="/pl/privacy">politykę prywatności</a>.</span>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -89,15 +84,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
             <div class="item"><span class="dot"></span>Krótki przewodnik „jak korzystać z tej książki”</div>
             <div class="item"><span class="dot"></span>Format dopasowany do standardowego druku 8,5×11" / A4</div>
           </div>
-          <form class="lead-form" data-list="seniors-pl" novalidate>
-            <input type="text" name="name" placeholder="Twoje imię" autocomplete="given-name" required />
-            <input type="email" name="email" placeholder="Twój adres e-mail" autocomplete="email" required />
-            <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAAEcxM-7TnesT20ZP" data-theme="dark"></div>
-            <button class="cta-btn cta-seniors" type="submit">Wyślij mi darmowe strony →</button>
-            <p class="form-status" role="status" aria-live="polite"></p>
+          <div class="kit-embed-wrap">
+            <script async data-uid="daeb3b6fd0" src="https://alex-herek.kit.com/daeb3b6fd0/index.js"></script>
             <span class="fine">Zero spamu. Wypisz się w każdej chwili. Zobacz naszą <a href="/pl/privacy">politykę prywatności</a>.</span>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -195,24 +185,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   .panel-seniors .includes .dot { background: var(--gold); }
   .panel-kids .includes .item { color: var(--ink-soft); }
   .panel-seniors .includes .item { color: #c7d0d6; }
-  .lead-form { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; max-width: 380px; }
-  .lead-form input { font-family: 'Source Sans 3', sans-serif; font-size: .94rem; padding: 12px 16px; border-radius: 10px; border: 1.5px solid rgba(27,38,53,.2); background: #fff; color: var(--ink); }
-  .panel-seniors .lead-form input { border: 1.5px solid rgba(246,239,225,.25); background: rgba(255,255,255,.06); color: var(--paper); }
-  .lead-form .fine { font-size: .74rem; }
-  .panel-kids .lead-form .fine { color: var(--ink-soft); }
-  .panel-seniors .lead-form .fine { color: #8fa0a9; }
-  .lead-form .fine a { text-decoration: underline; color: inherit; }
-  /* Pole-pułapka (honeypot): zostaje w DOM, ale poza kolejnością tabulacji,
-     żeby czytniki ekranu je pomijały, i jest wizualnie ukryte poza ekranem,
-     więc prawdziwi odwiedzający nigdy go nie widzą ani nie wypełniają.
-     Proste boty wypełniające każde pole formularza "wpadają" w nie. */
-  .hp-field { position: absolute; left: -5000px; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
-  .form-status { font-size: .82rem; min-height: 1.2em; margin: 0; }
-  .form-status.is-error { color: #c0392b; font-weight: 600; }
-  .panel-seniors .form-status.is-error { color: #ff8a7a; }
-  .form-success { font-size: .96rem; font-weight: 600; margin: 8px 0 0; }
-  .panel-kids .form-success { color: var(--navy); }
-  .panel-seniors .form-success { color: var(--gold-light); }
+  /* Sam formularz zapisu to natywny embed Kit (ConvertKit) — patrz tagi
+     <script data-uid="..."> powyżej. Kit wstrzykuje własny formularz i
+     odpowiada za jego styl przez panel "Custom CSS" danego formularza w
+     panelu Kit (zsynchronizowany z kolorami marki użytymi tutaj) — ten
+     wrapper odpowiada wyłącznie za układ/odstępy po naszej stronie. */
+  .kit-embed-wrap { margin-top: 8px; max-width: 380px; }
+  .kit-embed-wrap .fine { font-size: .74rem; display: block; margin-top: 10px; }
+  .panel-kids .kit-embed-wrap .fine { color: var(--ink-soft); }
+  .panel-seniors .kit-embed-wrap .fine { color: #8fa0a9; }
+  .kit-embed-wrap .fine a { text-decoration: underline; color: inherit; }
   .how-strip { background: var(--paper); border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-l); padding: 36px 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
   @media (max-width: 760px) { .how-strip { grid-template-columns: 1fr; } }
   .how-item { display: flex; gap: 14px; align-items: flex-start; }
@@ -224,54 +206,3 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   .faq-item h3 { font-size: 1rem; color: var(--navy); margin-bottom: 8px; }
   .faq-item p { margin: 0; color: var(--ink-soft); font-size: .92rem; line-height: 1.55; }
 </style>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-<script>
-  // Submits each lead-magnet form to our own Cloudflare Pages Function
-  // (/api/subscribe), which verifies the Turnstile token server-side and
-  // then hands the signup to Kit. Kit owns the double opt-in confirmation
-  // email from there — this page never marks anyone as "subscribed".
-  document.querySelectorAll<HTMLFormElement>(".lead-form").forEach((form) => {
-    const statusEl = form.querySelector<HTMLElement>(".form-status");
-    const button = form.querySelector<HTMLButtonElement>("button[type='submit']");
-    function setStatus(msg: string, isError: boolean) {
-      if (!statusEl) return;
-      statusEl.textContent = msg;
-      statusEl.classList.toggle("is-error", isError);
-    }
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const data = new FormData(form);
-      const turnstileToken = data.get("cf-turnstile-response");
-      if (!turnstileToken) {
-        setStatus("Proszę ukończyć weryfikację powyżej.", true);
-        return;
-      }
-      if (button) button.disabled = true;
-      setStatus("Wysyłanie…", false);
-      try {
-        const res = await fetch("/api/subscribe", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: data.get("name"),
-            email: data.get("email"),
-            list: form.dataset.list,
-            token: turnstileToken,
-            company: data.get("company"), // honeypot — powinno zawsze być puste
-          }),
-        });
-        const result = await res.json();
-        if (result.ok) {
-          form.innerHTML =
-            '<p class="form-success">✓ Już prawie gotowe — sprawdź skrzynkę i potwierdź adres e-mail, aby otrzymać PDF.</p>';
-        } else {
-          setStatus("Coś poszło nie tak. Spróbuj ponownie za chwilę.", true);
-          if (button) button.disabled = false;
-        }
-      } catch {
-        setStatus("Błąd sieci — spróbuj ponownie.", true);
-        if (button) button.disabled = false;
-      }
-    });
-  });
-</script>
