@@ -13,7 +13,7 @@ faq:
   - question: "Czy trzeba podróżować, żeby dziecko poznało kultury świata?"
     answer: "Nie. Książki, kolorowanki, muzyka, jedzenie oraz rozmowy wideo z rodziną lub kolegami z zagranicy pozwalają zbudować autentyczną świadomość kulturową bez wychodzenia z domu."
   - question: "Ile czasu to naprawdę zajmuje?"
-    answer: "Bardzo mało. Podejście „kraj tygodnia" można zrealizować w dziesięć–piętnaście minut kilka razy w tygodniu — książka przed snem, kolorowanka albo nowa potrawa na kolację."
+    answer: "Bardzo mało. Podejście „kraj tygodnia” można zrealizować w dziesięć–piętnaście minut kilka razy w tygodniu — książka przed snem, kolorowanka albo nowa potrawa na kolację."
   - question: "Jak zamienić to w stały nawyk, a nie jednorazowe wydarzenie?"
     answer: "Przyczep to do czynności, którą i tak robicie codziennie, jak przekąska czy czytanie przed snem, i wprowadzaj nowy kraj według stałego harmonogramu (co tydzień lub co miesiąc), żeby stało się to nawykiem, a nie wyjątkowym wydarzeniem."
   - question: "Czy kolorowanki naprawdę są skuteczne w nauce o kulturze?"
@@ -48,19 +48,19 @@ Celem na tym etapie nie jest opanowanie geografii. Chodzi o ekspozycję: oswojen
 
 ## Maluchy (1–3 lata): najpierw zmysły, potem fakty
 
-Maluchy uczą się przez zmysły, nie przez wykłady. Na tym etapie „kultury świata" powinny pojawiać się jako dźwięki, faktury i obrazki — nie jako wyjaśnienia.
+Maluchy uczą się przez zmysły, nie przez wykłady. Na tym etapie „kultury świata” powinny pojawiać się jako dźwięki, faktury i obrazki — nie jako wyjaśnienia.
 
-- **Puszczajcie muzykę z różnych krajów.** Kilka minut afrobeatu, andyjskich fletów albo muzyki z bollywoodzkich filmów podczas zabawy wystarczy, by oswoić malucha z nowymi rytmami bez żadnej formalnej „lekcji".
+- **Puszczajcie muzykę z różnych krajów.** Kilka minut afrobeatu, andyjskich fletów albo muzyki z bollywoodzkich filmów podczas zabawy wystarczy, by oswoić malucha z nowymi rytmami bez żadnej formalnej „lekcji”.
 - **Czytajcie książeczki z różnorodnymi twarzami i miejscami.** Szukajcie książek pokazujących codzienność — posiłki, rodziny, domy — w różnych zakątkach świata, nie tylko święta czy stroje.
-- **Próbujcie razem nowych smaków.** Wprowadzenie nowego owocu, przyprawy czy dania z innej kuchni przy okazji przekąski to prosty, powtarzalny sposób na oswojenie z „innością".
-- **Wypowiadajcie proste słowa w innym języku.** „Cześć" i „dziękuję" w dwóch-trzech językach, powtarzane podczas codziennych czynności, zasiewają wczesną świadomość, że sam język bywa różny.
+- **Próbujcie razem nowych smaków.** Wprowadzenie nowego owocu, przyprawy czy dania z innej kuchni przy okazji przekąski to prosty, powtarzalny sposób na oswojenie z „innością”.
+- **Wypowiadajcie proste słowa w innym języku.** „Cześć” i „dziękuję” w dwóch-trzech językach, powtarzane podczas codziennych czynności, zasiewają wczesną świadomość, że sam język bywa różny.
 
 ## Przedszkolaki (3–5 lat): historie, mapy i zabawa manualna
 
 W wieku przedszkolnym dzieci potrafią zapamiętać proste fakty i lubią nazywać oraz sortować — to idealny moment na ustrukturyzowane, ale zabawowe aktywności kulturowe.
 
-- **Korzystajcie z dużej, prostej mapy świata lub globusa.** Pokażcie, gdzie mieszka rodzina, a potem kraj, który „odwiedzacie" w danym tygodniu. Przedszkolaki uwielbiają rytuał wybierania nowego miejsca za każdym razem.
-- **Wprowadźcie cotygodniowy „kraj tygodnia".** Wybierzcie jeden kraj i przeprowadźcie przez niego cały tydzień: potrawa, flaga do pokolorowania, piosenka i jeden fakt („W Japonii wiele osób zdejmuje buty przed wejściem do domu").
+- **Korzystajcie z dużej, prostej mapy świata lub globusa.** Pokażcie, gdzie mieszka rodzina, a potem kraj, który „odwiedzacie” w danym tygodniu. Przedszkolaki uwielbiają rytuał wybierania nowego miejsca za każdym razem.
+- **Wprowadźcie cotygodniowy „kraj tygodnia”.** Wybierzcie jeden kraj i przeprowadźcie przez niego cały tydzień: potrawa, flaga do pokolorowania, piosenka i jeden fakt („W Japonii wiele osób zdejmuje buty przed wejściem do domu”).
 - **Wykorzystajcie kolorowanki jako narzędzie edukacyjne.** Kolorowanie i tak jest przedszkolnym klasykiem — połączenie go ze stronami dotyczącymi konkretnego kraju (flagi, tradycyjne stroje, zabytki, lokalne zwierzęta) zamienia aktywność, którą dzieci już kochają, w bierną naukę kultury. Dokładnie na tym podejściu opiera się seria [Dzieci Świata i ich Kultury](/pl/kids/dzieci-swiata-i-ich-kultury), która prowadzi przedszkolaka przez kolejne kontynenty, kraj po kraju.
 
 ![Karta do kolorowania flagi i mapy Egiptu — darmowa próbka z serii Dzieci Świata i ich Kultury](/images/sample-africa-egypt-pl.jpg)
@@ -68,17 +68,17 @@ W wieku przedszkolnym dzieci potrafią zapamiętać proste fakty i lubią nazywa
 **Sprawdźcie sami:** [pobierzcie darmową kartę z flagą i mapą do pokolorowania](/pl/free-samples#kids) i zobaczcie, jak sprawdzi się u waszego przedszkolaka w tym tygodniu.
 
 - **Świętujcie jedno święto spoza własnej tradycji.** Diwali, Chiński Nowy Rok, Dzień Zmarłych, Id al-Fitr — wybierzcie jedno w roku i zróbcie małą, dopasowaną do wieku aktywność.
-- **Pozwólcie im „gotować" (pod nadzorem).** Mieszanie, smarowanie czy dekorowanie prostego dania z innego kraju buduje zmysłowe wspomnienie związane z konkretną kulturą.
+- **Pozwólcie im „gotować” (pod nadzorem).** Mieszanie, smarowanie czy dekorowanie prostego dania z innego kraju buduje zmysłowe wspomnienie związane z konkretną kulturą.
 
 ## Starsze dzieci (5–8 lat): fakty, pytania i prawdziwe relacje
 
-Gdy dziecko potrafi już trochę czytać i pyta „dlaczego", nauka o kulturze może stać się bardziej konkretna, nie zamieniając się przy tym w szkolną lekcję.
+Gdy dziecko potrafi już trochę czytać i pyta „dlaczego”, nauka o kulturze może stać się bardziej konkretna, nie zamieniając się przy tym w szkolną lekcję.
 
-- **Załóżcie zeszyt-„paszport".** Prosty notes lub wydruk, w którym dziecko stempluje, rysuje lub zapisuje jeden fakt na kraj, utrzymuje zaangażowanie przez tygodnie czy miesiące.
+- **Załóżcie zeszyt-„paszport”.** Prosty notes lub wydruk, w którym dziecko stempluje, rysuje lub zapisuje jeden fakt na kraj, utrzymuje zaangażowanie przez tygodnie czy miesiące.
 - **Oglądajcie krótkie, dopasowane do wieku filmiki o codziennym życiu za granicą.** Widok prawdziwych rówieśników idących do szkoły albo bawiących się w innym kraju działa mocniej niż jakiekolwiek wyjaśnienie dorosłego.
-- **Rozmawiajcie o tym, co jest takie samo, nie tylko o różnicach.** Każda kultura ma rodziny, gry, ulubione potrawy i święta — zakotwiczenie lekcji w podobieństwach sprawia, że „inne" nie zaczyna znaczyć „dziwne".
+- **Rozmawiajcie o tym, co jest takie samo, nie tylko o różnicach.** Każda kultura ma rodziny, gry, ulubione potrawy i święta — zakotwiczenie lekcji w podobieństwach sprawia, że „inne” nie zaczyna znaczyć „dziwne”.
 - **Łączcie to z dziedzictwem rodzinnym.** Jeśli wasza rodzina ma korzenie w innym kraju lub regionie, ten wiek to dobry moment na prawdziwe rozmowy o tym, skąd pochodzili krewni i co znaczą dane tradycje.
-- **Zachęcajcie do pytań, nie wymagając idealnych odpowiedzi.** „To świetne pytanie — sprawdźmy to razem" uczy ciekawości lepiej niż znajomość każdego faktu na pamięć.
+- **Zachęcajcie do pytań, nie wymagając idealnych odpowiedzi.** „To świetne pytanie — sprawdźmy to razem” uczy ciekawości lepiej niż znajomość każdego faktu na pamięć.
 
 ## Pięć prostych aktywności na ten tydzień
 
@@ -88,4 +88,4 @@ Gdy dziecko potrafi już trochę czytać i pyta „dlaczego", nauka o kulturze m
 4. Wypożyczcie z biblioteki dwie książki obrazkowe osadzone w różnych krajach.
 5. Wybierzcie w tym miesiącu jedno święto z innej kultury, żeby poznać je razem.
 
-Nic z tego oczywiście nie zastąpi prawdziwej rozmowy — kolorowanka po prostu daje dziecku coś do robienia rękami, podczas gdy ta rozmowa się toczy. To samo połączenie sprawia, że [kolorowanki radzą sobie lepiej niż podręczniki w tej grupie wiekowej](/pl/blog/kids/kolorowanki-geograficzne-kontra-podreczniki): strona staje się dowodem tego, czego dziecko się nauczyło, a nie czymś, czego tylko w połowie wysłuchało. A jeśli celem jest empatia — nie tylko geografia — [format „flaga i nowy przyjaciel" z serii Dzieci Świata](/pl/blog/kids/kolorowanki-kultury-swiata-empatia-dzieci) został zaprojektowany właśnie po to, by „inna kultura" była odczuwana jak nowy przyjaciel, a nie abstrakcja.
+Nic z tego oczywiście nie zastąpi prawdziwej rozmowy — kolorowanka po prostu daje dziecku coś do robienia rękami, podczas gdy ta rozmowa się toczy. To samo połączenie sprawia, że [kolorowanki radzą sobie lepiej niż podręczniki w tej grupie wiekowej](/pl/blog/kids/kolorowanki-geograficzne-kontra-podreczniki): strona staje się dowodem tego, czego dziecko się nauczyło, a nie czymś, czego tylko w połowie wysłuchało. A jeśli celem jest empatia — nie tylko geografia — [format „flaga i nowy przyjaciel” z serii Dzieci Świata](/pl/blog/kids/kolorowanki-kultury-swiata-empatia-dzieci) został zaprojektowany właśnie po to, by „inna kultura” była odczuwana jak nowy przyjaciel, a nie abstrakcja.
