@@ -4,6 +4,8 @@ tag: "EMPATHY"
 excerpt: "Meet the series for Little Explorers: 5 volumes, 84+ countries, color-keyed flags, landmarks, and nature. Smart, engaging geography learning for kids."
 draft: false
 pubDate: 2026-08-25
+heroImage: "/images/blog-teaching-empathy-meeting-children.jpg"
+heroImageAlt: "Four smiling children of different ethnic backgrounds coloring together a Children of the World coloring book page showing India's flag and the Taj Mahal"
 plSlug: "kolorowanki-kultury-swiata-empatia-dzieci"
 ---
 
