@@ -6,6 +6,7 @@ draft: false
 pubDate: 2026-08-26
 heroImage: "/images/blog-intro-world-cultures-toddlers.jpg"
 heroImageAlt: "Mother and toddler sitting together at a wooden kitchen table, pointing at an illustrated world map picture book, with crayons, a bowl of fresh fruit, and a small globe nearby"
+plSlug: "wprowadzanie-dzieci-w-kultury-swiata"
 ---
 
 <!--
@@ -20,6 +21,9 @@ Internal link target: Children of the World (Series) — /kids/children-of-the-w
 Content angle: Cultural education starts with passive visual exposure to
   national symbols before formal geography lessons begin.
 Silo role: Cluster B hub — links out to #08, #10, #04, #05, #09
+Translated pair: PL version at /pl/blog/kids/wprowadzanie-dzieci-w-kultury-swiata
+NOTE: fixed a stale Argentina sample reference (image + link) to the actual
+  Africa/Egypt sample, matching the current /free-samples content (2026-09-11).
 -->
 
 Most children won't set foot on six continents before kindergarten — but they can still grow up knowing the world is big, colorful, and full of people worth caring about. Teaching cultural awareness doesn't require plane tickets. It requires consistency: small, repeated moments where a child hears a new word, tastes a new food, or colors a flag they've never seen before.
@@ -49,7 +53,7 @@ By preschool age, kids can hold onto simple facts and enjoy naming and sorting �
 - **Run a weekly "country of the week."** Pick one country, then thread it through the week: a food, a flag to color, a song, and one fact ("In Japan, many people take off their shoes before entering a home").
 - **Use coloring pages as a teaching tool.** Coloring is already a preschool staple — pairing it with country-specific pages (flags, traditional dress, landmarks, local animals) turns an activity kids already love into passive cultural learning. This is the exact approach behind the [Children of the World and Their Cultures](/kids/children-of-the-world) series, which walks preschoolers through a continent at a time, country by country.
 
-![Argentina flag and map coloring card — free printable sample from Children of the World and Their Cultures](/images/sample-argentina-flag.jpg)
+![Egypt flag and map coloring card — free printable sample from Children of the World and Their Cultures](/images/sample-africa-egypt-en.jpg)
 
 **Try it yourself:** [download a free flag-and-map coloring card](/free-samples#kids) and see how it works with your preschooler this week.
 
