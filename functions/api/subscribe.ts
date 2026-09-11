@@ -37,14 +37,31 @@
 //
 // Kit integration note (2026-08-27): the single-step "add subscriber to
 // form by email address" endpoint (POST /v4/forms/{id}/subscribers with
-// {email_address}) returns 404 for this Kit account for reasons Kit
-// support could not immediately explain — confirmed not a plan
-// restriction, confirmed the form IDs are correct and exist, confirmed
-// reproducible across every form on the account. The two-step flow below
-// (create/upsert the subscriber, then attach them to the form by numeric
-// subscriber ID) was verified working end-to-end, including the double
-// opt-in confirmation email. If Kit later fixes the single-step endpoint,
-// this can be simplified back to one call.
+// {email_address}) returned 404 for this Kit account. Kit support (2026-09,
+// ticket re: forms 9846377/9846383/9846250) explained the 404 fires
+// because that endpoint requires the subscriber to already exist — it is
+// NOT a bug, just an ordering requirement.
+//
+// UPDATE (2026-09-11): the original two-step flow (create/upsert the
+// subscriber via POST /v4/subscribers, then attach by numeric subscriber
+// ID via POST /v4/forms/{id}/subscribers/{subscriberId}) was found to mark
+// subscribers "Confirmed" immediately, bypassing double opt-in entirely —
+// confirmed live on this account (12/12 test subscribers showed
+// "Confirmed", 0 "Unconfirmed"), because POST /v4/subscribers itself
+// creates the subscriber as active. This is a known Kit API limitation,
+// not a Cloudflare/Turnstile issue.
+//
+// Testing now: attach by EMAIL instead of by ID (POST
+// /v4/forms/{id}/subscribers with {email_address}) as step 2b, now that
+// step 2a guarantees the subscriber already exists (so the 404 from before
+// should no longer fire). Unconfirmed whether this actually makes Kit
+// respect double opt-in — verify in the Kit dashboard (Subscribers →
+// filter Unconfirmed) after a fresh test signup, BEFORE clicking the
+// confirmation email link. If subscribers still show "Confirmed"
+// immediately, this is a Kit API limitation with no server-side fix
+// available, and the only reliable option is to stop using this custom
+// endpoint and switch to Kit's own hosted/embedded form for double opt-in
+// to be enforced.
 
 interface Env {
   TURNSTILE_SECRET_KEY: string;
@@ -165,10 +182,15 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   // 2b. Attach the subscriber to the correct form. This is what actually
   // triggers Kit's double opt-in confirmation email for this form/sequence.
+  //
+  // TEST (2026-09-11): attaching by email address instead of by numeric
+  // subscriber ID, to see whether Kit respects double opt-in through this
+  // path. subscriberId is still resolved above (kept for the fallback
+  // log/error path below) but is no longer sent in the request.
   let attachRes: Response;
   try {
     attachRes = await fetch(
-      `https://api.kit.com/v4/forms/${formId}/subscribers/${subscriberId}`,
+      `https://api.kit.com/v4/forms/${formId}/subscribers`,
       {
         method: "POST",
         headers: {
@@ -176,6 +198,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
           "X-Kit-Api-Key": env.KIT_API_KEY,
         },
         body: JSON.stringify({
+          email_address: email,
           referrer: request.headers.get("Referer") ?? undefined,
         }),
       }
