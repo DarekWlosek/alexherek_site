@@ -2,8 +2,8 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const kidsPosts = await getCollection("blogKids");
-const seniorPosts = await getCollection("blogSeniors");
+const kidsPosts = (await getCollection("blogKids")).filter((p) => !p.data.draft);
+const seniorPosts = (await getCollection("blogSeniors")).filter((p) => !p.data.draft);
 
 const latest = [
   ...kidsPosts.slice(0, 2).map((p) => ({ ...p, silo: "kids" as const })),
@@ -43,29 +43,31 @@ const latest = [
     </div>
   </section>
 
-  <section class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">LATEST FROM BOTH SHELVES</span>
-      <h2>Recent posts.</h2>
-    </div>
-    <div class="post-grid">
-      {latest.map((post) => (
-        <a href={`/blog/${post.silo}/${post.id}`} class="post-card reveal">
-          {post.data.heroImage ? (
-            <img class={`post-thumb ${post.silo === "seniors" ? "seniors" : ""}`} src={post.data.heroImage} alt={post.data.heroImageAlt ?? ""} />
-          ) : (
-            <div class={`post-thumb ${post.silo === "seniors" ? "seniors" : ""}`}></div>
-          )}
-          <div class="post-body">
-            <span class={`post-tag ${post.silo === "seniors" ? "seniors" : ""}`}>{post.data.tag}</span>
-            <h3>{post.data.title}</h3>
-            <p>{post.data.excerpt}</p>
-            <span class="post-date">{post.data.draft ? "Coming soon" : post.data.pubDate?.toDateString()}</span>
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
+  {latest.length > 0 && (
+    <section class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">LATEST FROM BOTH SHELVES</span>
+        <h2>Recent posts.</h2>
+      </div>
+      <div class="post-grid">
+        {latest.map((post) => (
+          <a href={`/blog/${post.silo}/${post.id}`} class="post-card reveal">
+            {post.data.heroImage ? (
+              <img class={`post-thumb ${post.silo === "seniors" ? "seniors" : ""}`} src={post.data.heroImage} alt={post.data.heroImageAlt ?? ""} />
+            ) : (
+              <div class={`post-thumb ${post.silo === "seniors" ? "seniors" : ""}`}></div>
+            )}
+            <div class="post-body">
+              <span class={`post-tag ${post.silo === "seniors" ? "seniors" : ""}`}>{post.data.tag}</span>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.excerpt}</p>
+              <span class="post-date">{post.data.pubDate?.toDateString()}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
 </BaseLayout>
 
 <style>
