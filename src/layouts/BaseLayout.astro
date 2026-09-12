@@ -215,6 +215,15 @@ const plURL = lang === "pl" ? canonicalURL : altPath ? new URL(altPath, Astro.si
     align-items: center;
     gap: 16px 24px;
   }
+  /* The [hidden] attribute is how the banner script shows/hides this panel.
+     Without this rule, the .cookie-banner class's own `display: flex` above
+     has equal CSS specificity to the browser's built-in `[hidden]{display:
+     none}` rule and, being an author style, wins the tie — so the banner
+     would stay visible (and clicks on Accept/Decline would silently do
+     nothing visible) even after `hidden` is set. This rule restores hiding. */
+  .cookie-banner[hidden] {
+    display: none !important;
+  }
   .cookie-banner p {
     margin: 0;
     flex: 1 1 320px;
