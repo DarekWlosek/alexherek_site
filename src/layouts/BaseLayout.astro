@@ -40,6 +40,20 @@ const plURL = lang === "pl" ? canonicalURL : altPath ? new URL(altPath, Astro.si
 <!doctype html>
 <html lang={lang}>
   <head>
+    <!-- Consent Mode v2: default to "denied" until the visitor accepts the
+         cookie banner (see the banner script near the end of <body>). Must
+         run before gtag.js so no analytics cookie is set without consent. -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+      });
+    </script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z941PX9BHP"></script>
     <script>
@@ -93,6 +107,73 @@ const plURL = lang === "pl" ? canonicalURL : altPath ? new URL(altPath, Astro.si
     </main>
     <Footer lang={lang} />
 
+    <div id="cookie-consent-banner" class="cookie-banner" hidden>
+      <p>
+        {lang === "pl" ? (
+          <>Używamy plików cookie do analizy ruchu na stronie (Google Analytics). Możesz zaakceptować lub odrzucić — zobacz naszą <a href="/pl/privacy">politykę prywatności</a>.</>
+        ) : (
+          <>We use cookies to analyze site traffic (Google Analytics). You can accept or decline — see our <a href="/privacy">privacy policy</a>.</>
+        )}
+      </p>
+      <div class="cookie-actions">
+        <button id="cookie-reject" type="button" class="cta-btn cta-outline-cream">
+          {lang === "pl" ? "Odrzuć" : "Decline"}
+        </button>
+        <button id="cookie-accept" type="button" class="cta-btn cta-primary">
+          {lang === "pl" ? "Akceptuj" : "Accept"}
+        </button>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const CONSENT_KEY = "ah_cookie_consent";
+        const banner = document.getElementById("cookie-consent-banner");
+
+        function updateConsent(granted) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            window.dataLayer.push(arguments);
+          }
+          gtag("consent", "update", {
+            analytics_storage: granted ? "granted" : "denied",
+          });
+        }
+
+        let stored = null;
+        try {
+          stored = localStorage.getItem(CONSENT_KEY);
+        } catch {
+          // localStorage unavailable (private mode, blocked storage) — treat as no choice yet.
+        }
+
+        if (stored === "granted") {
+          updateConsent(true);
+        } else if (stored !== "denied" && banner) {
+          banner.hidden = false;
+        }
+
+        const acceptBtn = document.getElementById("cookie-accept");
+        const rejectBtn = document.getElementById("cookie-reject");
+
+        acceptBtn?.addEventListener("click", () => {
+          try {
+            localStorage.setItem(CONSENT_KEY, "granted");
+          } catch {}
+          updateConsent(true);
+          if (banner) banner.hidden = true;
+        });
+
+        rejectBtn?.addEventListener("click", () => {
+          try {
+            localStorage.setItem(CONSENT_KEY, "denied");
+          } catch {}
+          updateConsent(false);
+          if (banner) banner.hidden = true;
+        });
+      })();
+    </script>
+
     <script>
       const els = document.querySelectorAll(".reveal");
       if ("IntersectionObserver" in window) {
@@ -114,3 +195,59 @@ const plURL = lang === "pl" ? canonicalURL : altPath ? new URL(altPath, Astro.si
     </script>
   </body>
 </html>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    z-index: 999;
+    max-width: 780px;
+    margin: 0 auto;
+    background: var(--navy);
+    color: var(--cream);
+    border-radius: var(--radius-m);
+    box-shadow: var(--shadow-soft);
+    padding: 20px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+  }
+  .cookie-banner p {
+    margin: 0;
+    flex: 1 1 320px;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: #cdd6dc;
+  }
+  .cookie-banner p a {
+    color: var(--gold-light);
+    text-decoration: underline;
+  }
+  .cookie-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .cookie-actions .cta-btn {
+    padding: 10px 18px;
+    font-size: 0.86rem;
+  }
+  @media (max-width: 560px) {
+    .cookie-banner {
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      padding: 18px;
+    }
+    .cookie-actions {
+      width: 100%;
+    }
+    .cookie-actions .cta-btn {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+</style>
