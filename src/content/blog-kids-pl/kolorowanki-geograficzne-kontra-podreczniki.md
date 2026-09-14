@@ -50,14 +50,3 @@ Nic z tego nie oznacza, że podręczniki są złe dla tej grupy wiekowej — kr�
 ## Wypróbuj sam(a)
 
 Wybierz jeden kraj, o którym Twoje dziecko nigdy wcześniej nie rozmawiało. Przeczytaj mu jedno lub dwa zdania na jego temat, a potem podaj pusty kontur jego flagi i pozwól wybrać kolory. Zapytaj następnego dnia, co zapamiętało. Z naszego doświadczenia — i tak, jak zaprojektowana jest każda strona w tomach *Europa* i *Azja* — flaga wygrywa niemal za każdym razem.
-
-## Najczęściej zadawane pytania
-
-**W jakim wieku kolorowanki geograficzne działają najlepiej?**
-Najlepiej sprawdzają się w wieku 3–8 lat — to naturalne okno uwagi 10–20 minut, w którym dziecko chętnie angażuje ręce i wzrok jednocześnie, także zanim jeszcze zacznie samodzielnie czytać.
-
-**Czy kolorowanka może zastąpić naukę z podręcznika?**
-Nie zastępuje, ale świetnie uzupełnia — krótki fakt przekazany na głos przy okazji kolorowania łączy zalety obu metod, bez wad żadnej z nich osobno.
-
-**Jak wykorzystać kolorowankę do nauki geografii w domu?**
-Wybierz jeden kraj, o którym dziecko jeszcze nie rozmawiało, opowiedz mu jedno-dwa zdania na jego temat, a potem podaj pusty kontur flagi tego kraju do pokolorowania. Zapytaj następnego dnia, co zapamiętało.

@@ -81,20 +81,3 @@ Najszybszym sposobem, żeby taki prezent zabrzmiał protekcjonalnie, jest sposó
 ## Jeśli to jej pierwsza książka z łamigłówkami lub aktywnościami
 
 Zacznijcie od czegoś mniejszego, niż wydaje się to konieczne. W przypadku prezentu opartego na rysowaniu oznacza to *Left Hand Brain Training, Tom 1 — Pierwsze kreski* — nie późniejszy tom, nawet dla kogoś, kto wydaje się naturalnie zręczny, ponieważ cały sens polega na używaniu *niedominującej* ręki, co dla każdego jest na początku nieznanym terenem. W przypadku łamigłówek słownych i logicznych wybierzcie tom *Sprawnego Umysłu* dotyczący czegoś, czym dana osoba jest już zainteresowana, zamiast opcji „najtrudniejszej" albo najbardziej rozbudowanej. Książka, która zostanie skończona i sprawi przyjemność, jest lepsza niż książka porzucona na trzeciej stronie.
-
-## Najczęściej zadawane pytania
-
-**Jaka jest właściwie różnica między tymi dwiema seriami?**
-Left Hand Brain Training to seria oparta na rysowaniu, wykorzystująca niedominującą rękę — kreślenie, labirynty, kształty i wzory. Sprawny Umysł to seria łamigłówek i ćwiczeń pamięci — wykreślanki, ciekawostki, przysłowia i strony na pamięć. Serie są dopasowane do różnych typów osobowości, a nie do różnych poziomów zaawansowania.
-
-**Czy zacząć od łatwiejszego tomu, jeśli mój rodzic wydaje się sprawny umysłowo?**
-W przypadku Left Hand Brain Training — tak, zawsze zaczynajcie od Tomu 1, ponieważ seria stopniowo buduje koordynację niedominującej ręki, niezależnie od ogólnej sprawności. W przypadku Sprawnego Umysłu poszczególne tomy są samodzielne, a nie sekwencyjne, więc lepiej wybrać według tematu i zainteresowań.
-
-**Czy te książki są produktami medycznymi lub terapeutycznymi?**
-Nie. Obie serie to rozrywkowe aktywności inspirowane ideą sprawności umysłowej, przeznaczone do przyjemności i zaangażowania. Żadna z nich nie diagnozuje, nie leczy ani nie zapobiega żadnej chorobie, w tym schorzeniom związanym z pamięcią — w razie konkretnych obaw zdrowotnych warto skonsultować się z lekarzem.
-
-**Co, jeśli nie wiem, jaki typ aktywności wolałby mój rodzic?**
-Zapytajcie, jak zwykle spędza wolny czas. Osoba, która rysuje, koloruje albo robi na drutach, prawdopodobnie polubi Left Hand Brain Training. Osoba, która rozwiązuje krzyżówkę z gazety albo wykreślankę, prawdopodobnie wybierze Sprawny Umysł.
-
-**Czy duży druk naprawdę jest konieczny, czy to tylko chwyt marketingowy?**
-Ma większe znaczenie niż większość innych czynników. Książka z łamigłówkami, którą trudno przeczytać, trafia na półkę niezależnie od tego, jak dobrze dopasowana jest jej treść — sprawdzenie rozmiaru czcionki i kontrastu przed poziomem trudności zapobiega takiej sytuacji.

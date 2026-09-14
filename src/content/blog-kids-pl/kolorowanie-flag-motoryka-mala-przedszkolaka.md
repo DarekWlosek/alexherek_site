@@ -57,14 +57,3 @@ Większość list gotowości szkolnej wymaga funkcjonalnego chwytu kredki i umie
 ## Wypróbuj sam(a)
 
 Podaj dziecku flagę z jednym prostym kształtem — pojedynczym paskiem, zwykłą gwiazdką — i zmierz, jak długo zostanie przy stronie bez Twojej zachęty. W kolejnym tygodniu spróbuj flagi nieco bardziej szczegółowej. Ta dodatkowa minuta czy dwie, przez które dziecko przy niej wytrwa, to kontrola motoryki małej budująca się w czasie rzeczywistym.
-
-## Najczęściej zadawane pytania
-
-**W jakim wieku warto zacząć kolorować flagi dla motoryki małej?**
-Już od około 3. roku życia, gdy dziecko trzyma kredkę z pewną intencją, dobrym startem są proste flagi z dużymi, jednolitymi polami koloru. Bardziej szczegółowe flagi — mniejsze gwiazdki, cieńsze paski — sprawdzają się w wieku 4–5 lat, bliżej progu przedszkola/szkoły.
-
-**Czym kolorowanie flagi różni się od zwykłej kolorowanki?**
-Flagi mają proste krawędzie i ostre kąty zamiast łagodnych, wybaczających konturów, co wymaga precyzyjniejszego chwytu, kontrolowanego skręcania w rogach i wypełniania drobnych pól — umiejętności, których zwykłe kolorowanki nie ćwiczą tak bezpośrednio.
-
-**Jak często przedszkolak powinien to ćwiczyć?**
-Wystarczy kilka minut, dwa lub trzy razy w tygodniu. Regularność liczy się bardziej niż długość sesji — krótkie, powtarzane ćwiczenie buduje kontrolę ręki szybciej niż jedno długie, męczące posiedzenie.
