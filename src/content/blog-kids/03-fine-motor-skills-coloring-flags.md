@@ -2,7 +2,8 @@
 title: "How Coloring Country Flags Builds Fine Motor Skills Before Kindergarten"
 tag: "FINE MOTOR"
 excerpt: "Straight lines and small details make flag pages a built-in kindergarten-readiness drill."
-draft: true
+draft: false
+pubDate: 2026-09-14
 heroImage: "/images/blog-fine-motor-flags-coloring.jpg"
 heroImageAlt: "Close-up photo of a preschool-aged girl carefully coloring a small five-pointed star on a red, white, and blue flag coloring page with a red crayon, tongue poking out in concentration, a handful of sharpened crayons and a finished flag page nearby on a wooden table"
 plSlug: "kolorowanie-flag-motoryka-mala-przedszkolaka"
