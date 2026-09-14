@@ -2,8 +2,14 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const kidsPosts = (await getCollection("blogKids")).filter((p) => !p.data.draft);
-const seniorPosts = (await getCollection("blogSeniors")).filter((p) => !p.data.draft);
+const byNewest = (a: { data: { pubDate?: Date } }, b: { data: { pubDate?: Date } }) => {
+  const aTime = a.data.pubDate ? new Date(a.data.pubDate).getTime() : -Infinity;
+  const bTime = b.data.pubDate ? new Date(b.data.pubDate).getTime() : -Infinity;
+  return bTime - aTime;
+};
+
+const kidsPosts = (await getCollection("blogKids")).filter((p) => !p.data.draft).sort(byNewest);
+const seniorPosts = (await getCollection("blogSeniors")).filter((p) => !p.data.draft).sort(byNewest);
 
 const latest = [
   ...kidsPosts.slice(0, 2).map((p) => ({ ...p, silo: "kids" as const })),

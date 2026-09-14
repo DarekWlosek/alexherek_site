@@ -5,10 +5,10 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 const posts = (await getCollection("blogSeniors"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => {
-    // Chronological by publish date, oldest published first.
-    const aTime = a.data.pubDate ? new Date(a.data.pubDate).getTime() : Infinity;
-    const bTime = b.data.pubDate ? new Date(b.data.pubDate).getTime() : Infinity;
-    return aTime - bTime;
+    // Newest publish date first.
+    const aTime = a.data.pubDate ? new Date(a.data.pubDate).getTime() : -Infinity;
+    const bTime = b.data.pubDate ? new Date(b.data.pubDate).getTime() : -Infinity;
+    return bTime - aTime;
   });
 ---
 
