@@ -1,0 +1,157 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blogCooking");
+  return posts.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content, headings } = await render(entry);
+const tocHeadings = headings.filter((h) => h.depth === 2);
+
+const relatedBook = data.relatedBook ? await getEntry("cookingBooks", data.relatedBook) : undefined;
+
+const canonical = `https://alexherek.com/blog/cooking/${entry.id}/`;
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: data.title,
+  description: data.excerpt,
+  author: { "@type": "Person", name: "Alex Herek", url: "https://alexherek.com/about/" },
+  inLanguage: "en",
+  url: canonical,
+  ...(data.pubDate ? { datePublished: data.pubDate.toISOString() } : {}),
+  ...(data.heroImage ? { image: new URL(data.heroImage, "https://alexherek.com").toString() } : {}),
+};
+
+const faqJsonLd = data.faq && data.faq.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: data.faq.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+} : null;
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://alexherek.com/" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://alexherek.com/blog/" },
+    { "@type": "ListItem", position: 3, name: "Cooking", item: "https://alexherek.com/blog/cooking/" },
+    { "@type": "ListItem", position: 4, name: data.title, item: canonical },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${data.title} — Alex Herek`}
+  description={data.excerpt}
+  current="cooking"
+  lang="en"
+  ogImage={data.heroImage}
+  altPath={data.plSlug ? `/pl/blog/cooking/${data.plSlug}` : undefined}
+>
+  <div class="narrow">
+    <div class="crumb"><a href="/">Home</a><span>/</span><a href="/blog">Blog</a><span>/</span><a href="/blog/cooking">Cooking</a><span>/</span>{data.title}</div>
+  </div>
+
+  <div class="narrow post-header">
+    <span class="post-tag">{data.tag}</span>
+    <h1>{data.title}</h1>
+    <p class="post-meta">By Alex Herek &middot; {data.draft ? "Draft — publish date to be set" : data.pubDate?.toDateString()} &middot; 5 min read</p>
+  </div>
+
+  <div class="narrow">
+    {data.heroImage ? (
+      <img class="post-hero-img" src={data.heroImage} alt={data.heroImageAlt ?? ""} />
+    ) : (
+      <div class="post-hero"></div>
+    )}
+
+    {data.draft && (
+      <div class="draft-note">
+        DRAFT TEMPLATE — this post is a placeholder to reserve the URL and demonstrate the layout. Replace this text and the sections below with real content before publishing.
+      </div>
+    )}
+
+    {tocHeadings.length >= 3 && (
+      <nav class="toc" aria-label="Table of contents">
+        <span class="toc-label">In this guide</span>
+        <ul>
+          {tocHeadings.map((h) => (
+            <li><a href={`#${h.slug}`}>{h.text}</a></li>
+          ))}
+        </ul>
+      </nav>
+    )}
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {relatedBook && (
+      <div class="cta-inline">
+        <div>
+          <h3>Want the full {relatedBook.data.subtitle}?</h3>
+          <p>{relatedBook.data.recipeCount} recipes, three historic tables, six regions of Poland.</p>
+        </div>
+        <a href={`/cooking/${relatedBook.id}`} class="cta-btn cta-cooking">View the Cookbook →</a>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(articleJsonLd)} />
+{faqJsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />}
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+
+<style>
+  .post-header { padding: 40px 0 20px; }
+  .post-tag {
+    font-family: 'IBM Plex Mono', monospace; font-size: .66rem; letter-spacing: .08em; text-transform: uppercase;
+    background: var(--cranberry); color: #fff; padding: 5px 12px; border-radius: 100px; width: fit-content; display: inline-block; margin-bottom: 16px;
+  }
+  .post-header h1 { font-size: 2.1rem; line-height: 1.2; color: var(--navy); }
+  .post-meta { font-family: 'IBM Plex Mono', monospace; font-size: .76rem; color: var(--ink-soft); margin-top: 14px; }
+  .post-hero { border-radius: var(--radius-l); aspect-ratio: 16/8; background: linear-gradient(155deg,var(--cranberry-tint),var(--cream)); margin: 26px 0 40px; }
+  .post-hero-img { border-radius: var(--radius-l); width: 100%; aspect-ratio: 16/8; object-fit: cover; margin: 26px 0 40px; box-shadow: var(--shadow-soft); }
+  .prose { font-size: 1.06rem; line-height: 1.75; color: var(--ink); }
+  .prose :global(p) { margin: 0 0 22px; }
+  .prose :global(h2) { font-size: 1.4rem; color: var(--navy); margin: 36px 0 14px; }
+  .prose :global(h3) { font-size: 1.15rem; color: var(--navy); margin: 26px 0 10px; }
+  .prose :global(ul) { margin: 0 0 22px; padding-left: 22px; }
+  .prose :global(li) { margin-bottom: 8px; }
+  .prose :global(img) { border-radius: var(--radius-m); box-shadow: var(--shadow-soft); margin: 10px 0 26px; }
+  .prose :global(table) { width: 100%; border-collapse: collapse; margin: 0 0 26px; font-size: .94rem; }
+  .prose :global(th), .prose :global(td) { text-align: left; padding: 10px 14px; border-bottom: 1px solid rgba(198,153,47,.25); }
+  .prose :global(th) { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); }
+  .toc {
+    font-family: 'IBM Plex Mono', monospace; font-size: .8rem; background: var(--paper);
+    border-left: 3px solid var(--cranberry); border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 28px 0;
+  }
+  .toc-label { display: block; margin-bottom: 8px; letter-spacing: .04em; text-transform: uppercase; font-size: .72rem; color: var(--ink-soft); }
+  .toc ul { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin: 4px 0; }
+  .toc a { color: var(--navy); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .cta-inline {
+    background: var(--paper); border: 1px solid rgba(198,153,47,.3); border-radius: var(--radius-m);
+    padding: 26px; margin: 36px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  }
+  .cta-inline h3 { font-size: 1.05rem; color: var(--navy); margin-bottom: 4px; }
+  .cta-inline p { margin: 0; font-size: .86rem; color: var(--ink-soft); }
+  .draft-note {
+    background: rgba(198,153,47,.1); border-left: 3px solid var(--gold); padding: 14px 18px;
+    font-family: 'IBM Plex Mono', monospace; font-size: .76rem; color: var(--ink-soft); margin: 30px 0; border-radius: 0 8px 8px 0;
+  }
+</style>

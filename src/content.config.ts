@@ -102,6 +102,33 @@ const blogSeniors = defineCollection({
   schema: blogPostSchema,
 });
 
+/**
+ * Cooking blog posts (/blog/cooking/). Same shape as blogPostSchema, plus:
+ * - `faq`, so cooking articles can emit FAQPage schema.org markup like the
+ *   cookbook product pages already do (blogKids/blogSeniors don't need this
+ *   yet, so it isn't added there).
+ * - `relatedBook`, the id (filename) of the cookingBooks entry this post
+ *   should promote via an inline CTA (e.g. "wigilia").
+ */
+const blogPostCookingSchema = z.object({
+  title: z.string(),
+  tag: z.string(),
+  excerpt: z.string(),
+  draft: z.boolean().default(true),
+  pubDate: z.date().optional(),
+  heroImage: z.string().optional(), // path under /public/images
+  heroImageAlt: z.string().optional(),
+  faq: faqSchema.optional(),
+  relatedBook: z.string().optional(), // id of a cookingBooks entry, e.g. "wigilia"
+  /** id (filename without extension) of the matching post in blogCookingPl, if a translation exists. */
+  plSlug: z.string().optional(),
+});
+
+const blogCooking = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/blog-cooking" }),
+  schema: blogPostCookingSchema,
+});
+
 /** Same shape as blogPostSchema, plus an optional FAQ block for FAQPage schema.org markup. */
 const blogPostPlSchema = z.object({
   title: z.string(),
@@ -124,6 +151,25 @@ const blogKidsPl = defineCollection({
 const blogSeniorsPl = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/blog-seniors-pl" }),
   schema: blogPostPlSchema,
+});
+
+/** Same shape as blogPostPlSchema, plus `relatedBook` (see blogPostCookingSchema). */
+const blogPostCookingPlSchema = z.object({
+  title: z.string(),
+  tag: z.string(),
+  excerpt: z.string(),
+  draft: z.boolean().default(true),
+  pubDate: z.date().optional(),
+  heroImage: z.string().optional(),
+  heroImageAlt: z.string().optional(),
+  faq: faqSchema.optional(),
+  relatedBook: z.string().optional(),
+  enSlug: z.string().optional(),
+});
+
+const blogCookingPl = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/blog-cooking-pl" }),
+  schema: blogPostCookingPlSchema,
 });
 
 /**
@@ -188,9 +234,11 @@ export const collections = {
   cookingBooks,
   blogKids,
   blogSeniors,
+  blogCooking,
   testimonials,
   plKidsSeries,
   plSeniorSeries,
   blogKidsPl,
   blogSeniorsPl,
+  blogCookingPl,
 };
