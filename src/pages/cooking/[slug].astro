@@ -30,12 +30,26 @@ const bookJsonLd = {
   genre: ["Cookbook", "Regional & International Cooking", "Holiday Cooking"],
   url: canonical,
   ...(data.heroImage ? { image: new URL(data.heroImage, "https://alexherek.com").toString() } : {}),
-  offers: {
-    "@type": "Offer",
-    url: `https://www.amazon.com/dp/${data.asin}`,
-    priceCurrency: "USD",
-    availability: "https://schema.org/InStock",
-  },
+  offers: [
+    {
+      "@type": "Offer",
+      url: `https://www.amazon.com/dp/${data.asin}`,
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      ...(data.price ? { price: data.price } : {}),
+    },
+    ...(data.kindleAsin
+      ? [
+          {
+            "@type": "Offer",
+            url: `https://www.amazon.com/dp/${data.kindleAsin}`,
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock",
+            ...(data.kindlePrice ? { price: data.kindlePrice } : {}),
+          },
+        ]
+      : []),
+  ],
 };
 
 const faqJsonLd = data.faq && data.faq.length > 0 ? {
@@ -85,7 +99,10 @@ const breadcrumbJsonLd = {
           <span class="p-fact">{data.pages} PAGES</span>
         </div>
         <div class="p-ctas">
-          <a href={`https://www.amazon.com/dp/${data.asin}`} class="cta-btn cta-cooking">Buy on Amazon →</a>
+          <a href={`https://www.amazon.com/dp/${data.asin}`} class="cta-btn cta-cooking">Buy Paperback →</a>
+          {data.kindleAsin && (
+            <a href={`https://www.amazon.com/dp/${data.kindleAsin}`} class="cta-btn cta-outline-cream">Buy Kindle eBook →</a>
+          )}
         </div>
       </div>
     </div>
@@ -137,8 +154,10 @@ const breadcrumbJsonLd = {
         <p>150 recipes, three historic tables, six regions of Poland.</p>
       </div>
       <div class="band-ctas">
-        <a href={`https://www.amazon.com/dp/${data.asin}`} class="cta-btn cta-cooking">Buy on Amazon →</a>
-        <a href="/cooking" class="cta-btn cta-outline-cream">More cooking books</a>
+        <a href={`https://www.amazon.com/dp/${data.asin}`} class="cta-btn cta-cooking">Buy Paperback →</a>
+        {data.kindleAsin && (
+          <a href={`https://www.amazon.com/dp/${data.kindleAsin}`} class="cta-btn cta-outline-cream">Buy Kindle eBook →</a>
+        )}
       </div>
     </div>
   </section>
