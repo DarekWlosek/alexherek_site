@@ -71,8 +71,10 @@ const cookingBooks = defineCollection({
     language: z.string(), // "English"
     publishedYear: z.number(),
     edition: z.string().optional(),
-    asin: z.string(),
+    asin: z.string(), // paperback ASIN
     price: z.number().optional(), // USD
+    kindleAsin: z.string().optional(), // Kindle eBook ASIN, if a Kindle edition exists
+    kindlePrice: z.number().optional(), // USD
     faq: faqSchema.optional(),
     order: z.number().default(99),
   }),
