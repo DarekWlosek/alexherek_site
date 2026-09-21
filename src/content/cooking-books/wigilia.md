@@ -13,7 +13,7 @@ recipeCount: 150
 language: "English"
 publishedYear: 2026
 edition: "First Edition"
-asin: "B0HHP8JYR4"
+asin: "B0HJY94JN6"
 order: 1
 faq:
   - question: "What is Wigilia?"
