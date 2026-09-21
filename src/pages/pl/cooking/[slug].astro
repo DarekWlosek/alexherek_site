@@ -1,9 +1,9 @@
 ---
 import { getCollection, render } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
-  const books = await getCollection("cookingBooks");
+  const books = await getCollection("plCookingBooks");
   return books.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },
@@ -15,7 +15,7 @@ const { data } = entry;
 const { Content, headings } = await render(entry);
 const tocHeadings = headings.filter((h) => h.depth === 2);
 
-const canonical = `https://alexherek.com/cooking/${entry.id}/`;
+const canonical = `https://alexherek.com/pl/cooking/${entry.id}/`;
 
 const bookJsonLd = {
   "@context": "https://schema.org",
@@ -25,7 +25,7 @@ const bookJsonLd = {
   author: { "@type": "Person", name: "Alex Herek", url: "https://alexherek.com/about/" },
   bookFormat: "https://schema.org/Paperback",
   numberOfPages: String(data.pages),
-  inLanguage: "en",
+  inLanguage: "pl",
   datePublished: String(data.publishedYear),
   genre: ["Cookbook", "Regional & International Cooking", "Holiday Cooking"],
   url: canonical,
@@ -66,8 +66,8 @@ const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://alexherek.com/" },
-    { "@type": "ListItem", position: 2, name: "Cooking", item: "https://alexherek.com/cooking/" },
+    { "@type": "ListItem", position: 1, name: "Start", item: "https://alexherek.com/pl/" },
+    { "@type": "ListItem", position: 2, name: "Kuchnia", item: "https://alexherek.com/pl/cooking/" },
     { "@type": "ListItem", position: 3, name: data.title, item: canonical },
   ],
 };
@@ -78,17 +78,17 @@ const breadcrumbJsonLd = {
   description={data.description}
   current="cooking"
   ogImage={data.heroImage}
-  lang="en"
-  altPath={data.plSlug ? `/pl/cooking/${data.plSlug}` : undefined}
+  lang="pl"
+  altPath={`/cooking/${data.enSlug ?? entry.id}`}
 >
   <div class="wrap">
-    <div class="crumb"><a href="/">Home</a><span>/</span><a href="/cooking">Cooking</a><span>/</span>{data.title}</div>
+    <div class="crumb"><a href="/pl">Start</a><span>/</span><a href="/pl/cooking">Kuchnia</a><span>/</span>{data.title}</div>
   </div>
 
   <div class="wrap p-hero">
     <div class="p-shell reveal">
       <div class="p-photo">
-        {data.heroImage && <img src={data.heroImage} alt={data.heroImageAlt ?? `${data.title} cover`} />}
+        {data.heroImage && <img src={data.heroImage} alt={data.heroImageAlt ?? `Okładka: ${data.title}`} />}
       </div>
       <div class="p-body">
         <span class="eyebrow">{data.eyebrow}</span>
@@ -96,14 +96,14 @@ const breadcrumbJsonLd = {
         <span class="subtitle">{data.subtitle}</span>
         <p class="tagline">{data.tagline}</p>
         <div class="p-facts">
-          <span class="p-fact">{data.recipeCount} RECIPES</span>
+          <span class="p-fact">{data.recipeCount} PRZEPISÓW</span>
           <span class="p-fact">{data.format.toUpperCase()}{data.trimSize ? `, ${data.trimSize}` : ""}</span>
-          <span class="p-fact">{data.pages} PAGES</span>
+          <span class="p-fact">{data.pages} STRON</span>
         </div>
         <div class="p-ctas">
-          <a href={`https://www.amazon.com/dp/${data.asin}`} class="cta-btn cta-cooking">Buy Paperback →</a>
+          <a href={`https://www.amazon.com/dp/${data.asin}`} class="cta-btn cta-cooking">Kup wersję papierową →</a>
           {data.kindleAsin && (
-            <a href={`https://www.amazon.com/dp/${data.kindleAsin}`} class="cta-btn cta-outline-cream">Buy Kindle eBook →</a>
+            <a href={`https://www.amazon.com/dp/${data.kindleAsin}`} class="cta-btn cta-outline-cream">Kup e-booka Kindle →</a>
           )}
         </div>
       </div>
@@ -112,8 +112,8 @@ const breadcrumbJsonLd = {
 
   <section class="wrap narrow-content">
     {tocHeadings.length >= 3 && (
-      <nav class="toc reveal" aria-label="Table of contents">
-        <span class="toc-label">In this book</span>
+      <nav class="toc reveal" aria-label="Spis treści">
+        <span class="toc-label">W tej książce</span>
         <ul>
           {tocHeadings.map((h) => (
             <li><a href={`#${h.slug}`}>{h.text}</a></li>
@@ -129,16 +129,16 @@ const breadcrumbJsonLd = {
     <table class="details-table reveal">
       <tbody>
         <tr><th>Format</th><td>{data.format}{data.trimSize ? `, ${data.trimSize}` : ""}</td></tr>
-        <tr><th>Pages</th><td>{data.pages}</td></tr>
-        <tr><th>Language</th><td>{data.language}</td></tr>
-        <tr><th>Recipes</th><td>{data.recipeCount}</td></tr>
-        <tr><th>Edition</th><td>{data.edition ?? "—"}, {data.publishedYear}</td></tr>
+        <tr><th>Liczba stron</th><td>{data.pages}</td></tr>
+        <tr><th>Język</th><td>{data.language}</td></tr>
+        <tr><th>Przepisy</th><td>{data.recipeCount}</td></tr>
+        <tr><th>Wydanie</th><td>{data.edition ?? "—"}, {data.publishedYear}</td></tr>
       </tbody>
     </table>
 
     {data.faq && data.faq.length > 0 && (
       <div class="faq reveal">
-        <h2>Frequently Asked Questions</h2>
+        <h2>Najczęściej zadawane pytania</h2>
         {data.faq.map((f) => (
           <details>
             <summary>{f.question}</summary>
@@ -152,13 +152,13 @@ const breadcrumbJsonLd = {
   <section class="wrap">
     <div class="band reveal">
       <div>
-        <h2>Bring Wigilia to your own table.</h2>
-        <p>150 recipes, three historic tables, six regions of Poland.</p>
+        <h2>Przenieś Wigilię na swój stół.</h2>
+        <p>150 przepisów, trzy historyczne stoły, sześć regionów Polski.</p>
       </div>
       <div class="band-ctas">
-        <a href={`https://www.amazon.com/dp/${data.asin}`} class="cta-btn cta-cooking">Buy Paperback →</a>
+        <a href={`https://www.amazon.com/dp/${data.asin}`} class="cta-btn cta-cooking">Kup wersję papierową →</a>
         {data.kindleAsin && (
-          <a href={`https://www.amazon.com/dp/${data.kindleAsin}`} class="cta-btn cta-outline-cream">Buy Kindle eBook →</a>
+          <a href={`https://www.amazon.com/dp/${data.kindleAsin}`} class="cta-btn cta-outline-cream">Kup e-booka Kindle →</a>
         )}
       </div>
     </div>

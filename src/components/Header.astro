@@ -30,7 +30,7 @@ const t =
       <nav class="links">
         <a href={`${p}/kids`} class={current === "kids" ? "current" : ""}>{t.kids}</a>
         <a href={`${p}/seniors`} class={current === "seniors" ? "current" : ""}>{t.seniors}</a>
-        {lang === "en" && <a href="/cooking" class={current === "cooking" ? "current" : ""}>{t.cooking}</a>}
+        <a href={`${p}/cooking`} class={current === "cooking" ? "current" : ""}>{t.cooking}</a>
         <a href={`${p}/blog`} class={current === "blog" ? "current" : ""}>{t.blog}</a>
         <a href={`${p}/about`} class={current === "about" ? "current" : ""}>{t.about}</a>
       </nav>

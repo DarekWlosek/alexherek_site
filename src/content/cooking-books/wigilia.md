@@ -16,6 +16,7 @@ edition: "First Edition"
 asin: "B0HJY94JN6"
 kindleAsin: "B0HHP8JYR4"
 order: 1
+plSlug: "wigilia"
 faq:
   - question: "What is Wigilia?"
     answer: "Wigilia is the traditional Polish Christmas Eve vigil dinner, observed with twelve meatless dishes, a shared Christmas wafer (opłatek), and a table set for an unexpected guest."

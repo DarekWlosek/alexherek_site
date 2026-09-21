@@ -77,7 +77,47 @@ const cookingBooks = defineCollection({
     kindlePrice: z.number().optional(), // USD
     faq: faqSchema.optional(),
     order: z.number().default(99),
+    /** id (filename without extension) of the matching entry in plCookingBooks, if a translation exists. */
+    plSlug: z.string().optional(),
   }),
+});
+
+/**
+ * Polish-language product pages for the standalone cookbooks (/pl/cooking/).
+ * Same shape as cookingBooks, minus `language`/`edition`/`order` semantics
+ * that don't need re-stating per translation, plus `enSlug` to link back.
+ * The book itself is still the same physical/Kindle edition — ASIN, price,
+ * page count, etc. carry over unchanged; only the marketing copy is
+ * translated.
+ */
+const cookingBookPlSchema = z.object({
+  title: z.string(),
+  subtitle: z.string(),
+  eyebrow: z.string(),
+  tagline: z.string(),
+  description: z.string(),
+  heroImage: z.string().optional(),
+  heroImageAlt: z.string().optional(),
+  format: z.string(),
+  trimSize: z.string().optional(),
+  pages: z.number(),
+  recipeCount: z.number().optional(),
+  language: z.string(), // the book's actual language, e.g. "English" — the book has no Polish edition yet
+  publishedYear: z.number(),
+  edition: z.string().optional(),
+  asin: z.string(),
+  price: z.number().optional(),
+  kindleAsin: z.string().optional(),
+  kindlePrice: z.number().optional(),
+  faq: faqSchema.optional(),
+  order: z.number().default(99),
+  /** id (filename without extension) of the matching entry in cookingBooks. */
+  enSlug: z.string().optional(),
+});
+
+const plCookingBooks = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/pl-cooking-books" }),
+  schema: cookingBookPlSchema,
 });
 
 const blogPostSchema = z.object({
@@ -232,6 +272,7 @@ export const collections = {
   kidsSeries,
   seniorSeries,
   cookingBooks,
+  plCookingBooks,
   blogKids,
   blogSeniors,
   blogCooking,
