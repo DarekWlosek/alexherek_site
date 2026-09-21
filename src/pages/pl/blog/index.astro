@@ -10,15 +10,17 @@ const byNewest = (a: { data: { pubDate?: Date } }, b: { data: { pubDate?: Date }
 
 const kidsPosts = (await getCollection("blogKidsPl")).filter((p) => !p.data.draft).sort(byNewest);
 const seniorPosts = (await getCollection("blogSeniorsPl")).filter((p) => !p.data.draft).sort(byNewest);
+const cookingPosts = (await getCollection("blogCookingPl")).filter((p) => !p.data.draft).sort(byNewest);
 const latest = [
-  ...kidsPosts.slice(0, 2).map((p) => ({ ...p, silo: "kids" as const })),
+  ...kidsPosts.slice(0, 1).map((p) => ({ ...p, silo: "kids" as const })),
   ...seniorPosts.slice(0, 1).map((p) => ({ ...p, silo: "seniors" as const })),
+  ...cookingPosts.slice(0, 1).map((p) => ({ ...p, silo: "cooking" as const })),
 ];
 ---
 
 <BaseLayout
   title="Blog — Alex Herek"
-  description="Notatki zza stołu kreślarskiego: sztuczki geograficzne i pomysły na kolorowanie dla dzieci, wkrótce także trening mózgu i poradniki dla seniorów."
+  description="Notatki zza stołu kreślarskiego: sztuczki geograficzne i pomysły na kolorowanie dla dzieci, trening mózgu i poradniki dla seniorów oraz tradycje i przepisy z kuchni polskiej."
   current="blog"
   lang="pl"
   altPath="/blog"
@@ -31,7 +33,7 @@ const latest = [
     <div class="section-head reveal" style="text-align: left; margin: 0 0 30px;">
       <span class="eyebrow">Z NOTATNIKA</span>
       <h1 style="font-family: 'Fraunces', serif; font-size: 2.3rem; color: var(--navy); font-weight: 600;">Notatki zza stołu kreślarskiego.</h1>
-      <p>Dwie półki, dwa silosy — wybierz ten, który pasuje do tego, po co tu trafiłeś.</p>
+      <p>Trzy półki, trzy silosy — wybierz ten, który pasuje do tego, po co tu trafiłeś.</p>
     </div>
   </div>
 
@@ -47,6 +49,11 @@ const latest = [
         <h3>Trening mózgu i sprawna ręka</h3>
         <p>Ćwiczenia rysowania niedominującą ręką, wskazówki dużej czcionki i sposoby na trwały, codzienny nawyk.</p>
       </a>
+      <a href="/pl/blog/cooking" class="silo-card cooking reveal">
+        <span class="silo-tag">Kuchnia</span>
+        <h3>Tradycje, stoły i przepisy</h3>
+        <p>Polskie zwyczaje wigilijne, regionalne potrawy i poradniki planowania menu — powiązane z książką Wigilia.</p>
+      </a>
     </div>
   </section>
 
@@ -60,12 +67,12 @@ const latest = [
         {latest.map((post) => (
           <a href={`/pl/blog/${post.silo}/${post.id}`} class="post-card reveal">
             {post.data.heroImage ? (
-              <img class={`post-thumb ${post.silo === "seniors" ? "seniors" : ""}`} src={post.data.heroImage} alt={post.data.heroImageAlt ?? ""} />
+              <img class={`post-thumb ${post.silo}`} src={post.data.heroImage} alt={post.data.heroImageAlt ?? ""} />
             ) : (
-              <div class={`post-thumb ${post.silo === "seniors" ? "seniors" : ""}`}></div>
+              <div class={`post-thumb ${post.silo}`}></div>
             )}
             <div class="post-body">
-              <span class={`post-tag ${post.silo === "seniors" ? "seniors" : ""}`}>{post.data.tag}</span>
+              <span class={`post-tag ${post.silo}`}>{post.data.tag}</span>
               <h3>{post.data.title}</h3>
               <p>{post.data.excerpt}</p>
               <span class="post-date">{post.data.pubDate?.toLocaleDateString("pl-PL")}</span>
@@ -78,22 +85,27 @@ const latest = [
 </BaseLayout>
 
 <style>
-  .silo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
-  @media (max-width: 760px) { .silo-grid { grid-template-columns: 1fr; } }
+  .silo-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 26px; }
+  @media (max-width: 900px) { .silo-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .silo-grid { grid-template-columns: 1fr; } }
   .silo-card { border-radius: var(--radius-l); padding: 38px; min-height: 220px; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px; position: relative; overflow: hidden; box-shadow: var(--shadow-soft); text-decoration: none; }
   .silo-card.kids { background: linear-gradient(155deg,#f3d7bf,var(--cream)); }
   .silo-card.seniors { background: linear-gradient(155deg,#22303f,var(--navy-deep)); color: var(--cream); }
+  .silo-card.cooking { background: linear-gradient(155deg,var(--cranberry-tint),var(--cream)); }
   .silo-card.soon { opacity: .82; }
   .silo-tag { font-family: 'IBM Plex Mono', monospace; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; width: fit-content; }
   .silo-card.kids .silo-tag { background: var(--coral); color: #fff; }
   .silo-card.seniors .silo-tag { background: var(--gold); color: var(--navy-deep); }
+  .silo-card.cooking .silo-tag { background: var(--cranberry); color: #fff; }
   .silo-card h3 { font-size: 1.5rem; }
   .silo-card.kids h3 { color: var(--navy); }
   .silo-card.seniors h3 { color: var(--paper); }
+  .silo-card.cooking h3 { color: var(--navy); }
   .silo-card p { margin: 0; font-size: .92rem; line-height: 1.5; }
   .silo-card.kids p { color: var(--ink-soft); }
   .silo-card.seniors p { color: #b7c1c8; }
   .silo-card.seniors p a { color: var(--gold-light); }
+  .silo-card.cooking p { color: var(--ink-soft); }
 
   .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
   @media (max-width: 900px) { .post-grid { grid-template-columns: 1fr 1fr; } }
@@ -101,9 +113,11 @@ const latest = [
   .post-card { background: var(--paper); border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-m); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; }
   .post-thumb { aspect-ratio: 16/10; background: linear-gradient(155deg,var(--cream-deep),var(--paper)); width: 100%; object-fit: cover; display: block; }
   .post-thumb.seniors { background: linear-gradient(155deg,#22303f,var(--navy-deep)); }
+  .post-thumb.cooking { background: linear-gradient(155deg,var(--cranberry-tint),var(--paper)); }
   .post-body { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
   .post-tag { font-family: 'IBM Plex Mono', monospace; font-size: .62rem; letter-spacing: .06em; text-transform: uppercase; color: var(--coral-deep); }
   .post-tag.seniors { color: var(--gold); }
+  .post-tag.cooking { color: var(--cranberry-deep); }
   .post-body h3 { font-size: 1.02rem; color: var(--navy); line-height: 1.3; }
   .post-body p { margin: 0; font-size: .84rem; color: var(--ink-soft); line-height: 1.5; }
   .post-date { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; color: var(--ink-soft); margin-top: 6px; }

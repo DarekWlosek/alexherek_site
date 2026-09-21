@@ -1,9 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
 
-const posts = (await getCollection("blogCooking"))
-  .filter((post) => !post.data.draft)
+const posts = (await getCollection("blogCookingPl"))
+  .filter((p) => !p.data.draft)
   .sort((a, b) => {
     // Newest publish date first.
     const aTime = a.data.pubDate ? new Date(a.data.pubDate).getTime() : -Infinity;
@@ -13,28 +13,28 @@ const posts = (await getCollection("blogCooking"))
 ---
 
 <BaseLayout
-  title="Cooking Blog — Alex Herek"
-  description="Polish Christmas Eve traditions, regional recipes, and menu-planning guides tied to the Wigilia cookbook."
+  title="Blog kulinarny — Alex Herek"
+  description="Polskie tradycje wigilijne, regionalne przepisy i poradniki planowania menu — powiązane z książką kucharską Wigilia."
   current="cooking"
-  lang="en"
-  altPath="/pl/blog/cooking"
+  lang="pl"
+  altPath="/blog/cooking"
 >
   <div class="wrap">
-    <div class="crumb"><a href="/">Home</a><span>/</span><a href="/blog">Blog</a><span>/</span>Cooking</div>
+    <div class="crumb"><a href="/pl">Start</a><span>/</span><a href="/pl/blog">Blog</a><span>/</span>Kuchnia</div>
   </div>
 
   <div class="wrap" style="padding-top: 34px;">
     <div class="section-head reveal" style="text-align: left; margin: 0 0 30px;">
-      <span class="eyebrow" style="color: var(--cranberry-deep);">COOKING BLOG</span>
-      <h1 style="font-family: 'Fraunces', serif; font-size: 2.3rem; color: var(--navy); font-weight: 600;">Traditions, tables &amp; recipes.</h1>
-      <p>Polish Christmas Eve customs, regional dishes, and menu-planning guides — tied back to <a href="/cooking/wigilia">Wigilia: A Polish Christmas Cookbook of Three Tables</a>.</p>
+      <span class="eyebrow" style="color: var(--cranberry-deep);">BLOG KULINARNY</span>
+      <h1 style="font-family: 'Fraunces', serif; font-size: 2.3rem; color: var(--navy); font-weight: 600;">Tradycje, stoły i przepisy.</h1>
+      <p>Polskie zwyczaje wigilijne, regionalne potrawy i poradniki planowania menu — powiązane z książką <a href="/pl/cooking/wigilia">Wigilia: Książka kucharska trzech polskich stołów</a>.</p>
     </div>
   </div>
 
   <section class="wrap" style="padding-top: 0;">
     <div class="post-grid">
       {posts.map((post) => (
-        <a href={`/blog/cooking/${post.id}`} class="post-card reveal">
+        <a href={`/pl/blog/cooking/${post.id}`} class="post-card reveal">
           {post.data.heroImage ? (
             <img class="post-thumb cooking" src={post.data.heroImage} alt={post.data.heroImageAlt ?? ""} />
           ) : (
@@ -44,7 +44,7 @@ const posts = (await getCollection("blogCooking"))
             <span class="post-tag cooking">{post.data.tag}</span>
             <h3>{post.data.title}</h3>
             <p>{post.data.excerpt}</p>
-            <span class="post-date">{post.data.pubDate?.toDateString()}</span>
+            <span class="post-date">{post.data.pubDate?.toLocaleDateString("pl-PL")}</span>
           </div>
         </a>
       ))}

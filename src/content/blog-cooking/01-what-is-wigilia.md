@@ -7,6 +7,7 @@ pubDate: 2026-09-21
 heroImage: "/images/what-is-wigilia-hero.jpg"
 heroImageAlt: "Traditional Polish Wigilia table with opłatek (Christmas wafer), barszcz (beet soup) with uszka (mushroom dumplings), pierogi (filled dumplings), roasted carp, and makowiec (poppy-seed roll), set for Christmas Eve supper"
 relatedBook: "wigilia"
+plSlug: "co-to-jest-wigilia"
 faq:
   - question: "Is Wigilia the same as Christmas Eve?"
     answer: "Yes — Wigilia is the Polish name for the Christmas Eve celebration, specifically referring to the traditional supper held that evening."
@@ -33,7 +34,7 @@ Content angle: Entry point for the Polish Christmas Eve / Wigilia content
   linking deeper into dishes, regions, and the cookbook itself.
 Silo role: Cluster hub — links out to future posts on the 12 dishes,
   regional variations, and menu planning.
-Translated pair: none yet — PL version pending at /pl/blog/cooking/
+Translated pair: /blog/cooking/co-to-jest-wigilia (PL) — published 2026-09-21
 Publication order in cluster: 1 of 8 (see content-topic-queue.csv)
 -->
 
