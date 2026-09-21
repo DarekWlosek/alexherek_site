@@ -1,0 +1,5 @@
+# Naprawa duplikatów: stare pliki-widma z pages/blog/blog-kids i pages/blog/blog-seniors
+# usunięte z repo (były wczesnym szkicem sprzed migracji do src/content/).
+# Zachowanie SEO equity dla ewentualnie już zaindeksowanych starych URL-i.
+/blog/blog-kids/*     /blog/kids/:splat     301
+/blog/blog-seniors/*  /blog/seniors/:splat  301
