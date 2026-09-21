@@ -1,0 +1,213 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const books = await getCollection("cookingBooks");
+  return books.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content, headings } = await render(entry);
+const tocHeadings = headings.filter((h) => h.depth === 2);
+
+const canonical = `https://alexherek.com/cooking/${entry.id}/`;
+
+const bookJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  name: data.title,
+  alternateName: data.subtitle,
+  author: { "@type": "Person", name: "Alex Herek", url: "https://alexherek.com/about/" },
+  bookFormat: "https://schema.org/Paperback",
+  numberOfPages: String(data.pages),
+  inLanguage: "en",
+  datePublished: String(data.publishedYear),
+  genre: ["Cookbook", "Regional & International Cooking", "Holiday Cooking"],
+  url: canonical,
+  ...(data.heroImage ? { image: new URL(data.heroImage, "https://alexherek.com").toString() } : {}),
+  offers: {
+    "@type": "Offer",
+    url: `https://www.amazon.com/dp/${data.asin}`,
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+  },
+};
+
+const faqJsonLd = data.faq && data.faq.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: data.faq.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+} : null;
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://alexherek.com/" },
+    { "@type": "ListItem", position: 2, name: "Cooking", item: "https://alexherek.com/cooking/" },
+    { "@type": "ListItem", position: 3, name: data.title, item: canonical },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${data.title}: ${data.subtitle} — Alex Herek`}
+  description={data.description}
+  current="cooking"
+  ogImage={data.heroImage}
+>
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a><span>/</span><a href="/cooking">Cooking</a><span>/</span>{data.title}</div>
+  </div>
+
+  <div class="wrap p-hero">
+    <div class="p-shell reveal">
+      <div class="p-photo">
+        {data.heroImage && <img src={data.heroImage} alt={data.heroImageAlt ?? `${data.title} cover`} />}
+      </div>
+      <div class="p-body">
+        <span class="eyebrow">{data.eyebrow}</span>
+        <h1>{data.title}</h1>
+        <span class="subtitle">{data.subtitle}</span>
+        <p class="tagline">{data.tagline}</p>
+        <div class="p-facts">
+          <span class="p-fact">{data.recipeCount} RECIPES</span>
+          <span class="p-fact">{data.format.toUpperCase()}{data.trimSize ? `, ${data.trimSize}` : ""}</span>
+          <span class="p-fact">{data.pages} PAGES</span>
+        </div>
+        <div class="p-ctas">
+          <a href={`https://www.amazon.com/dp/${data.asin}`} class="cta-btn cta-cooking">Buy on Amazon →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap narrow-content">
+    {tocHeadings.length >= 3 && (
+      <nav class="toc reveal" aria-label="Table of contents">
+        <span class="toc-label">In this book</span>
+        <ul>
+          {tocHeadings.map((h) => (
+            <li><a href={`#${h.slug}`}>{h.text}</a></li>
+          ))}
+        </ul>
+      </nav>
+    )}
+
+    <div class="prose reveal">
+      <Content />
+    </div>
+
+    <table class="details-table reveal">
+      <tbody>
+        <tr><th>Format</th><td>{data.format}{data.trimSize ? `, ${data.trimSize}` : ""}</td></tr>
+        <tr><th>Pages</th><td>{data.pages}</td></tr>
+        <tr><th>Language</th><td>{data.language}</td></tr>
+        <tr><th>Recipes</th><td>{data.recipeCount}</td></tr>
+        <tr><th>Edition</th><td>{data.edition ?? "—"}, {data.publishedYear}</td></tr>
+      </tbody>
+    </table>
+
+    {data.faq && data.faq.length > 0 && (
+      <div class="faq reveal">
+        <h2>Frequently Asked Questions</h2>
+        {data.faq.map((f) => (
+          <details>
+            <summary>{f.question}</summary>
+            <p>{f.answer}</p>
+          </details>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <section class="wrap">
+    <div class="band reveal">
+      <div>
+        <h2>Bring Wigilia to your own table.</h2>
+        <p>150 recipes, three historic tables, six regions of Poland.</p>
+      </div>
+      <div class="band-ctas">
+        <a href={`https://www.amazon.com/dp/${data.asin}`} class="cta-btn cta-cooking">Buy on Amazon →</a>
+        <a href="/cooking" class="cta-btn cta-outline-cream">More cooking books</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(bookJsonLd)} />
+{faqJsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />}
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+
+<style>
+  .p-hero { padding: 34px 0 10px; }
+  .p-shell {
+    border-radius: var(--radius-l); overflow: hidden; box-shadow: var(--shadow-soft);
+    background: radial-gradient(ellipse at 80% 0%, rgba(161,58,58,.22), transparent 55%), linear-gradient(200deg,#22303f 0%, var(--navy) 55%, var(--navy-deep) 100%);
+    display: grid; grid-template-columns: .85fr 1.15fr; color: var(--cream);
+  }
+  @media (max-width: 900px) { .p-shell { grid-template-columns: 1fr; } }
+  .p-photo { position: relative; min-height: 420px; display: flex; align-items: center; justify-content: center; padding: 36px; background: rgba(0,0,0,.12); }
+  .p-photo img { max-width: 260px; width: 100%; border-radius: 8px; box-shadow: 0 20px 40px -16px rgba(0,0,0,.6); border: 6px solid rgba(255,255,255,.08); }
+  .p-body { padding: 52px 48px; display: flex; flex-direction: column; gap: 14px; justify-content: center; }
+  .p-body .eyebrow { color: var(--gold-light); }
+  .p-body h1 { font-size: 2.3rem; line-height: 1.12; color: var(--paper); }
+  .subtitle { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.1rem; color: var(--gold-light); }
+  .tagline { color: #cdd6dc; font-size: 1rem; line-height: 1.6; max-width: 48ch; }
+  .p-facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2px; }
+  .p-fact {
+    font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .04em;
+    background: rgba(198,153,47,.14); border: 1px solid rgba(198,153,47,.4); color: var(--gold-light);
+    padding: 6px 12px; border-radius: 100px;
+  }
+  .p-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+
+  .narrow-content { max-width: 760px; padding-top: 46px; padding-bottom: 20px; }
+  .toc {
+    font-family: 'IBM Plex Mono', monospace; font-size: .8rem; background: var(--paper);
+    border-left: 3px solid var(--gold); border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 0 0 30px;
+  }
+  .toc-label { display: block; margin-bottom: 8px; letter-spacing: .04em; text-transform: uppercase; font-size: .72rem; color: var(--ink-soft); }
+  .toc ul { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin: 4px 0; }
+  .toc a { color: var(--navy); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  .prose { font-size: 1.06rem; line-height: 1.75; color: var(--ink); }
+  .prose :global(p) { margin: 0 0 22px; }
+  .prose :global(h2) { font-size: 1.4rem; color: var(--navy); margin: 36px 0 14px; }
+  .prose :global(ul) { margin: 0 0 22px; padding-left: 22px; }
+  .prose :global(li) { margin-bottom: 8px; }
+  .prose :global(a) { color: var(--gold); }
+
+  .details-table { width: 100%; border-collapse: collapse; margin: 10px 0 40px; font-size: .94rem; }
+  .details-table th, .details-table td { text-align: left; padding: 10px 14px; border-bottom: 1px solid rgba(198,153,47,.25); }
+  .details-table th { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-soft); width: 140px; }
+
+  .faq { margin: 0 0 20px; }
+  .faq h2 { font-size: 1.4rem; color: var(--navy); margin: 0 0 18px; }
+  .faq details {
+    border: 1px solid rgba(198,153,47,.28); border-radius: var(--radius-m); padding: 14px 18px; margin-bottom: 10px; background: var(--paper);
+  }
+  .faq summary { font-weight: 600; color: var(--navy); cursor: pointer; }
+  .faq p { margin: 10px 0 0; color: var(--ink-soft); font-size: .94rem; line-height: 1.55; }
+
+  .band {
+    background: radial-gradient(ellipse at 80% 10%, rgba(161,58,58,.22), transparent 55%), var(--navy);
+    border-radius: var(--radius-l); padding: 52px 46px; color: var(--cream);
+    display: flex; align-items: center; justify-content: space-between; gap: 36px; flex-wrap: wrap;
+  }
+  .band h2 { font-size: 1.75rem; color: var(--paper); max-width: 24ch; }
+  .band p { color: #c7d0d6; margin-top: 10px; max-width: 42ch; line-height: 1.5; }
+  .band-ctas { display: flex; gap: 14px; flex-shrink: 0; }
+  @media (max-width: 480px) { .band-ctas { flex-direction: column; width: 100%; } }
+</style>

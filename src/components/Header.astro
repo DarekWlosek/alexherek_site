@@ -1,7 +1,7 @@
 ---
 interface Props {
   /** Which top-level nav item to highlight, if any. */
-  current?: "kids" | "seniors" | "blog" | "about";
+  current?: "kids" | "seniors" | "cooking" | "blog" | "about";
   /** Site language. Defaults to English. */
   lang?: "en" | "pl";
   /** Where the language-switcher pill should link to. Defaults to each locale's homepage. */
@@ -13,8 +13,8 @@ const p = lang === "pl" ? "/pl" : "";
 
 const t =
   lang === "pl"
-    ? { kids: "Dzieci", seniors: "Seniorzy", blog: "Blog", about: "O autorze", tag: "KSIĄŻKI DLA DZIECI I SENIORÓW" }
-    : { kids: "Kids", seniors: "Seniors", blog: "Blog", about: "About", tag: "CHILDREN'S & SENIOR BRAIN BOOKS" };
+    ? { kids: "Dzieci", seniors: "Seniorzy", cooking: "Kuchnia", blog: "Blog", about: "O autorze", tag: "KSIĄŻKI DLA DZIECI I SENIORÓW" }
+    : { kids: "Kids", seniors: "Seniors", cooking: "Cooking", blog: "Blog", about: "About", tag: "CHILDREN'S & SENIOR BRAIN BOOKS" };
 ---
 
 <header>
@@ -30,6 +30,7 @@ const t =
       <nav class="links">
         <a href={`${p}/kids`} class={current === "kids" ? "current" : ""}>{t.kids}</a>
         <a href={`${p}/seniors`} class={current === "seniors" ? "current" : ""}>{t.seniors}</a>
+        {lang === "en" && <a href="/cooking" class={current === "cooking" ? "current" : ""}>{t.cooking}</a>}
         <a href={`${p}/blog`} class={current === "blog" ? "current" : ""}>{t.blog}</a>
         <a href={`${p}/about`} class={current === "about" ? "current" : ""}>{t.about}</a>
       </nav>

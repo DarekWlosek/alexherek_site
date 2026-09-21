@@ -1,0 +1,118 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const allBooks = (await getCollection("cookingBooks")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Cooking Books by Alex Herek | Polish Heritage & Holiday Cookbooks"
+  description="Illustrated cookbooks exploring culinary heritage and tradition — starting with Wigilia, a Polish Christmas Eve cookbook of three historic tables."
+  current="cooking"
+>
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a><span>/</span>Cooking</div>
+  </div>
+
+  <div class="wrap ck-hero">
+    <div class="ck-shell reveal">
+      <div class="ck-text">
+        <span class="eyebrow" style="color: var(--gold-light);">ILLUSTRATED COOKBOOKS · CULTURE & TRADITION</span>
+        <h1>Cooking Books</h1>
+        <p>
+          Alex Herek tells stories of culture and tradition for readers of every age
+          — from <a href="/kids/children-of-the-world/">Children of the World and Their Cultures</a>
+          for kids to illustrated cookbooks exploring the culinary heritage behind the
+          world's most cherished traditions.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">THE CATALOG</span>
+      <h2>Every title, ready today.</h2>
+    </div>
+
+    <div class="books-grid">
+      {allBooks.map((b) => (
+        <a href={`/cooking/${b.id}`} class="featured-card reveal">
+          <div class="fc-cover">
+            {b.data.heroImage && <img src={b.data.heroImage} alt={b.data.heroImageAlt ?? `${b.data.title} cover`} />}
+          </div>
+          <div class="fc-body">
+            <span class="fc-badge">{b.data.eyebrow}</span>
+            <h3>{b.data.title}: {b.data.subtitle}</h3>
+            <p class="desc">{b.data.description}</p>
+            <div class="fc-facts">
+              <span class="fc-fact">{b.data.recipeCount} RECIPES</span>
+              <span class="fc-fact">{b.data.format.toUpperCase()}</span>
+              <span class="fc-fact">{b.data.language.toUpperCase()}</span>
+            </div>
+            <span class="cta-btn cta-cooking fc-cta">View Book →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="band reveal">
+      <div>
+        <h2>Bring heritage to your own table.</h2>
+        <p>Illustrated, kitchen-ready, and built for cooks anywhere in the world.</p>
+      </div>
+      <div class="band-ctas">
+        <a href="/cooking/wigilia" class="cta-btn cta-cooking">View Wigilia →</a>
+        <a href="/" class="cta-btn cta-outline">Browse the full catalog</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ck-hero { padding: 34px 0 10px; }
+  .ck-shell {
+    border-radius: var(--radius-l); overflow: hidden; box-shadow: var(--shadow-soft);
+    background: radial-gradient(ellipse at 80% 0%, rgba(161,58,58,.22), transparent 55%), linear-gradient(200deg,#22303f 0%, var(--navy) 55%, var(--navy-deep) 100%);
+    padding: 56px 52px; color: var(--cream);
+  }
+  .ck-text h1 { font-size: 2.5rem; line-height: 1.1; color: var(--paper); margin: 12px 0 16px; }
+  .ck-text p { color: #cdd6dc; font-size: 1.02rem; line-height: 1.6; max-width: 62ch; }
+  .ck-text p a { color: var(--gold-light); }
+
+  .books-grid { display: flex; flex-direction: column; gap: 34px; }
+  .featured-card {
+    background: var(--navy); color: var(--cream); border-radius: var(--radius-l); overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1.05fr;
+    box-shadow: 0 20px 40px -26px rgba(27,38,53,.3); text-decoration: none;
+  }
+  @media (max-width: 900px) { .featured-card { grid-template-columns: 1fr; } }
+  .fc-cover { position: relative; padding: 36px; background: linear-gradient(160deg, #22303f, var(--navy-deep)); display: flex; align-items: center; justify-content: center; }
+  .fc-cover img { max-width: 230px; border-radius: 8px; box-shadow: 0 16px 30px -14px rgba(0,0,0,.55); border: 5px solid rgba(255,255,255,.08); }
+  .fc-body { padding: 46px 46px 40px; display: flex; flex-direction: column; gap: 14px; justify-content: center; }
+  .fc-badge {
+    font-family: 'IBM Plex Mono', monospace; font-size: .64rem; letter-spacing: .08em; text-transform: uppercase;
+    background: var(--gold); color: var(--navy-deep); padding: 4px 10px; border-radius: 100px; width: fit-content;
+  }
+  .fc-body h3 { font-size: 1.5rem; color: var(--paper); line-height: 1.25; }
+  .fc-body p.desc { color: #c7d0d6; font-size: .96rem; line-height: 1.55; max-width: 48ch; }
+  .fc-facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2px; }
+  .fc-fact {
+    font-family: 'IBM Plex Mono', monospace; font-size: .64rem; letter-spacing: .04em;
+    background: rgba(198,153,47,.14); border: 1px solid rgba(198,153,47,.4); color: var(--gold-light);
+    padding: 5px 11px; border-radius: 100px;
+  }
+  .fc-cta { margin-top: 10px; }
+
+  .band {
+    background: radial-gradient(ellipse at 80% 10%, rgba(161,58,58,.22), transparent 55%), var(--navy);
+    border-radius: var(--radius-l); padding: 52px 46px; color: var(--cream);
+    display: flex; align-items: center; justify-content: space-between; gap: 36px; flex-wrap: wrap;
+  }
+  .band h2 { font-size: 1.75rem; color: var(--paper); max-width: 24ch; }
+  .band p { color: #c7d0d6; margin-top: 10px; max-width: 42ch; line-height: 1.5; }
+  .band-ctas { display: flex; gap: 14px; flex-shrink: 0; }
+  @media (max-width: 480px) { .band-ctas { flex-direction: column; width: 100%; } }
+</style>

@@ -21,6 +21,9 @@
   --sky: #3f8fb0;
   --sage: #8ea988;
   --sage-tint: #e4ece2;
+  --cranberry: #a13a3a;
+  --cranberry-deep: #7e2c2c;
+  --cranberry-tint: #f3dede;
 
   /* text */
   --ink: #1b2635;
@@ -168,6 +171,15 @@ h3 {
 }
 .cta-outline-cream:hover {
   background: rgba(246, 239, 225, 0.1);
+}
+
+.cta-cooking {
+  background: var(--cranberry);
+  color: #fff;
+  box-shadow: 0 12px 22px -10px rgba(161, 58, 58, 0.55);
+}
+.cta-cooking:hover {
+  background: var(--cranberry-deep);
 }
 
 /* ---------- breadcrumb ---------- */

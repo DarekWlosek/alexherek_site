@@ -42,6 +42,42 @@ const seniorSeries = defineCollection({
   }),
 });
 
+/**
+ * Standalone cookbooks (not a multi-volume series like kids/senior shelves —
+ * each entry here is one purchasable title). Powers /cooking/ and
+ * /cooking/[slug]/.
+ */
+const faqSchema = z.array(
+  z.object({
+    question: z.string(),
+    answer: z.string(),
+  }),
+);
+
+const cookingBooks = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/cooking-books" }),
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string(),
+    eyebrow: z.string(),
+    tagline: z.string(), // short poetic hook line for the hero
+    description: z.string(), // 1-2 sentence summary for cards + meta description
+    heroImage: z.string().optional(), // path under /public/images — front cover only
+    heroImageAlt: z.string().optional(),
+    format: z.string(), // "Paperback"
+    trimSize: z.string().optional(), // "8.5 x 11 in"
+    pages: z.number(),
+    recipeCount: z.number().optional(),
+    language: z.string(), // "English"
+    publishedYear: z.number(),
+    edition: z.string().optional(),
+    asin: z.string(),
+    price: z.number().optional(), // USD
+    faq: faqSchema.optional(),
+    order: z.number().default(99),
+  }),
+});
+
 const blogPostSchema = z.object({
   title: z.string(),
   tag: z.string(),
@@ -73,14 +109,7 @@ const blogPostPlSchema = z.object({
   pubDate: z.date().optional(),
   heroImage: z.string().optional(), // path under /public/images
   heroImageAlt: z.string().optional(),
-  faq: z
-    .array(
-      z.object({
-        question: z.string(),
-        answer: z.string(),
-      }),
-    )
-    .optional(),
+  faq: faqSchema.optional(),
   /** id (filename without extension) of the matching post in blogKids/blogSeniors, if an EN original exists. */
   enSlug: z.string().optional(),
 });
@@ -114,7 +143,7 @@ const testimonials = defineCollection({
     quote: z.string(),
     author: z.string(), // real name, initials, or "Verified Amazon Customer"
     source: z.string(), // required — where/how this was collected
-    silo: z.enum(["kids", "seniors"]),
+    silo: z.enum(["kids", "seniors", "cooking"]),
     rating: z.number().min(1).max(5).default(5),
     link: z.string().url().optional(), // link to the public review, if any
     photo: z.string().optional(), // path under /public/images
@@ -154,6 +183,7 @@ const plSeniorSeries = defineCollection({
 export const collections = {
   kidsSeries,
   seniorSeries,
+  cookingBooks,
   blogKids,
   blogSeniors,
   testimonials,
