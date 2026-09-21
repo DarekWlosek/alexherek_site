@@ -2,9 +2,11 @@
 title: "Daily Fine Motor Skill Drills to Maintain Hand Dexterity in Older Adults"
 tag: "MOTOR SKILLS"
 excerpt: "Short, repeatable hand-dexterity drills — tracing, pinching, buttoning — help older adults keep the fine motor control everyday tasks depend on."
-draft: true
+draft: false
+pubDate: 2026-09-21
 heroImage: "/images/blog-fine-motor-drills-older-adults.jpg"
 heroImageAlt: "An older man at a kitchen table practicing fine motor dexterity drills with a pencil and a page of tracing exercises, a button-and-thread practice board and a cup of tea beside him"
+plSlug: "cwiczenia-sprawnosci-dloni-dla-seniorow"
 ---
 
 <!--
@@ -25,8 +27,9 @@ Silo role: Cluster (Motor & Neuroplasticity) — first of two follow-ups to
 WRITING NOTE: no medical/therapeutic claims. Dexterity framed as a
   practical, everyday-life benefit, not a clinical outcome — see project
   content guidelines.
-Translated pair: none yet — PL version pending at /pl/blog/seniors/
+Translated pair: /pl/blog/seniors/cwiczenia-sprawnosci-dloni-dla-seniorow — published 2026-09-21
 Publication order in cluster: 2 of 3 (after #11, before #18)
+Reviewed and published by Dariusz 2026-09-21.
 -->
 
 **Quick answer:** Fine motor skills are the small, precise hand movements behind everyday tasks — buttoning a shirt, opening a jar, writing a note. Like any physical skill, they respond to light, regular practice. A handful of simple drills, done for a few minutes a day, is enough to keep hands feeling capable rather than clumsy.
