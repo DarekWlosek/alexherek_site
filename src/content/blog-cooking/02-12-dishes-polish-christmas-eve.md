@@ -7,6 +7,7 @@ pubDate: 2026-09-24
 heroImage: "/images/blog-12-dishes-wigilia.jpg"
 heroImageAlt: "Polish Wigilia table set for Christmas Eve with barszcz (beet soup) with uszka (mushroom dumplings), pierogi (filled dumplings), fried fish fillets, herring with red onion, kutia (wheat-berry pudding), makowiec (poppy seed roll), kompot (dried-fruit compote) and opłatek (Christmas wafer), lit by candles beside a Christmas tree"
 relatedBook: "wigilia"
+plSlug: "12-potraw-wigilijnych"
 faq:
   - question: "What are the 12 dishes of Polish Christmas Eve?"
     answer: "There is no single official list. A typical Wigilia menu includes red barszcz (beet soup) with uszka (mushroom dumplings), mushroom soup, fried carp, fish Greek-style, herring, pierogi with sauerkraut and mushrooms, sauerkraut with peas, poppy seed noodles, kutia, makowiec (poppy seed roll), piernik (gingerbread cake) and dried-fruit compote. The exact set varies by family and region."
@@ -28,7 +29,7 @@ Intent: Informational (list / "what are")
 GEO format: Quick answer + 12-dish table + FAQ
 Internal link targets: hub /blog/cooking/01-what-is-wigilia/, cookbook /cooking/wigilia/
 Silo role: Cluster Wigilia — 2 of 8 (see content-topic-queue.csv)
-Translated pair: not yet — add plSlug when the PL version is published
+Translated pair: /pl/blog/cooking/12-potraw-wigilijnych (PL) — published 2026-09-24
 -->
 
 **A traditional Polish Christmas Eve dinner, called Wigilia, is a meatless feast of twelve dishes built from fish, mushrooms, cabbage, grains, poppy seed, honey and dried fruit.** There is no single official list of the twelve. Most tables include red barszcz, a clear beet soup, with uszka, tiny mushroom dumplings; fried carp; herring; pierogi; and sweets such as makowiec, a poppy seed roll, and kutia, a wheat-berry pudding. The exact menu changes from region to region and from family to family.
