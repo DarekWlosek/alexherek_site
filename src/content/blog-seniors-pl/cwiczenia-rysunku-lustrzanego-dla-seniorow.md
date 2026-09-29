@@ -2,7 +2,7 @@
 title: "Rysowanie w lustrze: proste ćwiczenie koordynacji oka i ręki dla seniorów"
 tag: "MOTORYKA"
 excerpt: "Rysowanie w lustrze, czyli kopiowanie kształtu na podstawie jego odbicia, to prosty sposób bez ekranu na wyzwanie dla koordynacji oka i ręki oraz skupienia."
-draft: true
+draft: false
 pubDate: 2026-09-29
 heroImage: "/images/blog-mirror-drawing-exercises.jpg"
 heroImageAlt: "Starsza kobieta przy stole wykonuje ćwiczenie rysowania w lustrze: kopiuje ołówkiem kształt z wydrukowanej kartki, a obok kartki stoi oparte małe lusterko"
