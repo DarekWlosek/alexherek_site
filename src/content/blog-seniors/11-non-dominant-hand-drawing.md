@@ -6,6 +6,7 @@ draft: false
 pubDate: 2026-08-26
 heroImage: "/images/blog-non-dominant-hand-drawing.jpg"
 heroImageAlt: "An older woman at a wooden kitchen table working through a Left Hand Brain Training for Seniors, Book 3 — Mirror & Balance exercise book, surrounded by maze printouts, crayons, a coffee mug, houseplants, and a world map on the wall"
+plSlug: "cwiczenia-rysowania-niedominujaca-reka"
 ---
 
 <!--
