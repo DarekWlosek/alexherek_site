@@ -52,7 +52,7 @@ const bookSeriesJsonLd = {
   </div>
 
   <div class="wrap p-hero">
-    <div class="p-shell reveal">
+    <div class={`p-shell reveal ${data.heroImage ? "" : "nocover"}`}>
       <div class="p-body">
         <span class="eyebrow">{data.eyebrow}</span>
         <h1>{data.title}</h1>
@@ -90,7 +90,7 @@ const bookSeriesJsonLd = {
           <a href={v.asin ? `https://www.amazon.com/dp/${v.asin}` : "#"} class="vol-card">
             <div class="vol-cover">
               <span class="vol-badge">{v.number}</span>
-              {v.cover ? <img src={v.cover} alt={`${v.title} cover`} /> : <div class="placeholder">COVER ART<br />IN PROGRESS</div>}
+              {v.cover ? <img src={v.cover} alt={`${v.title} cover`} /> : <div class="placeholder">{v.status === "available" ? <>VIEW THE BOOK<br />ON AMAZON</> : <>COVER ART<br />IN PROGRESS</>}</div>}
             </div>
             <div class="vol-info">
               <h3>{v.title}</h3>
@@ -143,6 +143,7 @@ const bookSeriesJsonLd = {
     background: radial-gradient(ellipse at 10% 0%, rgba(217,102,61,.16), transparent 55%), linear-gradient(160deg, var(--paper) 0%, var(--cream) 60%, var(--cream-deep) 100%);
     display: grid; grid-template-columns: 1.05fr 1fr;
   }
+  .p-shell.nocover { grid-template-columns: 1fr; }
   @media (max-width: 900px) { .p-shell { grid-template-columns: 1fr; } }
   .p-body { padding: 52px 48px; display: flex; flex-direction: column; gap: 16px; justify-content: center; }
   .p-body .eyebrow { color: var(--coral-deep); }

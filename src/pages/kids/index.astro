@@ -18,7 +18,7 @@ const soonGradients: Record<string, string> = {
 
 <BaseLayout
   title="Kids Coloring Books — Alex Herek"
-  description="Five coloring book series for kids: Children of the World and Their Cultures, Yupzi the Alien Explores the 50 States, plus three more series in the works."
+  description="Coloring and activity books for kids: Children of the World and Their Cultures, Yupzi the Alien Explores the 50 States, Autumn Traditions Around the World, plus three more series in the works."
   current="kids"
   altPath="/pl/kids"
 >
@@ -31,7 +31,7 @@ const soonGradients: Record<string, string> = {
       <div class="kh-text">
         <span class="kh-spine-label">CHAPTER · KIDS</span>
         <span class="eyebrow" style="color: var(--coral-deep);">FOR LITTLE EXPLORERS · AGES 3–10</span>
-        <h1>Five series.<br />One crayon box.</h1>
+        <h1>Six shelves.<br />One crayon box.</h1>
         <p>Coloring pages that double as a passport, a career fair, a bedtime story and a feelings chart — pick a shelf below and start coloring.</p>
         <div class="kh-tags">
           <span class="kh-tag">24+ COUNTRIES</span>
@@ -49,12 +49,12 @@ const soonGradients: Record<string, string> = {
     <div class="section-head reveal">
       <span class="eyebrow">THE CATALOG</span>
       <h2>Pick a series to start with.</h2>
-      <p>"Children of the World" is fully published and "Yupzi the Alien Explores" has its first book out. The other three series are in the works — join the list to hear when a volume lands.</p>
+      <p>"Children of the World" is fully published, "Yupzi the Alien Explores" has its first book out and "Autumn Traditions Around the World" is a stand-alone book. The other three series are in the works — join the list to hear when a volume lands.</p>
     </div>
 
     <div class="series-grid">
       {featuredList.map((fs) => (
-        <a href={`/kids/${fs.id}`} class="featured-card reveal">
+        <a href={`/kids/${fs.id}`} class={`featured-card reveal ${fs.data.volumes.some((v) => v.cover) ? "" : "no-covers"}`}>
           <div class="fc-body">
             <span class="fc-badge">{fs.data.flagship ? "FLAGSHIP SERIES" : "NEW SERIES"}</span>
             <h3>{fs.data.title}</h3>
@@ -70,11 +70,13 @@ const soonGradients: Record<string, string> = {
             </div>
             <span class="cta-btn cta-kids fc-cta">View the series →</span>
           </div>
+          {fs.data.volumes.some((v) => v.cover) && (
           <div class="fc-covers">
             {fs.data.volumes
               .filter((v) => v.cover)
               .map((v, i) => <img class={`c${(i % 4) + 1}`} src={v.cover} alt={`${fs.data.title} — ${v.title} cover`} />)}
           </div>
+          )}
         </a>
       ))}
 
@@ -225,6 +227,7 @@ const soonGradients: Record<string, string> = {
     display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-content: center;
   }
   .fc-covers img { border-radius: 8px; box-shadow: 0 16px 26px -14px rgba(0,0,0,.4); border: 5px solid #fff; }
+  .featured-card.no-covers { grid-template-columns: 1fr; }
   .fc-covers img:only-child { grid-column: 1 / -1; justify-self: center; max-width: 250px; }
   .fc-covers .c1 { transform: rotate(-4deg) translateY(6px); }
   .fc-covers .c2 { transform: rotate(3deg) translateY(-10px); }
