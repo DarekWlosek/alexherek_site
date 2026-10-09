@@ -14,6 +14,10 @@ const { entry } = Astro.props;
 const { data } = entry;
 const { Content, headings } = await render(entry);
 const tocHeadings = headings.filter((h) => h.depth === 2);
+const isAutumn = /^(28|29|30|31|32|33)-/.test(entry.id);
+const sample = isAutumn
+  ? { title: "Want to try the Autumn Traditions book?", text: 'Grab a free 6-page sample from "Autumn Traditions Around the World for Kids."', href: "/free-samples#autumn" }
+  : { title: "Haven't tried the series yet?", text: 'Grab a free 5-page sample from "Children of the World."', href: "/free-samples#kids" };
 ---
 
 <BaseLayout
@@ -63,10 +67,10 @@ const tocHeadings = headings.filter((h) => h.depth === 2);
 
     <div class="cta-inline">
       <div>
-        <h3>Haven't tried the series yet?</h3>
-        <p>Grab a free 5-page sample from "Children of the World."</p>
+        <h3>{sample.title}</h3>
+        <p>{sample.text}</p>
       </div>
-      <a href="/free-samples#kids" class="cta-btn cta-kids">Get free sample →</a>
+      <a href={sample.href} class="cta-btn cta-kids">Get free sample →</a>
     </div>
   </div>
 </BaseLayout>

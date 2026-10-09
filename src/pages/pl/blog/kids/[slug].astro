@@ -15,6 +15,10 @@ const { data } = entry;
 const { Content } = await render(entry);
 
 const canonicalPath = `/pl/blog/kids/${entry.id}`;
+const isAutumn = /^(28|29|30|31|32|33)-/.test(data.enSlug ?? "");
+const sample = isAutumn
+  ? { title: "Chcesz zajrzeć do książki o jesiennych tradycjach?", text: 'Pobierz darmową 6-stronicową próbkę z książki "Autumn Traditions Around the World for Kids" (wersja angielska).', href: "/free-samples#autumn", label: "Pobierz próbkę (EN) →" }
+  : { title: "Nie próbowałeś jeszcze tej serii?", text: 'Pobierz darmową 5-stronicową próbkę z serii "Dzieci Świata i ich Kultury".', href: "/pl/free-samples#kids", label: "Pobierz darmową próbkę →" };
 
 const blogPostingJsonLd = {
   "@context": "https://schema.org",
@@ -88,10 +92,10 @@ const faqJsonLd = data.faq && data.faq.length > 0 ? {
 
     <div class="cta-inline">
       <div>
-        <h3>Nie próbowałeś jeszcze tej serii?</h3>
-        <p>Pobierz darmową 5-stronicową próbkę z serii "Dzieci Świata i ich Kultury".</p>
+        <h3>{sample.title}</h3>
+        <p>{sample.text}</p>
       </div>
-      <a href="/pl/free-samples#kids" class="cta-btn cta-kids">Pobierz darmową próbkę →</a>
+      <a href={sample.href} class="cta-btn cta-kids">{sample.label}</a>
     </div>
   </div>
 </BaseLayout>
