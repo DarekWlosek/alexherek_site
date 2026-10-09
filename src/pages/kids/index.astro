@@ -4,7 +4,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const allSeries = (await getCollection("kidsSeries")).sort((a, b) => a.data.order - b.data.order);
 const flagship = allSeries.find((s) => s.data.flagship);
-const comingSoon = allSeries.filter((s) => !s.data.flagship);
+const hasAvailable = (s: (typeof allSeries)[number]) => s.data.volumes.some((v) => v.status === "available");
+const publishedOthers = allSeries.filter((s) => !s.data.flagship && hasAvailable(s));
+const comingSoon = allSeries.filter((s) => !s.data.flagship && !hasAvailable(s));
+const featuredList = [...(flagship ? [flagship] : []), ...publishedOthers];
 
 const soonGradients: Record<string, string> = {
   "dreams-what-ill-become": "linear-gradient(155deg,#3a5a75,#3f8fb0)",
@@ -15,7 +18,7 @@ const soonGradients: Record<string, string> = {
 
 <BaseLayout
   title="Kids Coloring Books — Alex Herek"
-  description="Four coloring book series for kids ages 3–10: Children of the World and Their Cultures, plus three more series in the works."
+  description="Five coloring book series for kids: Children of the World and Their Cultures, Yupzi the Alien Explores the 50 States, plus three more series in the works."
   current="kids"
   altPath="/pl/kids"
 >
@@ -28,7 +31,7 @@ const soonGradients: Record<string, string> = {
       <div class="kh-text">
         <span class="kh-spine-label">CHAPTER · KIDS</span>
         <span class="eyebrow" style="color: var(--coral-deep);">FOR LITTLE EXPLORERS · AGES 3–10</span>
-        <h1>Four series.<br />One crayon box.</h1>
+        <h1>Five series.<br />One crayon box.</h1>
         <p>Coloring pages that double as a passport, a career fair, a bedtime story and a feelings chart — pick a shelf below and start coloring.</p>
         <div class="kh-tags">
           <span class="kh-tag">24+ COUNTRIES</span>
@@ -46,18 +49,18 @@ const soonGradients: Record<string, string> = {
     <div class="section-head reveal">
       <span class="eyebrow">THE CATALOG</span>
       <h2>Pick a series to start with.</h2>
-      <p>"Children of the World" is fully published. The other three series are in the works — join the list to hear when a volume lands.</p>
+      <p>"Children of the World" is fully published and "Yupzi the Alien Explores" has its first book out. The other three series are in the works — join the list to hear when a volume lands.</p>
     </div>
 
     <div class="series-grid">
-      {flagship && (
-        <a href={`/kids/${flagship.id}`} class="featured-card reveal">
+      {featuredList.map((fs) => (
+        <a href={`/kids/${fs.id}`} class="featured-card reveal">
           <div class="fc-body">
-            <span class="fc-badge">FLAGSHIP SERIES</span>
-            <h3>{flagship.data.title}</h3>
-            <p>{flagship.data.description}</p>
+            <span class="fc-badge">{fs.data.flagship ? "FLAGSHIP SERIES" : "NEW SERIES"}</span>
+            <h3>{fs.data.title}</h3>
+            <p>{fs.data.description}</p>
             <div class="fc-volumes">
-              {flagship.data.volumes.map((v) => (
+              {fs.data.volumes.map((v) => (
                 <div class={`vol-row ${v.status !== "available" ? "soon" : ""}`}>
                   <span class="vn">{v.number}</span>
                   <span class="vt">{v.title}</span>
@@ -68,12 +71,12 @@ const soonGradients: Record<string, string> = {
             <span class="cta-btn cta-kids fc-cta">View the series →</span>
           </div>
           <div class="fc-covers">
-            {flagship.data.volumes
+            {fs.data.volumes
               .filter((v) => v.cover)
-              .map((v, i) => <img class={`c${(i % 4) + 1}`} src={v.cover} alt={`${flagship.data.title} — ${v.title} cover`} />)}
+              .map((v, i) => <img class={`c${(i % 4) + 1}`} src={v.cover} alt={`${fs.data.title} — ${v.title} cover`} />)}
           </div>
         </a>
-      )}
+      ))}
 
       <div class="soon-grid">
         {comingSoon.map((s) => (
@@ -222,6 +225,7 @@ const soonGradients: Record<string, string> = {
     display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-content: center;
   }
   .fc-covers img { border-radius: 8px; box-shadow: 0 16px 26px -14px rgba(0,0,0,.4); border: 5px solid #fff; }
+  .fc-covers img:only-child { grid-column: 1 / -1; justify-self: center; max-width: 250px; }
   .fc-covers .c1 { transform: rotate(-4deg) translateY(6px); }
   .fc-covers .c2 { transform: rotate(3deg) translateY(-10px); }
   .fc-covers .c3 { transform: rotate(-2deg) translateY(-2px); }

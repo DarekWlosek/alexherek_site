@@ -13,6 +13,12 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { data } = entry;
 const { Content } = await render(entry);
+const availableVolumes = data.volumes.filter((v) => v.status === "available");
+const hasAvailable = availableVolumes.length > 0;
+const showShelf = data.flagship || hasAvailable;
+const ages = (data.ageRange.match(/\d+/g) ?? []).map(Number);
+const minAge = ages[0] ?? 3;
+const maxAge = ages[1] ?? 10;
 
 const bookSeriesJsonLd = {
   "@context": "https://schema.org",
@@ -20,12 +26,12 @@ const bookSeriesJsonLd = {
   name: data.title,
   author: { "@type": "Person", name: "Alex Herek" },
   publisher: { "@type": "Organization", name: "Alex Herek" },
-  audience: { "@type": "Audience", audienceType: "Children", suggestedMinAge: 3, suggestedMaxAge: 10 },
-  hasPart: data.volumes
-    .filter((v) => v.status === "available")
+  audience: { "@type": "Audience", audienceType: "Children", suggestedMinAge: minAge, suggestedMaxAge: maxAge },
+  hasPart: availableVolumes
     .map((v) => ({
       "@type": "Book",
-      name: `${data.title}: ${v.title}`,
+      name: v.title.startsWith(data.title) ? v.title : `${data.title}: ${v.title}`,
+      ...(v.cover ? { image: `https://alexherek.com${v.cover}` } : {}),
       bookFormat: "https://schema.org/Paperback",
       inLanguage: "en",
       ...(v.price && v.asin
@@ -56,14 +62,14 @@ const bookSeriesJsonLd = {
           <span class="p-fact">{data.ageRange}</span>
         </div>
         <div class="p-ctas">
-          {data.flagship && (
-            <a href={`https://www.amazon.com/dp/${data.volumes[0].asin}`} class="cta-btn cta-kids">Shop the series →</a>
+          {showShelf && availableVolumes[0]?.asin && (
+            <a href={`https://www.amazon.com/dp/${data.flagship ? data.volumes[0].asin : availableVolumes[0].asin}`} class="cta-btn cta-kids">{data.flagship ? "Shop the series →" : "Buy on Amazon →"}</a>
           )}
           <a href="/free-samples#kids" class="cta-btn cta-outline">Try a free sample</a>
         </div>
       </div>
       {data.heroImage && (
-        <div class="p-covers">
+        <div class={`p-covers ${data.volumes.filter((v) => v.cover).length === 1 ? "single" : ""}`}>
           {data.volumes.filter((v) => v.cover).map((v, i) => (
             <img class={`c${(i % 4) + 1}`} src={v.cover} alt={`${data.title} — ${v.title} cover`} />
           ))}
@@ -75,11 +81,11 @@ const bookSeriesJsonLd = {
   <section class="wrap" id="volumes">
     <div class="section-head reveal">
       <span class="eyebrow">THE FULL SERIES</span>
-      <h2>{data.flagship ? "Every volume, one continent at a time." : "What's planned for this series."}</h2>
+      <h2>{data.flagship ? "Every volume, one continent at a time." : hasAvailable ? "Available now." : "What's planned for this series."}</h2>
     </div>
 
-    {data.flagship ? (
-      <div class="vol-grid reveal">
+    {showShelf ? (
+      <div class={`vol-grid reveal ${data.volumes.length === 1 ? "single" : ""}`}>
         {data.volumes.map((v) => (
           <a href={v.asin ? `https://www.amazon.com/dp/${v.asin}` : "#"} class="vol-card">
             <div class="vol-cover">
@@ -126,7 +132,7 @@ const bookSeriesJsonLd = {
   </section>
 </BaseLayout>
 
-{data.flagship && (
+{showShelf && (
   <script type="application/ld+json" is:inline set:html={JSON.stringify(bookSeriesJsonLd)} />
 )}
 
@@ -151,12 +157,14 @@ const bookSeriesJsonLd = {
   .p-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
   .p-covers { position: relative; padding: 36px; display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
   .p-covers img { border-radius: 8px; box-shadow: 0 16px 30px -14px rgba(0,0,0,.4); border: 5px solid #fff; width: 150px; }
+  .p-covers.single img { width: 230px; }
   .p-covers .c1 { transform: rotate(-6deg) translateY(10px); }
   .p-covers .c2 { transform: rotate(3deg) translateY(-14px); }
   .p-covers .c3 { transform: rotate(-2deg) translateY(4px); }
   .p-covers .c4 { transform: rotate(6deg) translateY(-4px); }
 
   .vol-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+  .vol-grid.single { grid-template-columns: minmax(0, 240px); justify-content: center; }
   @media (max-width: 1000px) { .vol-grid { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 640px) { .vol-grid { grid-template-columns: repeat(2, 1fr); } }
   .vol-card {
