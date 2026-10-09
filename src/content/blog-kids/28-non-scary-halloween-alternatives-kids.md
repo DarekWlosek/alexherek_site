@@ -3,7 +3,7 @@ title: "10 Non-Scary Halloween Alternatives for Kids Who Don't Like Spooky Stuff
 tag: "SEASONAL"
 excerpt: "Ten gentle fall activities for children who find Halloween too spooky: from leaf art and gratitude jars to a family remembrance evening and a coloring trip around the world."
 draft: false
-pubDate: 2026-10-14
+pubDate: 2026-10-09
 heroImage: "/images/blog-non-scary-halloween-alternatives-kids.jpg"
 heroImageAlt: "Child and parent coloring a page of fall leaves with colored pencils at a wooden table, beside a small pumpkin, a leaf paper lantern and a cup of tea with a cinnamon stick"
 plSlug: "halloween-bez-strachu-alternatywy-dla-dzieci"
