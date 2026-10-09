@@ -15,6 +15,7 @@ const { data } = entry;
 const { Content } = await render(entry);
 const availableVolumes = data.volumes.filter((v) => v.status === "available");
 const hasAvailable = availableVolumes.length > 0;
+const sampleAnchor = ({ "yupzi-the-alien-explores": "yupzi", "autumn-traditions-around-the-world": "autumn" } as Record<string, string>)[entry.id] ?? "kids";
 const showShelf = data.flagship || hasAvailable;
 const ages = (data.ageRange.match(/\d+/g) ?? []).map(Number);
 const minAge = ages[0] ?? 3;
@@ -65,7 +66,7 @@ const bookSeriesJsonLd = {
           {showShelf && availableVolumes[0]?.asin && (
             <a href={`https://www.amazon.com/dp/${data.flagship ? data.volumes[0].asin : availableVolumes[0].asin}`} class="cta-btn cta-kids">{data.flagship ? "Shop the series →" : "Buy on Amazon →"}</a>
           )}
-          <a href="/free-samples#kids" class="cta-btn cta-outline">Try a free sample</a>
+          <a href={`/free-samples#${sampleAnchor}`} class="cta-btn cta-outline">Try a free sample</a>
         </div>
       </div>
       {data.heroImage && (
@@ -122,10 +123,10 @@ const bookSeriesJsonLd = {
     <div class="band reveal">
       <div>
         <h2>Try before you buy.</h2>
-        <p>Grab a free 6-page sample from our flagship series.</p>
+        <p>{sampleAnchor === "kids" ? "Grab a free 6-page sample from our flagship series." : "Download a free 6-page sample of this book."}</p>
       </div>
       <div class="band-ctas">
-        <a href="/free-samples#kids" class="cta-btn cta-kids">Get free sample</a>
+        <a href={`/free-samples#${sampleAnchor}`} class="cta-btn cta-kids">Get free sample</a>
         <a href="/kids" class="cta-btn cta-outline">Back to Kids catalog</a>
       </div>
     </div>
