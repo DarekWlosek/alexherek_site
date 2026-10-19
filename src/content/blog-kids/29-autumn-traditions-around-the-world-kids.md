@@ -15,7 +15,7 @@ Primary keyword: autumn traditions around the world
 Secondary keywords: fall traditions in different countries for kids; harvest festivals around the world for kids; fall festivals for kids
 Intent: Informational
 GEO format: Quick answer + 10 festivals (country, when, what families do) + at-a-glance table + book section + FAQ + Key takeaways + Sources
-Internal links: #28 non-scary Halloween alternatives, #04 teaching empathy; later add #30 (Día de los Muertos) and #31 (harvest festivals unit study) when published
+Internal links: #28 non-scary Halloween alternatives, #04 teaching empathy; #30 linked; later add #31 (harvest festivals unit study) when published
 Book: Autumn Traditions Around the World for Kids (B0HLQ5CMR3); series page /kids/autumn-traditions-around-the-world; sample /free-samples#autumn
 Silo role: HUB of the autumn cluster (S)
 WRITING NOTE: inclusive wording ("In many communities...", "Traditions vary by region."). Remembrance festivals described warmly, without morbid detail. Never put Halloween down. All facts from the listed sources; book contents from the book's own table of contents.
@@ -29,7 +29,7 @@ Autumn is a good season for this kind of geography lesson. The days get shorter,
 ## 10 fall festivals for kids
 
 ### 1. Mexico: Día de los Muertos (Day of the Dead)
-In many communities in Mexico, families remember loved ones at the end of October and the beginning of November. UNESCO describes how families welcome the returning souls of loved ones with flowers, candles and offerings. For children, the heart of it is memory and love: telling happy stories, building a family altar and decorating it with marigolds and photos. It is a warm celebration, not a scary one.
+In many communities in Mexico, families remember loved ones at the end of October and the beginning of November. UNESCO describes how families welcome the returning souls of loved ones with flowers, candles and offerings. For children, the heart of it is memory and love: telling happy stories, building a family altar and decorating it with marigolds and photos. It is a warm celebration, not a scary one. For simple words to explain it to a child, see our guide to [explaining Día de los Muertos to kids](/blog/kids/30-explain-dia-de-los-muertos-to-kids).
 
 ### 2. Guatemala: the Giant Kite Festival
 Every November 1, All Saints' Day, the towns of Sumpango and Santiago Sacatepéquez fill with enormous, colorful kites. The giant display kites measure roughly 6 to 20 meters across. Families prepare them in advance, and the kites carry messages to the heavens, thanking ancestors and asking for protection and prosperity.

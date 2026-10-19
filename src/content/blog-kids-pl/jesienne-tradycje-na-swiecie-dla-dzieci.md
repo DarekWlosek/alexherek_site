@@ -35,7 +35,7 @@ Jesień to dobry czas na taką lekcję geografii. Dni robią się krótsze, plon
 ## 10 jesiennych świąt dla dzieci
 
 ### 1. Meksyk: Día de los Muertos (Dzień Zmarłych)
-W wielu społecznościach w Meksyku rodziny wspominają bliskich pod koniec października i na początku listopada. UNESCO opisuje, że rodziny witają powracające dusze bliskich kwiatami, świecami i darami. Dla dzieci istotą jest pamięć i miłość: opowiadanie wesołych historii, budowanie rodzinnego ołtarzyka i ozdabianie go aksamitkami oraz zdjęciami. To ciepłe święto, nie straszne.
+W wielu społecznościach w Meksyku rodziny wspominają bliskich pod koniec października i na początku listopada. UNESCO opisuje, że rodziny witają powracające dusze bliskich kwiatami, świecami i darami. Dla dzieci istotą jest pamięć i miłość: opowiadanie wesołych historii, budowanie rodzinnego ołtarzyka i ozdabianie go aksamitkami oraz zdjęciami. To ciepłe święto, nie straszne. Proste słowa, którymi można je dziecku wyjaśnić, znajdziesz w artykule [Jak wyjaśnić dzieciom Día de los Muertos](/pl/blog/kids/dzien-zmarlych-w-meksyku-dla-dzieci).
 
 ### 2. Gwatemala: Festiwal Gigantycznych Latawców
 Każdego 1 listopada, w Dzień Wszystkich Świętych, miasteczka Sumpango i Santiago Sacatepéquez wypełniają się ogromnymi, kolorowymi latawcami. Gigantyczne latawce pokazowe mają od 6 do 20 metrów średnicy. Rodziny przygotowują je z wyprzedzeniem, a latawce niosą do nieba wiadomości: podziękowania dla przodków i prośby o opiekę oraz pomyślność.
