@@ -13,7 +13,7 @@ faq:
   - question: "Czy Dzień Zmarłych w Meksyku to to samo co Halloween?"
     answer: "Nie. Halloween to głównie przebrania i straszna zabawa. Día de los Muertos to ciepła rodzinna tradycja o pamięci i miłości."
   - question: "Czy Día de los Muertos jest straszne dla dzieci?"
-    answer: "Nie ma takie być. Czaszki i szkielety to kolorowe, wesołe ozdoby. Wyjaśnij dziecku, że tradycja jest o miłości i pamiętaniu."
+    answer: "Nie powinno takie być. Czaszki i szkielety to kolorowe, wesołe ozdoby. Wyjaśnij dziecku, że tradycja jest o miłości i pamiętaniu."
   - question: "Dlaczego używa się aksamitek?"
     answer: "Uważa się, że ich jaskrawy kolor i mocny zapach prowadzą dusze do ołtarza. Rodziny mogą układać z płatków ścieżkę do ofrendy."
   - question: "Od jakiego wieku można to tłumaczyć dziecku?"
