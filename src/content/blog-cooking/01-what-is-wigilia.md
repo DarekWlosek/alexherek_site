@@ -95,20 +95,3 @@ Wigilia (December 24th, evening) is meatless, ritual-driven, and centers on symb
 ## Bringing Wigilia to your own table
 
 Recreating an authentic Wigilia doesn't require Polish heritage — it requires understanding the rhythm of the evening: the wait for the star, the sharing of opłatek, and a table built around meaning rather than abundance.
-
-## Frequently Asked Questions
-
-**Is Wigilia the same as Christmas Eve?**
-Yes — Wigilia is the Polish name for the Christmas Eve celebration, specifically referring to the traditional supper held that evening.
-
-**Why is there an empty seat at the Wigilia table?**
-It is left for an unexpected guest or in memory of family members who have passed away, symbolizing hospitality and remembrance.
-
-**Why are there 12 dishes at Wigilia?**
-Twelve dishes traditionally represent the twelve apostles, though some regions serve seven or nine dishes instead, depending on local custom.
-
-**Is Wigilia dinner always meatless?**
-Traditionally yes, tied to the Catholic custom of fasting before Christmas. Fish, especially carp, is the featured protein instead of meat.
-
-**What time does Wigilia start?**
-By tradition, once the first star appears in the evening sky — usually just after sunset on December 24th.
