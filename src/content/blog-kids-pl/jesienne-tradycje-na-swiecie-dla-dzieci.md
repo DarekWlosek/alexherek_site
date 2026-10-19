@@ -12,6 +12,8 @@ faq:
     answer: "Święta plonów, np. Dzień Dziękczynienia w USA i Sukkot w Izraelu, święta księżyca, np. Święto Środka Jesieni w Chinach i Chuseok w Korei, oraz dni pamięci o bliskich, np. Día de los Muertos w Meksyku czy Wszystkich Świętych i Zaduszki w Polsce."
   - question: "Czy te święta mają charakter religijny?"
     answer: "Część wiąże się z religią, jak Sukkot, a część łączy zwyczaje religijne, rodzinne i kulturowe. Opisujemy je informacyjnie i z szacunkiem, a tradycje różnią się w obrębie każdego kraju."
+  - question: "Czy jest gotowy plan lekcji do tego tematu?"
+    answer: "Tak. Zobacz 5-dniowy plan [jesiennego tematu tygodnia dla dzieci uczących się w domu](/pl/blog/kids/swieta-plonow-na-swiecie-dla-dzieci), który zamienia te święta w tydzień zajęć."
   - question: "Dla jakiego wieku jest ten przewodnik?"
     answer: "Najlepiej sprawdza się dla dzieci w wieku 6–9 lat, czytany razem z rodzicem lub nauczycielem. Młodsze dzieci mogą cieszyć się obrazkami oraz pomysłami na jedzenie i prace plastyczne."
   - question: "Czy wszystkie te święta wypadają jesienią?"

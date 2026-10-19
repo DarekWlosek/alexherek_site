@@ -98,6 +98,9 @@ Harvest festivals such as Thanksgiving in the United States and Sukkot in Israel
 **Are these festivals religious?**
 Some are tied to a religion, such as Sukkot, and some mix religious, family and cultural customs. We describe them informationally and respectfully, and traditions vary within each country.
 
+**Is there a lesson plan for this?**
+Yes. See our [5-day fall unit study for homeschoolers](/blog/kids/31-harvest-festivals-unit-study-homeschool), which turns these festivals into a week of lessons.
+
 **What age is this guide for?**
 It works well for ages 6 to 9, read together with a parent or teacher. Younger children can enjoy the pictures and the food and craft ideas.
 
