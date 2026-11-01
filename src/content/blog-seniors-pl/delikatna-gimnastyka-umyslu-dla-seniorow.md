@@ -2,7 +2,7 @@
 title: "Delikatna gimnastyka umysłu dla seniorów: 10 prostych ćwiczeń w domu"
 tag: "TRENING MÓZGU"
 excerpt: "Dziesięć spokojnych, nieliczonych na czas ćwiczeń dla umysłu dla seniorów, pogrupowanych według typu — bez sprzętu i bez rywalizacji."
-draft: true
+draft: false
 pubDate: 2026-11-01
 heroImage: "/images/blog-gentle-brain-gym-activities.jpg"
 heroImageAlt: "Starszy mężczyzna i kobieta wykonujący proste ćwiczenie koordynacji dłoni przy słonecznym stole kuchennym"

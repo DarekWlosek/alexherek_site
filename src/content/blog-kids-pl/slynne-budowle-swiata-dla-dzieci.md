@@ -2,7 +2,7 @@
 title: "Słynne budowle świata dla dzieci: 8 prostych zajęć"
 tag: "ZABYTKI"
 excerpt: "Osiem praktycznych sposobów, by przybliżyć dzieciom w wieku 4–9 lat słynne budowle i zabytki świata — klocki, plastelina, kolorowanka i kilka sprawdzonych faktów."
-draft: true
+draft: false
 pubDate: 2026-11-01
 heroImage: "/images/blog-famous-landmarks-activities-kids.jpg"
 heroImageAlt: "Dłonie dziecka budujące mały model zabytku z kartonu i plasteliny obok kolorowanki przedstawiającej budowlę"

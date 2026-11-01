@@ -2,7 +2,7 @@
 title: "Wieczorne zajęcia dla seniora: spokojna rutyna na wyciszenie"
 tag: "RELAKS"
 excerpt: "Prosta, godzinna rutyna wieczorna, która zamienia ekrany na spokojną łamigłówkę albo kilka minut rysowania — oparta na realnych zaleceniach dotyczących higieny snu."
-draft: true
+draft: false
 pubDate: 2026-11-01
 heroImage: "/images/blog-relaxing-evening-brain-activities.jpg"
 heroImageAlt: "Starsza kobieta w fotelu, otulona szalem, z herbatą ziołową i stroną łamigłówki o zmierzchu"
