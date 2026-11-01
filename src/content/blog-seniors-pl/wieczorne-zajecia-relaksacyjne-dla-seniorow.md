@@ -2,7 +2,7 @@
 title: "Wieczorne zajęcia dla seniora: spokojna rutyna na wyciszenie"
 tag: "RELAKS"
 excerpt: "Prosta, godzinna rutyna wieczorna, która zamienia ekrany na spokojną łamigłówkę albo kilka minut rysowania — oparta na realnych zaleceniach dotyczących higieny snu."
-draft: false
+draft: true
 pubDate: 2026-11-01
 heroImage: "/images/blog-relaxing-evening-brain-activities.jpg"
 heroImageAlt: "Starsza kobieta w fotelu, otulona szalem, z herbatą ziołową i stroną łamigłówki o zmierzchu"
@@ -43,7 +43,7 @@ Poniżej znajdziecie prosty, godzinny sposób, by wprowadzić tę zamianę do wi
 
 ## Dlaczego godzina przed snem ma takie znaczenie
 
-Światło z telefonów, tabletów, komputerów i telewizorów może opóźniać naturalny sygnał organizmu, że czas spać, a treści przygnębiające albo zbyt pobudzające mogą utrzymywać umysł w aktywności właśnie wtedy, gdy powinien się wyciszać. Nic z tego nie dotyczy wyłącznie starszych osób — to ogólna zasada higieny snu obowiązująca w każdym wieku. To, co zmienia sytuację przy rutynie wyciszenia, to po prostu posiadanie czegoś spokojnego i beznaekranowego do zrobienia zamiast — tak, by „bez ekranów" nie oznaczało „nic do roboty".
+Światło z telefonów, tabletów, komputerów i telewizorów może opóźniać naturalny sygnał organizmu, że czas spać, a treści przygnębiające albo zbyt pobudzające mogą utrzymywać umysł w aktywności właśnie wtedy, gdy powinien się wyciszać. Nic z tego nie dotyczy wyłącznie starszych osób — to ogólna zasada higieny snu obowiązująca w każdym wieku. To, co zmienia sytuację przy rutynie wyciszenia, to po prostu posiadanie czegoś spokojnego i beznaekranowego do zrobienia zamiast — tak, by „bez ekranów” nie oznaczało „nic do roboty”.
 
 ## Prosta, godzinna rutyna wieczorna
 
@@ -67,7 +67,7 @@ Ogólne wskazówki National Institute on Aging dla starszych osób obejmują kil
 - **Uważajcie na kofeinę i alkohol późnym dniem.** Zarówno kofeina — w kawie, herbacie, napojach gazowanych i czekoladzie — jak i alkohol mogą zakłócać sen nawet w małych ilościach, szczególnie spożyte późno.
 - **Jeśli nie możecie zasnąć, nie leżcie w łóżku i nie walczcie z tym.** Ogólna rada mówi, by po około 20 minutach bezskutecznego próbowania wstać, zrobić coś spokojnego w przyciemnionym świetle i wrócić do łóżka, gdy poczujecie senność.
 
-Spokojna łamigłówka albo rysowanie naturalnie wpisują się w kilka z tych nawyków naraz: zastępują czas przed ekranem, są kojące zamiast pobudzające i dają umysłowi coś łagodnego, w czym może się „osadzić" zamiast w myślach pozostałych po całym dniu.
+Spokojna łamigłówka albo rysowanie naturalnie wpisują się w kilka z tych nawyków naraz: zastępują czas przed ekranem, są kojące zamiast pobudzające i dają umysłowi coś łagodnego, w czym może się „osadzić” zamiast w myślach pozostałych po całym dniu.
 
 ## Czym ta rutyna nie jest
 
